@@ -789,8 +789,8 @@ const extras: Extra[] = [
   {
     code: "SX",
     name: "山西省",
-    implementingTitle: "山西省实施《中华人民共和国残疾人保障法》办法",
-    implementingPoints: ["省地方性法规。"],
+    implementingTitle: "山西省残疾人保障条例",
+    implementingPoints: ["省地方性法规（2010年条例；原1992年实施办法已废止）。"],
     planTitle: "山西省“十四五”残疾人保障和发展规划",
     planPoints: ["就业、康复、家庭改造。"],
     subsidyPoints: ["两项补贴按省标准。"],

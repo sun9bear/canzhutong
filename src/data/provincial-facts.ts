@@ -616,6 +616,12 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
   },
   SX: {
     planShortTitle: "山西规划（残疾人）",
+    planUrl:
+      "http://www.lishi.gov.cn/zwgk/fdzdgknr/ghtj/sjghjjd/sjwj/202401/t20240112_1834541.shtml",
+    planIssued: "2022（晋政发〔2022〕9号，离石区政府网转载省政府通知全文）",
+    implementingUrl:
+      "http://www.npc.gov.cn/npc/c1773/c1849/c6680/c18674/c18676/201905/t20190522_51238.html",
+    implementingIssued: "2010-07-16通过，2010-10-01施行（山西省残疾人保障条例；原1992年实施办法同时废止，中国人大网公开文本）",
     employmentUrl:
       "https://xxgk.qinshui.gov.cn/xzf/qsczj/fdzdgknr/mlqd_25/202301/P020230118420849432752.pdf",
     employmentNote:
@@ -702,6 +708,16 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
   },
   LN: {
     planShortTitle: "辽宁规划（残疾人）",
+    planUrl:
+      "https://www.ln.gov.cn/web/zwgkx/zfwj/szfbgtwj/2022n/766822D9F382464FB16C6EAD1FD8FB20/index.shtml",
+    planIssued: "2022-01（辽政办发〔2022〕6号）",
+    rehabUrl:
+      "https://www.ln.gov.cn/web/zwgkx/zfxxgk1/zc/xzgfxwj/szf/szfwj/2023010415522743769/index.shtml",
+    rehabAgeNote:
+      "辽政发〔2018〕29号：具有辽宁户籍、0—7岁、在视力、听力（言语）、肢体、智力、精神等方面有出生缺陷和发育异常、需要进行早期干预和康复训练的儿童（有无办理残疾人证均可）；优先低保、建档立卡贫困户、儿童福利机构收留抚养、残疾孤儿及特困供养对象等。有条件地区可扩大年龄范围或放宽家庭经济条件限制。自2018年10月1日起全面实施；补助项目与额度以省残联配套及当地执行为准，本库不锁死过期金额。",
+    implementingUrl:
+      "http://www.npc.gov.cn/npc/c1773/c1849/c6680/c18674/c18676/201905/t20190522_52920.html",
+    implementingIssued: "2011-11-24通过，2012-02-01施行（辽宁省实施《中华人民共和国残疾人保障法》办法，中国人大网公开文本）",
     subsidyUrl:
       "https://mzt.ln.gov.cn/mzt/zfxxgk/fdzdgknr/lzyj/mztgfxwj/lmf/2026040916485552844/index.shtml",
     subsidyPoints: [
@@ -1869,6 +1885,9 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   NM: {
+    implementingUrl:
+      "http://www.npc.gov.cn/npc/c1773/c1849/c6680/c18674/c18676/201905/t20190522_51944.html",
+    implementingIssued: "2012-03-31修订通过，2012-05-01施行（内蒙古自治区实施《中华人民共和国残疾人保障法》办法，中国人大网公开文本）",
     employmentUrl:
       "https://www.xlgl.gov.cn/xlgl/zw/zwgk/rdhy/2023061917314048259/index.html",
     employmentNote:
@@ -2051,6 +2070,13 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   JL: {
+    planUrl:
+      "http://jl.gov.cn/gb/2022/zb_202201/szfbgtwj/202201/t20220120_8381826.html",
+    planIssued: "2021-09-30（吉政发〔2021〕20号，省政府公报全文）",
+    rehabUrl:
+      "http://xxgk.jl.gov.cn/szf/gkml/201812/t20181205_5350322.html",
+    rehabAgeNote:
+      "吉政发〔2018〕20号：具有吉林省户籍（或持有吉林省内居住证）、有康复需求的0—6岁视力、听力、言语、肢体、智力等残疾儿童和孤独症儿童；须已办理残疾人证或持具有诊断资质的县级以上医疗机构出具的医学诊断证明。自2018年10月1日起全面实施；补助标准与目录以省残联实施细则及当地执行为准。",
     employmentUrl:
       "http://jilin.chinatax.gov.cn/art/2025/9/17/art_23132_921627.html",
     employmentNote:
@@ -2756,6 +2782,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   GS: {
+    rehabUrl:
+      "https://www.huining.gov.cn/xxgk/xzxxgk/xzyz/fdzdgknr/shjz/art/2023/art_340444553c7b414ca2e91bb85a244a39.html",
+    rehabAgeNote:
+      "甘政发〔2018〕62号：救助对象为具有甘肃户籍（含居住证发放地在甘肃）且符合条件的0—6岁视力、听力、言语、肢体、智力等残疾儿童和孤独症儿童；包括城乡低保、建档立卡贫困户、儿童福利机构收留抚养、残疾孤儿、特困供养及其他经济困难家庭残疾儿童。有条件地区可扩大年龄范围或放宽家庭经济条件限制。自2018年10月1日起实施；具体补助项目与额度以省残联配套及市县执行为准，本库不锁死过期金额。",
     employmentUrl:
       "https://gansu.gscn.com.cn/system/2026/03/11/013467987.shtml",
     employmentNote:
