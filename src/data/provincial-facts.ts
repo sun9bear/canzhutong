@@ -901,6 +901,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   HE: {
+    planTitle: "河北省“十四五”残疾人保障和发展规划",
+    planUrl:
+      "https://www.sqq.gov.cn/art/2021/9/10/art_6521_888225.html",
+    planIssued: "2021（冀政字〔2021〕46号，承德双桥区双峰寺镇政府网转载省政府通知全文）",
     planShortTitle: "河北规划（残疾人）",
     implementingUrl:
       "http://www.luanxian.gov.cn/index.php?a=show&c=index&catid=1688&id=33503&m=content",
@@ -1699,6 +1703,12 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   SC: {
+    planTitle: "四川省“十四五”残疾人保障和发展规划",
+    planShortTitle: "四川规划（残疾人）",
+    rehabUrl:
+      "https://www.sc.gov.cn/10462/c103044/2018/10/13/e32af547feb145cdbc408bf84064aab0.shtml",
+    rehabAgeNote:
+      "川府发〔2018〕40号《四川省人民政府关于建立残疾儿童康复救助制度的实施意见》（省政府网站公开全文；信息公开页标注自2025-12-31起失效）：救助对象为符合条件的0—6岁视力、听力、言语、肢体、智力等残疾儿童和孤独症儿童；脑瘫儿童年龄放宽至12岁；非特殊教育学校随班就读听障儿童申请人工耳蜗植入年龄放宽至12岁；肢体残疾儿童申请矫治手术年龄可放宽至14岁。有条件地区可扩大年龄范围或放宽家庭经济条件限制。现行执行口径以省政府/省残联最新配套为准，本库不锁死过期金额。",
     implementingUrl:
       "http://mzt.sc.gov.cn/scmzt/xzgfxwj2023/2024/7/1/23ba46f969f5427e875f41c79c0c62f6.shtml",
     implementingIssued: "2024-07-01（川民规〔2024〕1号）",
@@ -2292,6 +2302,11 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   GX: {
+    planTitle: "广西残疾人保障和发展“十四五”规划",
+    planShortTitle: "广西规划（残疾人）",
+    planUrl:
+      "http://www.gxzf.gov.cn/zwgk/zfxxgkzl_84988/fdzdgknr/ghxx/zxgh912/t11308574.shtml",
+    planIssued: "2021-12-16（桂政发〔2021〕48号，自治区人民政府门户网站专项规划栏目全文）",
     employmentUrl: "http://www.gxdpf.org.cn/contents/646/44458.html",
     employmentNote:
       "桂财税〔2016〕47号：安排比例不得低于1.5%。自治区残联2026年2月通告：2026年联网认证申报时间为3月1日至10月31日。",
@@ -2377,6 +2392,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   HI: {
+    rehabUrl:
+      "https://qsqzf.haikou.gov.cn/hksqsqzf/hygq/202411/e53f2324aa1442cc96d20826bf645bdf.shtml",
+    rehabAgeNote:
+      "《海南省残疾儿童康复救助实施办法》口径（海口市琼山区政府网转载省残联新闻发布会公开介绍）：救助对象为具有海南省户籍或居住证，或监护人在海南缴纳社保半年以上的0—17岁视力、听力、言语、肢体、智力等残疾儿童和孤独症儿童。救助内容含人工耳蜗/助听器、矫治手术、辅助器具适配及康复训练等；具体补助项目与额度以实施办法、项目实施方案及市县执行为准，本库不锁死过期金额。",
     planTitle: "海南省“十四五”残疾人保障和发展规划",
     planShortTitle: "海南规划（残疾人）",
     planUrl:
@@ -2771,6 +2790,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   AH: {
+    rehabUrl:
+      "https://www.luan.gov.cn/group1/M00/11/B2/wKgSGWfP8BSAR9S2ACwBkODRfLY587.pdf",
+    rehabAgeNote:
+      "皖政〔2018〕84号《安徽省人民政府关于建立残疾儿童康复救助制度的实施意见》（六安市政府网转载省政府文件PDF全文，2018-10扫描件）：救助对象为符合条件的0—6岁视力、听力、言语、肢体、智力等残疾儿童和孤独症儿童；2019年1月1日起积极推进符合条件的7—14岁残疾儿童康复救助。有条件地区可扩大年龄范围或放宽家庭经济条件限制。自2018年10月1日起全面实施；具体补助项目与额度以省残联配套及市县执行为准，本库不锁死过期金额。",
     planUrl:
       "https://www.guangde.gov.cn/OpennessContent/show/2400389.html",
     planIssued: "2022（皖政〔2022〕4号，广德市政府网转载省政府通知全文）",
@@ -2944,6 +2967,11 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   QH: {
+    planTitle: "青海省“十四五”残疾人保障和发展规划",
+    planShortTitle: "青海规划（残疾人）",
+    planUrl:
+      "http://www.qinghai.gov.cn/xxgk/xxgk/qhzb/n2022/202306/P020230606565635117494.pdf",
+    planIssued: "2021-12-21（青政〔2021〕79号，省政府公报PDF全文）",
     subsidyUrl:
       "http://www.qinghai.gov.cn/msfw/system/2025/04/04/030069272.shtml",
     subsidyPoints: [
