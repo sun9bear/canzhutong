@@ -1146,6 +1146,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
   },
   YN: {
     planShortTitle: "云南规划（残疾人）",
+    rehabUrl:
+      "https://www.ynjc.gov.cn/r/cms/jcqzfxxgk/201809/122019131tji.pdf",
+    rehabAgeNote:
+      "云政发〔2018〕52号（江川区政府网转载省政府文件PDF全文）：救助对象为视力、听力、言语、肢体、智力等残疾儿童和孤独症儿童，年龄0—6岁；其中语后聋听障儿童申请人工耳蜗植入、肢体残疾儿童申请矫治手术年龄可放宽至18岁。有条件地区可扩大年龄范围或放宽家庭经济条件限制。自2018年10月1日起全面实施；具体补助项目与额度以省残联配套及州县执行为准，本库不锁死过期金额。",
     implementingUrl:
       "https://www.baoshan.gov.cn/info/11596/4861464.htm",
     implementingIssued: "2016（云政发〔2016〕5号，保政发〔2016〕66号转引）",
@@ -1457,6 +1461,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   HB: {
+    rehabUrl:
+      "http://www.suizhou.gov.cn/zwgk/xxgk/shgysyjs/sblyxx/shjz/202005/t20200519_801383.shtml",
+    rehabAgeNote:
+      "鄂政发〔2018〕37号《湖北省残疾儿童康复救助制度》（随州市政府网转载省政府制度全文）：救助对象为具有湖北户籍（含持港澳台居民居住证）、0—10岁、诊断明确的视力、听力、言语、肢体、智力等残疾儿童和孤独症儿童；有条件的地方可放宽救助对象年龄和救助范围。自2018年10月1日起实施；具体项目与补助以市县实施办法及省残联配套为准，本库不锁死过期金额。",
     implementingUrl: "http://www.hbdpf.org.cn/gk/gfwj/flfg/161202.htm",
     implementingIssued: "2015-12-26（鄂政办发〔2015〕96号，2016-01-01施行）",
     subsidyUrl:
@@ -2026,6 +2034,15 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   SN: {
+    planTitle: "陕西省“十四五”残疾人保障和发展规划",
+    planShortTitle: "陕西规划（残疾人）",
+    planUrl:
+      "https://www.shaanxi.gov.cn/zfxxgk/zfgb/2022/d5q/202204/t20220406_2216417.html",
+    planIssued: "2021（陕政办发〔2021〕34号，省政府公报公开）",
+    rehabUrl:
+      "https://www.shaanxi.gov.cn/zfxxgk/fdzdgknr/zcwj/gfxwj/202208/t20220805_2233315.html",
+    rehabAgeNote:
+      "陕政发〔2018〕32号：救助对象为符合条件的0—6岁（含6周岁）视力、听力、言语、肢体、智力等残疾儿童和孤独症儿童；包括城乡低保、建档立卡贫困户、儿童福利机构收留抚养、残疾孤儿、特困供养及其他经济困难家庭残疾儿童。自2018年10月1日起全面实施；具体补助项目与额度以省残联配套及市县执行为准，本库不锁死过期金额。",
     implementingUrl: "https://www.xyx.gov.cn/Content-1333280.html",
     implementingIssued: "2016-01-01（陕政发〔2016〕2号）",
     subsidyUrl: "https://www.xyx.gov.cn/Content-1333280.html",
@@ -2332,6 +2349,11 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   HI: {
+    planTitle: "海南省“十四五”残疾人保障和发展规划",
+    planShortTitle: "海南规划（残疾人）",
+    planUrl:
+      "https://new.tzxm.gov.cn/zckd/fzgh/202112/t20211220_1308790.shtml",
+    planIssued: "2021-12-12（琼府〔2021〕45号，国家投资项目在线审批监管平台公开；附件DOC全文见同目录 W020211220720603905359.doc）",
     implementingUrl:
       "http://mlqzf.haikou.gov.cn/xgk/mlqzf/mlqmzj_8434/fdzdgknr/bmwj_8957/202404/t1352506.shtml",
     implementingIssued:
@@ -2418,6 +2440,11 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   NX: {
+    planTitle: "宁夏回族自治区残疾人保障和发展“十四五”规划",
+    planShortTitle: "宁夏规划（残疾人）",
+    planUrl:
+      "https://www.nx.gov.cn/zwgk/qzfwj/202112/t20211221_3240223.html",
+    planIssued: "2021-12-21（宁政发〔2021〕34号）",
     rehabUrl:
       "https://www.nx.gov.cn/zwgk/zc/xzgfxwj/qzf/202311/t20231106_4339519.html",
     rehabAgeNote:
