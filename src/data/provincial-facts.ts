@@ -1189,7 +1189,11 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   YN: {
+    planTitle: "云南省“十四五”残疾人保障和发展规划（保山规划转引）",
     planShortTitle: "云南规划（残疾人）",
+    planUrl:
+      "https://baoshan.gov.cn/info/16226/9624494.htm",
+    planIssued: "2021-10-28（云政发〔2021〕26号，保山市人民政府《保山市“十四五”残疾人保障和发展规划》保政发〔2022〕14号全文转引）",
     rehabUrl:
       "https://www.ynjc.gov.cn/r/cms/jcqzfxxgk/201809/122019131tji.pdf",
     rehabAgeNote:
@@ -1279,7 +1283,11 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   XJ: {
+    planTitle: "新疆维吾尔自治区“十四五”残疾人保障和发展规划（昌吉州规划转引）",
     planShortTitle: "新疆规划（残疾人）",
+    planUrl:
+      "https://www.cj.gov.cn/p1/zxgh/20220516/282352.html",
+    planIssued: "2022-05-16（昌吉州政府网公示《昌吉回族自治州“十四五”残疾人保障和发展规划》PDF全文，依据《新疆维吾尔自治区“十四五”残疾人保障和发展规划》）",
     rehabUrl:
       "https://www.cj.gov.cn/p146/bmwj/20250103/314512.html",
     rehabAgeNote:
@@ -1518,6 +1526,11 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   HB: {
+    planTitle: "湖北省残疾人事业发展“十四五”规划（鄂州规划转引）",
+    planShortTitle: "湖北规划（残疾人）",
+    planUrl:
+      "https://www.ezhou.gov.cn/gk/xxgkzt/ezsswgh/sjzxgh/202205/t20220511_467933.html",
+    planIssued: "2021-12-12（鄂政发〔2021〕33号；鄂州市政府网专项规划栏目公开《鄂州市残疾人事业发展“十四五”规划》全文并依据省规划，同网部门解读列明省文号）",
     rehabUrl:
       "http://www.suizhou.gov.cn/zwgk/xxgk/shgysyjs/sblyxx/shjz/202005/t20200519_801383.shtml",
     rehabAgeNote:
@@ -1992,6 +2005,12 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     implementingUrl:
       "http://www.npc.gov.cn/npc/c1773/c1849/c6680/c18674/c18676/201905/t20190522_51944.html",
     implementingIssued: "2012-03-31修订通过，2012-05-01施行（内蒙古自治区实施《中华人民共和国残疾人保障法》办法，中国人大网公开文本）",
+    subsidyUrl:
+      "http://mzj.wuhai.gov.cn/mzj/zfxxgk81/fdzdgknr22/834027/1559069/index.html",
+    subsidyPoints: [
+      "内民政发〔2024〕66号（乌海市民政局、财政局、残联乌民发〔2023〕78号转引）：自2024年7月1日起，自治区级指导标准为困难残疾人生活补贴、重度护理补贴均为125元/人/月。",
+      "中国政府网地方联播同口径确认提标资金已下达。对象范围与盟市扩面以自治区办法及户籍地审核为准。",
+    ],
     employmentUrl:
       "https://www.xlgl.gov.cn/xlgl/zw/zwgk/rdhy/2023061917314048259/index.html",
     employmentNote:
@@ -2795,7 +2814,11 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   XZ: {
+    planTitle: "西藏自治区“十四五”时期残疾人保障和发展规划（拉萨市解读转引）",
     planShortTitle: "西藏规划（残疾人）",
+    planUrl:
+      "https://www.lasa.gov.cn/lasa/zcjd/202307/3fb45bb9720a4a1d928cbaebe15e0588.shtml",
+    planIssued: "2022（拉萨市人民政府网《拉萨市“十四五”时期残疾人保障和发展规划》政策解读转引《西藏自治区“十四五”时期残疾人保障和发展规划》；藏政办发〔2022〕2号见自治区残联辅具适配办法引用）",
     rehabUrl:
       "https://www.xizang.gov.cn/zwgk/xxgk_424/zxxxgk/201905/t20190508_69063.html",
     rehabAgeNote:
@@ -2973,6 +2996,12 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "https://www.huining.gov.cn/xxgk/xzxxgk/xzyz/fdzdgknr/shjz/art/2023/art_340444553c7b414ca2e91bb85a244a39.html",
     rehabAgeNote:
       "甘政发〔2018〕62号：救助对象为具有甘肃户籍（含居住证发放地在甘肃）且符合条件的0—6岁视力、听力、言语、肢体、智力等残疾儿童和孤独症儿童；包括城乡低保、建档立卡贫困户、儿童福利机构收留抚养、残疾孤儿、特困供养及其他经济困难家庭残疾儿童。有条件地区可扩大年龄范围或放宽家庭经济条件限制。自2018年10月1日起实施；具体补助项目与额度以省残联配套及市县执行为准，本库不锁死过期金额。",
+    subsidyUrl:
+      "https://www.shandan.gov.cn/zfxxgk/xzzfxgk/ljx_7441/xzswgk8/qtfdzdgknr_7455/202409/t20240919_1292075.html",
+    subsidyPoints: [
+      "山丹县政府网公开口径：两项补贴标准由省政府统筹确定。城镇低保家庭及农村一、二类低保家庭中的困难残疾人生活补贴与重度护理补贴均为每人每月100元；农村三、四类低保家庭生活补贴由市、县自行确定。",
+      "生活补贴对象为低保家庭持证残疾人；护理补贴对象主要为智力、精神、肢体、视力一级及智力、精神二级且需长期照护者（有条件地方可扩面）。以户籍地窗口为准。",
+    ],
     employmentUrl:
       "https://gansu.gscn.com.cn/system/2026/03/11/013467987.shtml",
     employmentNote:
