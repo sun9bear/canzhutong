@@ -253,7 +253,7 @@ export const NATIONAL_POLICIES: PolicyRecord[] = [
       "持有第二代残疾人证；生活补贴还须符合当地困难认定（通常为低保家庭残疾人，部分地方扩大到低保边缘或无固定收入重残）；护理补贴通常要求一、二级重度。具体以户籍地现行文件为准。",
     howToApply:
       "向户籍所在地乡镇政府、街道办事处提出书面申请（许多地方已开通政务APP、残联系统网上申请）。街道（乡镇）受理后审核，县级民政部门审定，残联协助核实残疾等级。发放通过社会保障卡或指定账户按月打款。全国残疾人两项补贴信息系统已联网，跨省转移需办理关系衔接。",
-    body: `国发〔2015〕27号，2015年9月发布，2016年1月1日起全面实施。
+    body: `国发〔2015〕52号，2015年9月发布，2016年1月1日起全面实施。
 
 这是目前覆盖面最广的残疾人专项福利之一。生活补贴解决“额外生活支出”，护理补贴解决“长期照护支出”，功能不同，符合条件可以同时享受。
 
@@ -263,13 +263,13 @@ export const NATIONAL_POLICIES: PolicyRecord[] = [
 3. 与低保、特困供养、孤儿基本生活费、工伤护理费等的衔接，按“不得简单重复享受同类待遇、 complementary 的按地方规定处理”。已享受工伤保险护理费、纳入特困人员供养的，护理补贴如何发放以地方细则为准。
 4. 伪造材料骗补依法追回并追究责任。`,
     sourceName: "国务院",
-    sourceUrl: "https://www.gov.cn/zhengce/content/2015-09/25/content_10187.htm",
-    docNo: "国发〔2015〕27号",
+    sourceUrl: "https://www.gov.cn/zhengce/content/2015-09/25/content_10181.htm",
+    docNo: "国发〔2015〕52号",
     issuedAt: "2015-09-22",
     effectiveAt: "2016-01-01",
     status: "现行有效",
-    keywords: "两项补贴,生活补贴,护理补贴,低保,一二级,重度,民政,国发27号",
-    relatedIds: ["npc-disability-protection-law", "sc-14th-five-year-plan"],
+    keywords: "两项补贴,生活补贴,护理补贴,低保,一二级,重度,民政,国发52号",
+    relatedIds: ["npc-disability-protection-law", "two-subsidies-improve-2021", "sc-14th-five-year-plan"],
   },
   {
     id: "child-rehab-rescue",
@@ -1137,6 +1137,40 @@ export const NATIONAL_POLICIES: PolicyRecord[] = [
     status: "现行有效",
     keywords: "创业,灵活就业,电商,贷款贴息,零就业家庭,社保补贴",
     relatedIds: ["sc-employment-ordinance", "vocational-skills-plan"],
+  },
+
+  {
+    id: "two-subsidies-improve-2021",
+    title: "民政部 财政部 中国残联关于进一步完善困难残疾人生活补贴和重度残疾人护理补贴制度的意见",
+    shortTitle: "两项补贴完善意见2021",
+    level: "national",
+    regionCode: "CN",
+    regionName: "全国",
+    category: "subsidy",
+    disabilityTypes: ["all"],
+    summary:
+      "民发〔2021〕70号：在国发〔2015〕52号基础上，细化对象扩面、政策衔接、动态调整、跨省通办和定期复核。有条件地方可将生活补贴向低保边缘等延伸，护理补贴向三、四级智力、精神残疾等延伸。",
+    keyPoints: [
+      "生活补贴覆盖范围可向低保边缘家庭残疾人及其他困难残疾人延伸。",
+      "护理补贴覆盖范围可向三、四级智力、精神残疾人或其他残疾人延伸。",
+      "健全补贴标准动态调整机制；生活补贴参照额外生活支出、护理补贴参照基本照护成本的一定比例确定。",
+      "实现补贴资格认定申请「跨省通办」；有条件地方可将审核审定权限下放到乡镇（街道）。",
+      "退出低保、死亡、户籍迁出、残疾人证过期/冻结/注销等，应于次月停发。",
+      "残疾人证到期前，残联应提前6个月提醒换证。",
+    ],
+    eligibility:
+      "持有效残疾人证并符合户籍地两项补贴条件的残疾人。扩面对象以省级、市级文件为准。",
+    howToApply:
+      "向户籍地乡镇（街道）一门受理窗口申请，也可按规定跨省通办或全程网办；补贴仍由户籍地审核发放。",
+    body: `民政部、财政部、中国残联《关于进一步完善困难残疾人生活补贴和重度残疾人护理补贴制度的意见》（民发〔2021〕70号，2021年8月24日）。中国残联网站公开全文。后续民发〔2022〕79号就精准管理提出进一步要求。具体金额仍由地方确定，本条不锁死元/月数字。`,
+    sourceName: "民政部、财政部、中国残疾人联合会",
+    sourceUrl: "https://www.cdpf.org.cn/zwgk/zcwj/7bba0d7f368b470fb65ef6f6c14bcb26.htm",
+    docNo: "民发〔2021〕70号",
+    issuedAt: "2021-08-24",
+    effectiveAt: "2021-08-24",
+    status: "现行有效",
+    keywords: "两项补贴,民发70号,跨省通办,动态调整,低保边缘,精准管理",
+    relatedIds: ["two-subsidies-2015", "npc-disability-protection-law"],
   },
   {
     id: "culture-sports",
