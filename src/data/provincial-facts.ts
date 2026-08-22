@@ -444,6 +444,8 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
   },
   HN: {
     planShortTitle: "湖南规划（残疾人）",
+    subsidyUrl:
+      "https://mzt.hunan.gov.cn/mzt/xxgk/zcfg/wj/202602/t20260204_33909648.html",
     employmentUrl:
       "https://czj.yueyang.gov.cn/9062/9065/9066/content_2188057.html",
     employmentNote:
@@ -474,7 +476,7 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
         body: "湖南省民政厅网站公布湘民发〔2026〕4号。指导标准不是封顶标准，长沙等市可能更高，以当地公示为准。",
         sourceName: "湖南省民政厅",
         sourceUrl:
-          "http://mzt.hunan.gov.cn/mzt/xxgk/zcfg/wj/202602/t20260204_33909648.html",
+          "https://mzt.hunan.gov.cn/mzt/xxgk/zcfg/wj/202602/t20260204_33909648.html",
         docNo: "湘民发〔2026〕4号",
         issuedAt: "2026-02",
         effectiveAt: "2026-01-01",
@@ -640,6 +642,8 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
   },
   LN: {
     planShortTitle: "辽宁规划（残疾人）",
+    subsidyUrl:
+      "https://mzt.ln.gov.cn/mzt/zfxxgk/fdzdgknr/lzyj/mztgfxwj/lmf/2026040916485552844/index.shtml",
     subsidyPoints: [
       "辽宁省民政厅：经省政府同意，从2026年1月1日起，困难残疾人生活补贴起始标准从不低于80元/月提高到不低于90元/月，重度残疾人护理补贴起始标准同步从不低于80元提到不低于90元。",
       "有条件的地区可在起始标准上提高。生活补贴对象范围仍以低保家庭残疾人为主，护理补贴以一、二级重度为主，是否扩大须看当地文件。",
@@ -660,11 +664,11 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
         eligibility: "辽宁省符合两项补贴条件的残疾人。",
         howToApply: "向乡镇街道或通过辽宁政务服务网申请。",
         body: "辽宁省民政厅官网《关于提高困难残疾人生活补贴和重度残疾人护理补贴起始标准的通知》，2026年4月9日公开，执行回溯至2026年1月1日。",
-        sourceName: "辽宁省民政厅",
+        sourceName: "辽宁省民政厅、财政厅、残联",
         sourceUrl:
           "https://mzt.ln.gov.cn/mzt/zfxxgk/fdzdgknr/lzyj/mztgfxwj/lmf/2026040916485552844/index.shtml",
-        docNo: "辽宁省提高两项补贴起始标准通知",
-        issuedAt: "2026-04-09",
+        docNo: "辽民发〔2026〕16号",
+        issuedAt: "2026-03-30",
         effectiveAt: "2026-01-01",
       }),
       localEmployment({
@@ -818,6 +822,8 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
   },
   ZJ: {
     planShortTitle: "浙江规划（残疾人）",
+    subsidyUrl:
+      "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web2681/site/attach/0/68e8c1dc35ec4f35afeca1e57c50bdc6.pdf",
     employmentUrl:
       "https://zhejiang.chinatax.gov.cn/art/2017/4/20/art_8410_12284.html",
     employmentNote:
@@ -1507,7 +1513,37 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "http://jilin.chinatax.gov.cn/art/2025/9/17/art_23132_921627.html",
     employmentNote:
       "吉财税〔2016〕726号按差额人数和年平均工资计征。《吉林省残疾人保障条例》第三十条要求安排比例不低于1.6%。安置义务与残保金计征口径是否已统一，请核省残联、税务局当年解释。",
+    subsidyUrl:
+      "http://xxgk.jl.gov.cn/zcbm/fgw_97981/xxgkmlqy/202507/t20250703_9271906.html",
+    subsidyPoints: [
+      "吉民发〔2025〕26号：生活补贴由85元/人/月调整为99元/人/月，护理补贴由85元/人/月调整为93元/人/月，自2025年7月1日起执行。",
+      "各地可在此基础上适当提高。市县是否上浮以当地公示为准。",
+    ],
     extraPolicies: [
+      localSubsidy({
+        id: "jl-subsidy-2025",
+        code: "JL",
+        name: "吉林省",
+        title: "吉林省提高困难残疾人生活补贴和重度残疾人护理补贴标准",
+        shortTitle: "吉林两项补贴99/93",
+        summary:
+          "吉民发〔2025〕26号：经省政府同意，生活补贴调整为每人每月99元，护理补贴调整为每人每月93元，自2025年7月1日起执行。各地可适当提高。",
+        keyPoints: [
+          "生活补贴99元/人/月（由85元上调）。",
+          "护理补贴93元/人/月（由85元上调）。",
+          "执行时间：2025年7月1日。",
+          "文号：吉民发〔2025〕26号。",
+        ],
+        eligibility: "吉林省符合两项补贴条件的持证残疾人，对象范围以省实施意见和市县细则为准。",
+        howToApply: "向户籍地乡镇街道申请。金额若当地已上浮，以当地民政公示为准。",
+        body: "吉林省政府信息公开平台公开《吉林省民政厅 吉林省财政厅 吉林省残疾人联合会关于提高全省困难残疾人生活补贴和重度残疾人护理补贴标准的通知》（吉民发〔2025〕26号，成文2025年6月28日，发布2025年7月3日）。本条锁定省级标准，市县上浮请核当地文件。",
+        sourceName: "吉林省民政厅、财政厅、残联",
+        sourceUrl:
+          "http://xxgk.jl.gov.cn/zcbm/fgw_97981/xxgkmlqy/202507/t20250703_9271906.html",
+        docNo: "吉民发〔2025〕26号",
+        issuedAt: "2025-06-28",
+        effectiveAt: "2025-07-01",
+      }),
       localEmployment({
         id: "jl-employment-fund-2016",
         code: "JL",
@@ -1619,7 +1655,61 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     employmentUrl: "http://www.gxdpf.org.cn/contents/646/44458.html",
     employmentNote:
       "桂财税〔2016〕47号：安排比例不得低于1.5%。自治区残联2026年2月通告：2026年联网认证申报时间为3月1日至10月31日。",
+    subsidyUrl: "http://mzt.gxzf.gov.cn/xxgk/zcwj/gmf/t25960665.shtml",
+    subsidyPoints: [
+      "桂民发〔2025〕25号：从2025年1月1日起，自治区残疾人两项补贴标准由每人每月80元提高至每人每月90元。",
+      "有条件的地方可在自治区标准上适当提高，报同级政府批准并报自治区民政厅、财政厅备案。",
+      "桂民规〔2022〕2号：生活补贴对象为持证且享受广西低保待遇的残疾人；护理补贴对象为自治区户籍一、二级各类残疾人及三、四级精神残疾人（有条件地方可延伸）。",
+    ],
     extraPolicies: [
+      localSubsidy({
+        id: "gx-subsidy-2025",
+        code: "GX",
+        name: "广西壮族自治区",
+        title: "广西提高残疾人两项补贴标准（桂民发〔2025〕25号）",
+        shortTitle: "广西两项补贴90元",
+        summary:
+          "桂民发〔2025〕25号：自2025年1月1日起，自治区残疾人两项补贴标准由每人每月80元提高至每人每月90元。市县可在此基础上适当提高。",
+        keyPoints: [
+          "自治区标准：生活补贴、护理补贴均为90元/人/月（由80元上调）。",
+          "执行时间：2025年1月1日。",
+          "文号：桂民发〔2025〕25号（自治区民政厅、财政厅）。",
+          "对象范围仍按桂民规〔2022〕2号等文件：生活补贴以低保家庭持证残疾人为主；护理补贴覆盖一、二级及三、四级精神残疾（扩面以当地为准）。",
+        ],
+        eligibility:
+          "广西符合两项补贴条件的持证残疾人。生活补贴通常需享受广西最低生活保障；护理补贴通常须自治区户籍且符合等级范围。具体以户籍地审核为准。",
+        howToApply:
+          "向户籍地乡镇人民政府或街道办事处申请。金额是否高于90元，请核市县公示；亦可拨打12385或咨询户籍地残联/民政。",
+        body: "广西壮族自治区民政厅网站公开《广西壮族自治区民政厅 广西壮族自治区财政厅关于提高全区城乡最低生活保障补助水平和残疾人两项补贴标准的通知》（桂民发〔2025〕25号）。同厅《关于进一步完善困难残疾人生活补贴和重度残疾人护理补贴制度的实施意见》（桂民规〔2022〕2号，自2022年10月1日起施行）明确对象范围与衔接规则。本条金额以桂民发〔2025〕25号为准；对象细节以桂民规〔2022〕2号和当地细则为准。",
+        sourceName: "广西壮族自治区民政厅、财政厅",
+        sourceUrl: "http://mzt.gxzf.gov.cn/xxgk/zcwj/gmf/t25960665.shtml",
+        docNo: "桂民发〔2025〕25号",
+        issuedAt: "2025-08-21",
+        effectiveAt: "2025-01-01",
+      }),
+      localSubsidy({
+        id: "gx-subsidy-rule-2022",
+        code: "GX",
+        name: "广西壮族自治区",
+        title: "广西进一步完善残疾人两项补贴制度实施意见",
+        shortTitle: "广西两项补贴对象规则",
+        summary:
+          "桂民规〔2022〕2号：明确生活补贴、护理补贴对象范围与政策衔接。符合条件者可同时申领两项补贴；特困供养对象不再享受两项补贴等。自2022年10月1日起施行。",
+        keyPoints: [
+          "生活补贴：持证且享受广西最低生活保障待遇的残疾人；有条件地方可向低保边缘等延伸。",
+          "护理补贴：自治区户籍一、二级各类残疾人，以及三、四级精神残疾人；有条件地方可向三、四级智力等延伸。",
+          "可同时申领生活补贴与护理补贴；与其他福利性护理补贴择高。",
+          "特困人员救助供养已覆盖的，不再享受两项补贴。",
+        ],
+        eligibility: "广西持证残疾人，并符合桂民规〔2022〕2号及当地扩面规定。",
+        howToApply: "向户籍地乡镇或街道提出申请，监护人或受托人可代办。残联办证时应一次性告知两项补贴政策。",
+        body: "广西壮族自治区民政厅、财政厅、残联《关于进一步完善困难残疾人生活补贴和重度残疾人护理补贴制度的实施意见》（桂民规〔2022〕2号）。自治区民政厅网站公开文本及重点领域解读。补贴标准以桂民发〔2025〕25号及市县提标文件为准。",
+        sourceName: "广西壮族自治区民政厅、财政厅、残联",
+        sourceUrl: "http://mzt.gxzf.gov.cn/xxgk/zcwj/gmg/t18765297.shtml",
+        docNo: "桂民规〔2022〕2号",
+        issuedAt: "2022",
+        effectiveAt: "2022-10-01",
+      }),
       localEmployment({
         id: "gx-employment-fund-2016",
         code: "GX",
