@@ -302,6 +302,13 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   CQ: {
+    planUrl:
+      "https://www.cq.gov.cn/zwgk/zfxxgkzl/fdzdgknr/zdmsxx/shbz/sbzcjywbl/202112/t20211231_10268369.html",
+    planIssued: "2021（重庆市“十四五”残疾人保障和发展规划）",
+    rehabUrl:
+      "https://www.cq.gov.cn/zwgk/zfxxgkml/szfwj/xzgfxwj/szf/201810/t20181012_8837026.html",
+    rehabAgeNote:
+      "渝府发〔2018〕44号：重庆市人民政府关于建立残疾儿童康复救助制度的实施意见，落实国发〔2018〕20号，自2018年10月1日起实施。有条件区县可适时扩大年龄范围、放宽家庭经济条件限制并合理提高标准，具体以区县细则和市残联目录为准。",
     implementingUrl:
       "https://www.cqcs.gov.cn/bm/qmzj_75252/zwgk_73772/fdzdgknr_73775/zcwj_bm/gfxwj_bm/202402/t20240219_12933621.html",
     implementingIssued: "2021-12-10（渝民发〔2021〕15号）",
@@ -940,6 +947,13 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   ZJ: {
+    planUrl:
+      "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3096/site/attach/0/d7060e6c6eb74a66b66748978344d4e3.pdf",
+    planIssued: "2021-06-28（浙政发〔2021〕19号，省政府公报）",
+    rehabUrl:
+      "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3096/site/attach/0/1811021506297899116.pdf",
+    rehabAgeNote:
+      "浙政发〔2018〕36号（省政府公报PDF）：完善残疾儿童康复服务制度。服务对象以0—6周岁经鉴定符合国家标准的视力、听力、言语、肢体、智力、多重残疾儿童和孤独症儿童为主；不具备义务教育入学条件的，年龄可按规定放宽。具体补贴档次与目录以省残联工作细则及当地执行文件为准。",
     planShortTitle: "浙江规划（残疾人）",
     subsidyUrl:
       "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web2681/site/attach/0/68e8c1dc35ec4f35afeca1e57c50bdc6.pdf",
@@ -1006,6 +1020,13 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   SD: {
+    planUrl:
+      "http://gb.shandong.gov.cn/art/2021/10/11/art_100623_39296.html",
+    planIssued: "2021-09-02（鲁政字〔2021〕156号）",
+    rehabUrl:
+      "http://gb.shandong.gov.cn/art/2026/1/18/art_100623_47044.html",
+    rehabAgeNote:
+      "鲁政字〔2025〕188号《山东省残疾儿童康复救助办法》：申请对象为持残疾人证且未满18周岁，或持规定残疾诊断证明且未满7周岁，并符合户籍/居住证纳税或社保等条件之一。0—6岁听力言语肢体智力及孤独症集中训练每人年补助2万元；7岁以上集中训练1.5万元、“机构+社区+家庭”0.5万元；视力训练0.6万元（原则上不超过2年）。自2026年1月1日起施行，鲁政发〔2018〕20号同时废止。",
     planShortTitle: "山东规划（残疾人）",
     implementingUrl:
       "http://www.shandong.gov.cn/art/2015/12/29/art_2267_17675.html",
@@ -1475,6 +1496,13 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   JS: {
+    planUrl:
+      "https://www.jiangsu.gov.cn/art/2021/10/15/art_46144_10075133.html",
+    planIssued: "2021-09-25（苏政办发〔2021〕82号）",
+    rehabUrl:
+      "https://www.jiangsu.gov.cn/art/2018/10/30/art_46143_7856295.html",
+    rehabAgeNote:
+      "苏政发〔2018〕129号：本省户籍经评估有康复训练适应指征的0—6周岁残疾儿童；7—14周岁肢体残疾、孤独症儿童；人工耳蜗手术救助年龄可放宽到7—14周岁。有条件地区可放宽。救助经费标准由县级以上政府确定并动态调整。",
     implementingUrl:
       "http://mzt.jiangsu.gov.cn/art/2023/1/31/art_78615_10848067.html",
     implementingIssued: "2022-12-26（苏民规〔2022〕4号，2023-04-01施行）",
@@ -2316,6 +2344,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   NX: {
+    rehabUrl:
+      "https://www.nx.gov.cn/zwgk/zc/xzgfxwj/qzf/202311/t20231106_4339519.html",
+    rehabAgeNote:
+      "宁政规发〔2018〕8号：自治区人民政府建立残疾儿童康复救助制度实施意见，落实国发〔2018〕20号。自2018年10月1日起施行（政府信息公开页载明原有效期至2023年10月1日；现行执行口径以自治区残联/民政最新配套为准）。",
     implementingUrl:
       "https://www.spt.gov.cn/xxgk/bmxxgkml/sptqclz/fdzdgknr_51950/shjz_51959/202512/t20251217_5111151.html",
     implementingIssued: "2022（宁民规发〔2022〕2号）",
