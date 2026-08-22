@@ -82,6 +82,13 @@ function localEmployment(p: {
 
 export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
   BJ: {
+    planUrl:
+      "https://fgw.beijing.gov.cn/fgwzwgk/2024zcwj/ghjhwb/wngh/202205/t20220517_3732878.htm",
+    planIssued: "2021-09-19（京残工委〔2021〕3号，市发改委公开）",
+    rehabUrl:
+      "https://www.beijing.gov.cn/zhengce/zhengcefagui/201905/t20190522_61796.html",
+    rehabAgeNote:
+      "京政办发〔2018〕49号：完善本市残疾儿童康复服务制度，落实国发〔2018〕20号。加强0—15岁残疾儿童康复服务衔接，提供手术、康复训练和辅助器具配置等一体化服务；将疑似残疾儿童纳入康复服务范围。具体目录与补助以市残联配套办法及区残联审批为准。",
     employmentUrl:
       "https://invest.beijing.gov.cn/sy/zt/qyrx/202603/t20260316_4557787.html",
     employmentNote:
@@ -189,6 +196,13 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   SH: {
+    planUrl:
+      "https://www.shanghai.gov.cn/nw12344/20210810/d9cf38fe1ed447598dc1a96143c9ce97.html",
+    planIssued: "2021-07-09（沪府办发〔2021〕15号）",
+    rehabUrl:
+      "https://www.shanghai.gov.cn/nw12344/20250507/b3de0e1bc10a4a6597434edc37bd8386.html",
+    rehabAgeNote:
+      "沪府发〔2025〕1号：加强本市残疾儿童康复救助制度建设。救助对象为具有本市户籍未满18周岁，持视力/听力/言语/肢体/智力残疾人证或“阳光宝宝卡”，或经本市孤独症儿童康复救助诊断机构诊断为孤独症的儿童；持本市居住证且父母双方（或监护人）持居住证连续满1年以上、未享受户籍地同类救助的同类未满18周岁儿童也可申请。自2025年5月1日起施行，有效期至2030年4月30日；沪府规〔2018〕22号及延期文件同时废止。具体细则以市残联配套规定为准。",
     employmentUrl:
       "https://shanghai.chinatax.gov.cn/xwdt/ztzl/zcgll/cjrbzj/jfzy/202608/t481322.html",
     employmentNote:
@@ -419,6 +433,13 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   GD: {
+    planUrl:
+      "https://www.gd.gov.cn/gkmlpt/content/3/3764/post_3764191.html",
+    planIssued: "2021-12-16（粤府函〔2021〕375号）",
+    rehabUrl:
+      "https://www.gd.gov.cn/gkmlpt/content/0/157/post_157297.html",
+    rehabAgeNote:
+      "粤府办〔2018〕43号《广东省残疾儿童康复救助实施办法》：救助对象主要为本省户籍0—6岁（截至申请当年度8月31日止不满7周岁，有条件地区可扩大年龄范围）视力、听力、言语、智力、肢体残疾儿童和孤独症儿童。自2018年10月1日起实施；原文载明有效期5年，现行执行口径以省残联/省政府最新配套为准，本库不锁死过期金额。",
     planShortTitle: "广东规划（残疾人）",
     employmentUrl:
       "https://guangdong.chinatax.gov.cn/gdsw/gzsw_cjrjybzj/2018-07/06/content_f3d584a796bd4f778b2a2a458f707748.shtml",
@@ -2116,6 +2137,13 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   HL: {
+    planUrl:
+      "https://www.hlj.gov.cn/hlj/c108372/202112/c00_31181942.shtml",
+    planIssued: "2021-12-16（黑政规〔2021〕16号）",
+    rehabUrl:
+      "https://www.hlj.gov.cn/hlj/c108372/201901/c00_31181304.shtml",
+    rehabAgeNote:
+      "黑政规〔2018〕20号：具有本省户籍（或居住证）、有康复需求并经评估认定的0—6岁视力、听力、言语、肢体、智力残疾儿童和孤独症儿童；优先低保、建档立卡贫困户、儿童福利机构收留抚养、残疾孤儿及特困供养对象。有条件地区可扩大年龄范围或放宽家庭经济条件限制。自2018年12月1日起全面实施；补助标准与目录以省残联配套及当地执行为准。",
     employmentUrl:
       "https://www.hlj.gov.cn/hlj/c108040/202211/c00_31443922.shtml",
     employmentNote:
