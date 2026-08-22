@@ -533,6 +533,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "http://www.hunan.gov.cn/xxgk/wjk/szfwj/201810/t20181012_5117777.html",
     rehabAgeNote:
       "湘政发〔2018〕23号：具有湖南户籍或有效居住证、有康复需求和适应指征的0—6岁视力、听力、言语、肢体、智力等残疾儿童和孤独症儿童；包括城乡低保、建档立卡贫困户、儿童福利机构收留抚养、残疾孤儿、特困供养及其他经济困难家庭残疾儿童。鼓励有条件地区扩大年龄范围。自2018年10月1日起全面实施；补助项目与额度以省残联配套及市县执行为准，本库不锁死过期金额。",
+    implementingUrl:
+      "http://rst.hunan.gov.cn/rst/xxgk/zcfg/dfxfg/202211/t20221110_29122249.html",
+    implementingIssued:
+      "2017-09-29通过，2017-11-01施行（湖南省实施《中华人民共和国残疾人保障法》办法；2023年人大常委会决定对无障碍条款作相应修改，省人社厅网站公开文本）",
     subsidyUrl:
       "https://mzt.hunan.gov.cn/mzt/xxgk/zcfg/wj/202602/t20260204_33909648.html",
     employmentUrl:
@@ -2193,6 +2197,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "http://xxgk.jl.gov.cn/szf/gkml/201812/t20181205_5350322.html",
     rehabAgeNote:
       "吉政发〔2018〕20号：具有吉林省户籍（或持有吉林省内居住证）、有康复需求的0—6岁视力、听力、言语、肢体、智力等残疾儿童和孤独症儿童；须已办理残疾人证或持具有诊断资质的县级以上医疗机构出具的医学诊断证明。自2018年10月1日起全面实施；补助标准与目录以省残联实施细则及当地执行为准。",
+    implementingUrl:
+      "http://zwgk.changchun.gov.cn/zcbm/scl_4030/lzyj/202404/t20240430_3304219.html",
+    implementingIssued:
+      "2013-05-30通过，2013-08-01施行（吉林省残疾人保障条例；原实施办法同时废止，长春市政府信息公开网转载全文）",
     employmentUrl:
       "http://jilin.chinatax.gov.cn/art/2025/9/17/art_23132_921627.html",
     employmentNote:
@@ -2286,6 +2294,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "https://www.hlj.gov.cn/hlj/c108372/201901/c00_31181304.shtml",
     rehabAgeNote:
       "黑政规〔2018〕20号：具有本省户籍（或居住证）、有康复需求并经评估认定的0—6岁视力、听力、言语、肢体、智力残疾儿童和孤独症儿童；优先低保、建档立卡贫困户、儿童福利机构收留抚养、残疾孤儿及特困供养对象。有条件地区可扩大年龄范围或放宽家庭经济条件限制。自2018年12月1日起全面实施；补助标准与目录以省残联配套及当地执行为准。",
+    implementingUrl:
+      "http://www.npc.gov.cn/npc/c1773/c1849/c6680/c18674/c18676/201905/t20190522_53851.html",
+    implementingIssued:
+      "2011-08-12通过，2011-10-01施行（黑龙江省残疾人保障条例；原实施办法同时废止，中国人大网公开文本）",
     subsidyUrl:
       "https://www.hlj.gov.cn/hlj/c116003dp/202510/c00_31879135.shtml",
     subsidyPoints: [
@@ -2354,6 +2366,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     planUrl:
       "http://www.gxzf.gov.cn/zwgk/zfxxgkzl_84988/fdzdgknr/ghxx/zxgh912/t11308574.shtml",
     planIssued: "2021-12-16（桂政发〔2021〕48号，自治区人民政府门户网站专项规划栏目全文）",
+    rehabUrl:
+      "http://www.yfq.gov.cn/sjzt/jczt/ztzl/cjrflywzt/gfbzcjrfl/t19700101_3515471.shtml",
+    rehabAgeNote:
+      "桂政发〔2018〕45号（柳州市鱼峰区政府网转载自治区残联、卫生健康委《关于规范广西残疾儿童康复救助医学诊断和救助要求的通知》完整引用）：自2018年10月1日起实施残疾儿童康复救助制度；对有康复救助需求且符合条件的0—17岁视力、听力、言语、肢体、智力等残疾儿童和孤独症儿童提供康复训练、手术及辅助器具配置救助。具体补助项目与额度以自治区残联配套及市县执行为准，本库不锁死过期金额。",
     employmentUrl: "http://www.gxdpf.org.cn/contents/646/44458.html",
     employmentNote:
       "桂财税〔2016〕47号：安排比例不得低于1.5%。自治区残联2026年2月通告：2026年联网认证申报时间为3月1日至10月31日。",
@@ -2779,7 +2795,15 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   XZ: {
-    implementingIssued: "2016（藏政发〔2016〕44号）",
+    planShortTitle: "西藏规划（残疾人）",
+    rehabUrl:
+      "https://www.xizang.gov.cn/zwgk/xxgk_424/zxxxgk/201905/t20190508_69063.html",
+    rehabAgeNote:
+      "藏政发〔2019〕2号（自治区人民政府网站公开全文）：救助对象为具有西藏自治区户籍（居住证发放地在西藏）、诊断明确、有康复需求的0—8岁视力、听力、言语、肢体、智力等残疾儿童和孤独症儿童；语后聋听障儿童申请人工耳蜗植入、肢体残疾儿童申请矫治手术年龄可放宽至14岁。救助内容含基本康复训练、辅助器具适配和手术等。具体补助项目与额度以自治区配套细则及当地执行为准，本库不锁死金额。",
+    implementingUrl:
+      "https://www.xizang.gov.cn/xwzx_406/bmkx/202505/t20250529_481336.html",
+    implementingIssued:
+      "2013-09-27修订，2025-05-27第三次修正，2013-12-01施行（西藏自治区实施《中华人民共和国残疾人保障法》办法，自治区人民政府网转西藏日报公开文本）",
     subsidyUrl:
       "https://mzt.xizang.gov.cn/zxzx/gzdt/202503/t20250305_465410.html",
     subsidyPoints: [
@@ -2936,6 +2960,15 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   GS: {
+    planTitle: "甘肃省“十四五”残疾人保障和发展规划（张掖市规划依据省规划）",
+    planShortTitle: "甘肃规划（残疾人）",
+    planUrl:
+      "https://www.zhangye.gov.cn/zyszfxxgk/fdzdgknr_5657/zyghgy/zxgh/202301/t20230128_974671.html",
+    planIssued: "2022-04-15（张政发〔2022〕32号，张掖市政府信息公开网《张掖市“十四五”残疾人保障和发展规划》全文；依据甘肃省“十四五”残疾人保障和发展规划）",
+    implementingUrl:
+      "http://www.gsrdw.gov.cn/html/2022/lfdt_0602/21013.html",
+    implementingIssued:
+      "2012-03-28通过，2022-06-02修订，2022-08-01施行（甘肃省残疾人保障条例，甘肃人大网公开修订全文）",
     rehabUrl:
       "https://www.huining.gov.cn/xxgk/xzxxgk/xzyz/fdzdgknr/shjz/art/2023/art_340444553c7b414ca2e91bb85a244a39.html",
     rehabAgeNote:
