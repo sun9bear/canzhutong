@@ -46,7 +46,11 @@ import {
 } from "./preview";
 
 // Kick (and share) PGLite bootstrap as soon as the auth server module loads.
-void ensureDbReady();
+// Swallow here so a missing serverless WASM/data asset cannot crash route
+// module evaluation; auth handlers still fail closed when the DB is down.
+void ensureDbReady().catch((err) => {
+  console.error("[auth] PGLite bootstrap failed:", err);
+});
 
 /**
  * Preview secret must outlive module reloads: PGLite (and its session rows) is

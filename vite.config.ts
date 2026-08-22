@@ -4,6 +4,8 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { nitro } from "nitro/vite";
+import { cpSync, existsSync, readdirSync, statSync } from "node:fs";
+import { join } from "node:path";
 // @ts-expect-error JS plugin alongside the TS vite config
 import { grokPwaPlugin } from "./scripts/grok-pwa-plugin.mjs";
 
@@ -123,6 +125,58 @@ function authPopupPlugin(): Plugin {
   };
 }
 
+
+/**
+ * Nitro bundles `@electric-sql/pglite` into `_libs/electric-sql__pglite.mjs` and
+ * rewrites `new URL("./pglite.data", import.meta.url)` to that folder — but it
+ * does not copy the binary `.data` / `.wasm` siblings. Without them Vercel
+ * serverless crashes on every request with ENOENT `/var/task/_libs/pglite.data`.
+ * Copy the assets next to the bundled module after Nitro finishes compiling.
+ */
+function copyPgliteServerAssets(outputDir: string, rootDir: string) {
+  const srcDir = join(rootDir, "node_modules/@electric-sql/pglite/dist");
+  const files = ["pglite.data", "pglite.wasm", "initdb.wasm"] as const;
+  const targets: string[] = [];
+  const walk = (dir: string, depth: number) => {
+    if (depth > 10) return;
+    let entries: string[];
+    try {
+      entries = readdirSync(dir);
+    } catch {
+      return;
+    }
+    for (const name of entries) {
+      const full = join(dir, name);
+      if (name === "electric-sql__pglite.mjs") targets.push(dir);
+      try {
+        if (statSync(full).isDirectory()) walk(full, depth + 1);
+      } catch {
+        /* ignore */
+      }
+    }
+  };
+  walk(outputDir, 0);
+  if (targets.length === 0) {
+    console.warn(
+      "[pglite-assets] electric-sql__pglite.mjs not found under",
+      outputDir,
+    );
+    return;
+  }
+  for (const dir of targets) {
+    for (const file of files) {
+      const from = join(srcDir, file);
+      const to = join(dir, file);
+      if (!existsSync(from)) {
+        console.warn("[pglite-assets] missing source", from);
+        continue;
+      }
+      cpSync(from, to);
+      console.log(`[pglite-assets] ${file} -> ${to}`);
+    }
+  }
+}
+
 // `0.0.0.0:8080` is the live-preview contract — don't change host/port.
 // Keep `nitro` gated to `build` (the Vercel deploy target): enabled in dev it
 // opens a second dev-server port, which breaks the single-port preview.
@@ -135,6 +189,8 @@ export default defineConfig(({ command }) => ({
     strictPort: true,
   },
   resolve: { tsconfigPaths: true },
+  // Keep PGlite's WASM/data URL resolution intact in dev.
+  optimizeDeps: { exclude: ["@electric-sql/pglite"] },
   plugins: [
     pgliteBootstrapPlugin(),
     // Before tanstackStart so /auth/popup never falls through to the SPA.
@@ -151,6 +207,14 @@ export default defineConfig(({ command }) => ({
             // manifest + head-tag middleware). Nitro v3 defaults serverDir to
             // false, so removing this silently unwires /?install=1 on deploys.
             serverDir: "./server",
+            hooks: {
+              compiled(nitro) {
+                copyPgliteServerAssets(
+                  nitro.options.output.dir,
+                  nitro.options.rootDir,
+                );
+              },
+            },
           }),
         ]
       : []),
