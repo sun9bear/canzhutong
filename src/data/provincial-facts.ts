@@ -302,10 +302,42 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   CQ: {
+    implementingUrl:
+      "https://www.cqcs.gov.cn/bm/qmzj_75252/zwgk_73772/fdzdgknr_73775/zcwj_bm/gfxwj_bm/202402/t20240219_12933621.html",
+    implementingIssued: "2021-12-10（渝民发〔2021〕15号）",
+    subsidyUrl:
+      "https://mzj.cq.gov.cn/zwgk_218/zfxxgkml/zcjd/mtsj/202512/t20251230_15279136.html",
     subsidyPoints: [
+      "渝民发〔2021〕15号：生活补贴对象为重庆市户籍城乡低保中持有效残疾人证且符合衔接条件者；护理补贴对象为一级、二级持证残疾人。可同时申领两项。",
       "重庆市民政局2025年12月报道：自2026年1月1日起，生活补贴100元/月；护理补贴一级110元/月、二级100元/月。",
     ],
     extraPolicies: [
+      localSubsidy({
+        id: "cq-subsidy-rule-2021",
+        code: "CQ",
+        name: "重庆市",
+        title: "重庆市进一步完善残疾人两项补贴制度实施意见",
+        shortTitle: "重庆两项补贴渝民发15号",
+        summary:
+          "渝民发〔2021〕15号：明确对象范围、政策衔接、跨省通办与动态管理。生活补贴限低保持证残疾人；护理补贴限一、二级持证残疾人。有条件区县可扩面。",
+        keyPoints: [
+          "生活补贴：户籍低保对象中持有效残疾人证且符合衔接条件。",
+          "护理补贴：一级、二级持有效残疾人证且符合衔接条件。",
+          "两项可同时享受；工伤护理费、特困供养不同时享受。",
+          "支持跨省通办、全程网办；有条件可将审核下放到乡镇（街道）。",
+        ],
+        eligibility:
+          "具有重庆市户籍、持有效残疾人证，并符合渝民发〔2021〕15号对象范围与政策衔接规定的残疾人。",
+        howToApply:
+          "向户籍地或全国任意乡镇（街道）一门受理窗口，或政务服务平台申请；补贴由原户籍地审核发放。",
+        body: "重庆市民政局、财政局、残联《关于进一步完善困难残疾人生活补贴和重度残疾人护理补贴制度的实施意见》（渝民发〔2021〕15号，2021年12月10日）。长寿区民政局2024年2月废止旧区规范时全文转载该意见。现行元/月见市提标报道专条。",
+        sourceName: "重庆市民政局、财政局、残联（长寿区政府网转载）",
+        sourceUrl:
+          "https://www.cqcs.gov.cn/bm/qmzj_75252/zwgk_73772/fdzdgknr_73775/zcwj_bm/gfxwj_bm/202402/t20240219_12933621.html",
+        docNo: "渝民发〔2021〕15号",
+        issuedAt: "2021-12-10",
+        effectiveAt: "2021-12-10",
+      }),
       localSubsidy({
         id: "cq-subsidy-2026",
         code: "CQ",
@@ -795,11 +827,65 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
   },
   HE: {
     planShortTitle: "河北规划（残疾人）",
+    implementingUrl:
+      "http://www.luanxian.gov.cn/index.php?a=show&c=index&catid=1688&id=33503&m=content",
+    implementingIssued: "2015（冀政字〔2015〕74号，2016-01-01起制度实施）",
+    subsidyUrl:
+      "http://www.chengan.gov.cn/zfxxgk/view.jsp?id=27806&xxfl=1403",
     employmentUrl:
       "https://www.yongqing.gov.cn/xingzhengshiyexingshoufeihezhengfuxingjijinmuluqingdan/2023-06-03/15204.html",
     employmentNote:
-      "冀财税〔2016〕40号：安排比例1.5%。年缴纳额=（上年职工人数\xD71.5%－上年实际安排人数）\xD7上年职工年平均工资。冀财非税〔2020〕15号进一步规范征收管理。",
+      "冀财税〔2016〕40号：安排比例1.5%。年缴纳额=（上年职工人数×1.5%－上年实际安排人数）×上年职工年平均工资。冀财非税〔2020〕15号进一步规范征收管理。",
     extraPolicies: [
+      localSubsidy({
+        id: "he-subsidy-rule-2015",
+        code: "HE",
+        name: "河北省",
+        title: "河北省全面建立残疾人两项补贴制度实施意见",
+        shortTitle: "河北两项补贴冀政字74号",
+        summary:
+          "冀政字〔2015〕74号：生活补贴对象为低保家庭持证残疾人；护理补贴对象为一、二级需长期照护重度残疾人。制度起点生活补贴不低于55元/月、护理补贴不低于50元/月，之后按动态调整。",
+        keyPoints: [
+          "生活补贴：低保家庭持证残疾人；有条件地方可扩面。",
+          "护理补贴：一、二级视力/肢体/精神/智力及多重且需长期照护。",
+          "制度起点：生活不低于55元/月、护理不低于50元/月（2016年起），现行元/月见提标专条。",
+          "文号冀政字〔2015〕74号，滦县政府网公开全文。",
+        ],
+        eligibility:
+          "具有河北省户籍、持有效残疾人证，并符合冀政字〔2015〕74号及后续提标、当地扩面规定的残疾人。",
+        howToApply:
+          "向户籍地乡镇（街道）社会救助一门受理窗口申请。现行标准以省提标通知和市县公示为准。",
+        body: "河北省人民政府《关于全面建立困难残疾人生活补贴和重度残疾人护理补贴制度的实施意见》（冀政字〔2015〕74号）。滦县人民政府信息公开平台公开全文。后续标准以省民政厅、财政厅、残联提标通知为准。",
+        sourceName: "滦县人民政府（引冀政字〔2015〕74号）",
+        sourceUrl:
+          "http://www.luanxian.gov.cn/index.php?a=show&c=index&catid=1688&id=33503&m=content",
+        docNo: "冀政字〔2015〕74号",
+        issuedAt: "2015",
+        effectiveAt: "2016-01-01",
+      }),
+      localSubsidy({
+        id: "he-subsidy-2025",
+        code: "HE",
+        name: "河北省",
+        title: "河北省提高残疾人两项补贴标准（2025年）",
+        shortTitle: "河北2025两项补贴提标",
+        summary:
+          "省民政厅、财政厅、残联通知：自2025年1月1日起，困难残疾人生活补贴由96元/月调整为106元/月；重度残疾人护理补贴由90元/月调整为100元/月。高于省定标准所需资金由当地财政解决。",
+        keyPoints: [
+          "生活补贴106元/人/月（原96元）。",
+          "护理补贴100元/人/月（原90元）。",
+          "自2025年1月1日起执行。",
+          "市县可高于省定标准。",
+        ],
+        eligibility: "河北省符合两项补贴条件的持证残疾人。",
+        howToApply: "向户籍地乡镇街道或县民政申请；以当地公示和窗口为准。",
+        body: "河北省民政厅、财政厅、残联《关于提高困难残疾人生活补贴和重度残疾人护理补贴标准的通知》（2024年12月25日）。成安县人民政府网2025年3月12日公开全文。是否2026年再调，请核省民政厅最新通知。",
+        sourceName: "河北省民政厅、财政厅、残联（成安县政府网公开）",
+        sourceUrl: "http://www.chengan.gov.cn/zfxxgk/view.jsp?id=27806&xxfl=1403",
+        docNo: "河北省两项补贴提标通知（2025年1月1日起）",
+        issuedAt: "2024-12-25",
+        effectiveAt: "2025-01-01",
+      }),
       localEmployment({
         id: "he-employment-fund-2016",
         code: "HE",
@@ -849,8 +935,8 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       }),
     ],
     subsidyPoints: [
-      "河北省政府网2025年1月报道：困难残疾人生活补贴调整为每人每月106元，重度残疾人护理补贴调整为每人每月100元。是否2026年继续沿用，请核省民政厅最新通知。",
-      "有条件的市县可高于省标准。",
+      "冀政字〔2015〕74号建立制度；省民政厅、财政厅、残联2024年12月25日通知：自2025年1月1日起生活补贴106元/月、护理补贴100元/月。",
+      "有条件的市县可高于省标准；2026年是否再调，请核省民政厅最新通知。",
     ],
   },
   ZJ: {
@@ -1207,11 +1293,68 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   HB: {
+    implementingUrl: "http://www.hbdpf.org.cn/gk/gfwj/flfg/161202.htm",
+    implementingIssued: "2015-12-26（鄂政办发〔2015〕96号，2016-01-01施行）",
+    subsidyUrl:
+      "http://www.shiyan.gov.cn/fw/ztfw/shfl_105864/cjrfl/wjtz/202604/t20260403_4918451.shtml",
+    subsidyPoints: [
+      "鄂政办发〔2015〕96号：生活补贴对象为低保家庭残疾人；护理补贴对象为一、二级需长期照护重度残疾人。",
+      "省民政厅、财政厅、残联调整方案：自2026年1月1日起，生活补贴110元/人/月，护理补贴125元/人/月。",
+    ],
     employmentUrl:
       "https://www.hbdaye.gov.cn/zfxxgk/fdgknr/gysyjs/shbz/202303/t20230329_1001750.html",
     employmentNote:
       "鄂财法规〔2017〕11号、省政府令第334号：安排比例不低于1.5%。年缴纳额=（上年职工人数\xD71.5%－上年实际安排人数）\xD7上年职工年平均工资。安排1名持证一、二级残疾人或残疾军人证1—3级的，按2人计算。工资不低于当地最低工资并足额缴社保、签一年以上合同的才计入。",
     extraPolicies: [
+      localSubsidy({
+        id: "hb-subsidy-rule-2015",
+        code: "HB",
+        name: "湖北省",
+        title: "湖北省全面建立残疾人两项补贴制度实施意见",
+        shortTitle: "湖北两项补贴鄂政办发96号",
+        summary:
+          "鄂政办发〔2015〕96号：自2016年1月1日起全面实施。生活补贴对象为低保家庭残疾人；护理补贴对象为一、二级需长期照护重度残疾人。制度起点生活50元/月、护理100元/月，之后按动态调整。",
+        keyPoints: [
+          "生活补贴：低保家庭中的残疾人。",
+          "护理补贴：一、二级且需要长期照护的重度残疾人。",
+          "可同时申领两项；特困供养、工伤护理费不享受两项补贴。",
+          "文号鄂政办发〔2015〕96号，省残联网站公开。",
+        ],
+        eligibility:
+          "具有湖北省户籍、持有效残疾人证，并符合鄂政办发〔2015〕96号及后续调整方案的残疾人。",
+        howToApply:
+          "向户籍地街道办事处或乡镇政府受理窗口申请；也可按全国两项补贴信息系统办理。",
+        body: "湖北省人民政府办公厅《关于全面建立困难残疾人生活补贴和重度残疾人护理补贴制度的实施意见》（鄂政办发〔2015〕96号，2015年12月26日）。湖北省残联信息公开栏目公开全文。现行元/月见2026年调整方案专条。",
+        sourceName: "湖北省残疾人联合会（引鄂政办发〔2015〕96号）",
+        sourceUrl: "http://www.hbdpf.org.cn/gk/gfwj/flfg/161202.htm",
+        docNo: "鄂政办发〔2015〕96号",
+        issuedAt: "2015-12-26",
+        effectiveAt: "2016-01-01",
+      }),
+      localSubsidy({
+        id: "hb-subsidy-2026",
+        code: "HB",
+        name: "湖北省",
+        title: "湖北省困难残疾人生活补贴和重度残疾人护理补贴标准调整方案（2026年）",
+        shortTitle: "湖北2026两项补贴提标",
+        summary:
+          "省民政厅、财政厅、残联印发调整方案：自2026年1月1日起，困难残疾人生活补贴提高到每人每月110元；重度残疾人护理补贴提高到每人每月125元。",
+        keyPoints: [
+          "生活补贴110元/人/月。",
+          "护理补贴125元/人/月。",
+          "自2026年1月1日起实施。",
+          "提高部分由省与市县财政分级承担。",
+        ],
+        eligibility: "湖北省符合两项补贴条件的持证残疾人。",
+        howToApply: "向户籍地乡镇街道或县民政申请；依托全国残疾人两项补贴信息系统办理。",
+        body: "湖北省民政厅、财政厅、残联《湖北省困难残疾人生活补贴标准、重度残疾人护理补贴标准调整方案》（2026年3月25日印发）。十堰市委市政府门户网站2026年4月3日公开。省委、省政府批准。",
+        sourceName: "湖北省民政厅、财政厅、残联（十堰市政府网公开）",
+        sourceUrl:
+          "http://www.shiyan.gov.cn/fw/ztfw/shfl_105864/cjrfl/wjtz/202604/t20260403_4918451.shtml",
+        docNo: "湖北省两项补贴标准调整方案（2026年1月1日起）",
+        issuedAt: "2026-03-25",
+        effectiveAt: "2026-01-01",
+      }),
       localEmployment({
         id: "hb-employment-three-year",
         code: "HB",
@@ -1355,11 +1498,46 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   SC: {
+    implementingUrl:
+      "http://mzt.sc.gov.cn/scmzt/xzgfxwj2023/2024/7/1/23ba46f969f5427e875f41c79c0c62f6.shtml",
+    implementingIssued: "2024-07-01（川民规〔2024〕1号）",
+    subsidyUrl:
+      "http://mzt.sc.gov.cn/scmzt/zcjd2023/2024/7/1/c53e8ebf27144f4492e8e727e56f9d30.shtml",
+    subsidyPoints: [
+      "川民规〔2024〕1号：加强两项补贴精准管理与政策衔接，落实国发〔2015〕52号、民发〔2021〕70号、民发〔2022〕79号及川民发〔2015〕195号衔接规定。",
+      "省民政厅政策解读口径：困难残疾人生活补贴100元/人/月；一、二级重度护理补贴分别为110元、80元/人/月（解读载明截至提标后现行标准）。市县可另有提标。",
+    ],
     employmentUrl:
       "https://www.jzg.gov.cn/jzgrmzf/c100053/202301/70dbb837d4944d77a2a3ed824d7dcf26.shtml",
     employmentNote:
       "川财规〔2021〕5号：四川省安排残疾人就业比例不得低于在职职工总数1.6%（高于国家1.5%底线）。川财规〔2026〕2号延长该实施办法有效期。未达标缴纳残保金。",
     extraPolicies: [
+      localSubsidy({
+        id: "sc-subsidy-precise-2024",
+        code: "SC",
+        name: "四川省",
+        title: "四川省进一步加强残疾人两项补贴精准管理的实施意见",
+        shortTitle: "四川两项补贴川民规1号",
+        summary:
+          "川民规〔2024〕1号：强化政策宣传、政策衔接、数据比对与动态复核。省民政厅解读载明现行省定生活补贴100元/月，一、二级护理补贴110元、80元/月。",
+        keyPoints: [
+          "严格落实国发〔2015〕52号、民发〔2021〕70号、民发〔2022〕79号及川民发〔2015〕195号衔接规定。",
+          "重度护理补贴与老年人护理补贴不得重复，可择高。",
+          "解读载明省定标准：生活100元；护理一级110元、二级80元。",
+          "文号川民规〔2024〕1号，省民政厅规范性文件库公开。",
+        ],
+        eligibility:
+          "具有四川省户籍、持有效残疾人证，并符合川民发〔2015〕195号及川民规〔2024〕1号规定的残疾人。",
+        howToApply:
+          "向户籍地乡镇（街道）民政窗口申请，或通过全国残疾人两项补贴信息系统办理。",
+        body: "四川省民政厅、财政厅、残联《关于进一步加强残疾人两项补贴精准管理的实施意见》（川民规〔2024〕1号，省民政厅网站2024年7月1日公开）。金额口径引自同日政策解读对既往提标文件的汇总表述，市县提标以当地公示为准。",
+        sourceName: "四川省民政厅、财政厅、残联",
+        sourceUrl:
+          "http://mzt.sc.gov.cn/scmzt/xzgfxwj2023/2024/7/1/23ba46f969f5427e875f41c79c0c62f6.shtml",
+        docNo: "川民规〔2024〕1号",
+        issuedAt: "2024-07-01",
+        effectiveAt: "2024-07-01",
+      }),
       localEmployment({
         id: "sc-employment-fund-2021",
         code: "SC",
@@ -1545,10 +1723,42 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   HA: {
+    implementingUrl: "https://public.zhongyuan.gov.cn/02Z/6078082.jhtml",
+    implementingIssued: "2016-09-20（豫政〔2016〕60号，2016-01-01施行）",
+    subsidyUrl: "https://public.zhongyuan.gov.cn/02Z/6078082.jhtml",
+    subsidyPoints: [
+      "豫政〔2016〕60号：河南省困难残疾人生活补贴和重度残疾人护理补贴实施办法。郑州市中原区政务公开办事指南列明该文及郑政办〔2016〕66号为实施依据。",
+      "全省统一现行元/月未在本条锁死；请以省民政厅、市县公示为准。郑州中原区指南明确向街道窗口申请，承诺时限7个工作日。",
+    ],
     employmentUrl: "https://fgw.henan.gov.cn/2021/01-05/2072521.html",
     employmentNote:
       "河南省规定安排比例为1.6%（高于国家1.5%底线）。省发展改革委2021年实施意见：分档征收时，安排比例1%（含）以上但低于我省规定比例1.6%的，按应缴费额50%缴纳。",
     extraPolicies: [
+      localSubsidy({
+        id: "ha-subsidy-rule-2016",
+        code: "HA",
+        name: "河南省",
+        title: "河南省困难残疾人生活补贴和重度残疾人护理补贴实施办法",
+        shortTitle: "河南两项补贴豫政60号",
+        summary:
+          "豫政〔2016〕60号：全面建立两项补贴制度。郑州市中原区建设路街道办事指南列明该办法及郑政办〔2016〕66号为实施依据，并公布申请材料与办理时限。本条不编造全省统一现行元/月。",
+        keyPoints: [
+          "制度文件：豫政〔2016〕60号。",
+          "郑州配套：郑政办〔2016〕66号实施细则。",
+          "申请材料含申请表、身份证、残疾人证、户口本；困难生活补贴另附低保证。",
+          "中原区指南承诺时限7个工作日，结果银行发放。",
+        ],
+        eligibility:
+          "具有河南省户籍、持有效残疾人证，并符合豫政〔2016〕60号及市县细则的残疾人。",
+        howToApply:
+          "向户籍地乡镇（街道）一门受理窗口申请。郑州中原区示例地址：建设西路100号院，咨询0371-67869553。",
+        body: "河南省人民政府《关于印发河南省困难残疾人生活补贴和重度残疾人护理补贴实施办法的通知》（豫政〔2016〕60号）。郑州市中原区人民政府政务公开《困难残疾人生活补贴和重度残疾人护理补贴》办事指南（2021年11月25日）列明该文号。现行补贴金额以省民政厅和户籍地公示为准，本库不编造。",
+        sourceName: "郑州市中原区人民政府（引豫政〔2016〕60号）",
+        sourceUrl: "https://public.zhongyuan.gov.cn/02Z/6078082.jhtml",
+        docNo: "豫政〔2016〕60号",
+        issuedAt: "2016-09-20",
+        effectiveAt: "2016-01-01",
+      }),
       localEmployment({
         id: "ha-employment-fund-1.6",
         code: "HA",
@@ -1576,11 +1786,43 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   SN: {
+    implementingUrl: "https://www.xyx.gov.cn/Content-1333280.html",
+    implementingIssued: "2016-01-01（陕政发〔2016〕2号）",
+    subsidyUrl: "https://www.xyx.gov.cn/Content-1333280.html",
+    subsidyPoints: [
+      "陕政发〔2016〕2号：生活补贴对象为低保家庭持证残疾人、非低保家庭中1—3级低收入及其他困难残疾人；护理补贴对象为1—2级需经常照护者。",
+      "该意见载明：生活补贴18岁以下100元/月、18岁及以上60元/月；护理补贴一级120元/月、二级80元/月。有条件地方可提高；已高于者继续执行。现行元/月以市县公示为准。",
+    ],
     employmentUrl:
       "http://www.weibin.gov.cn/col15477/col15480/col15503/col16841/202605/t20260529_1273875.html",
     employmentNote:
       "陕财办综〔2016〕85号：安排比例不得低于在职职工总数1.5%。年缴纳额=（上年职工人数\xD71.5%－上年实际安排人数）\xD7上年职工年平均工资。",
     extraPolicies: [
+      localSubsidy({
+        id: "sn-subsidy-rule-2016",
+        code: "SN",
+        name: "陕西省",
+        title: "陕西省进一步完善残疾人两项补贴制度实施意见",
+        shortTitle: "陕西两项补贴陕政发2号",
+        summary:
+          "陕政发〔2016〕2号：完善对象范围与标准。生活补贴分年龄档；护理补贴分一级/二级。补贴按季度发放。西安市实施细则等文件引用该文号。",
+        keyPoints: [
+          "生活补贴：低保家庭持证；非低保1—3级低收入及其他困难残疾人。",
+          "护理补贴：1—2级且需要经常照护。",
+          "意见载明标准：生活18岁以下100元、18岁及以上60元；护理一级120元、二级80元（可提高）。",
+          "按季度现金发放；可同时申领两项。",
+        ],
+        eligibility:
+          "具有陕西省户籍、持有效残疾人证，并符合陕政发〔2016〕2号及市县细则的残疾人。",
+        howToApply:
+          "向户籍地乡镇政府或街道办事处提交申请。现行标准以市县民政公示为准。",
+        body: "陕西省人民政府《关于进一步完善困难残疾人生活补贴和重度残疾人护理补贴制度的实施意见》（陕政发〔2016〕2号）。旬阳市政府网转载省政府意见全文；西安高新区公开的市实施细则引用该文号。本条锁定意见载明金额，不编造后续未核验的全省统一新标准。",
+        sourceName: "陕西省人民政府（旬阳市政府网转载）",
+        sourceUrl: "https://www.xyx.gov.cn/Content-1333280.html",
+        docNo: "陕政发〔2016〕2号",
+        issuedAt: "2016-01",
+        effectiveAt: "2016-01-01",
+      }),
       localEmployment({
         id: "sn-employment-fund-2016",
         code: "SN",
@@ -2033,10 +2275,66 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   AH: {
+    implementingUrl:
+      "https://www.guangde.gov.cn/OpennessContent/show/3253817.html",
+    implementingIssued: "2022-12-06（皖民务字〔2022〕116号）",
+    subsidyUrl: "https://www.ahjx.gov.cn/Jczwgk/show/3508544.html",
+    subsidyPoints: [
+      "皖民务字〔2022〕116号《工作规范》：生活补贴对象为持证四级及以上且纳入低保或脱贫人口（稳定脱贫户除外）的残疾人；护理补贴对象为一、二级重度残疾人。",
+      "皖民务函〔2024〕237号：自2025年1月1日起，全省两项补贴基础标准由86元/月调整为94元/月，各地不得低于省定基础标准。",
+    ],
     employmentUrl: "https://cl.huainan.gov.cn/xwdt/tzgg/551854479.html",
     employmentNote:
       "淮南市残联、税务局2026年2月通告：2026年全省口径联网认证时间为3月1日至10月31日。安排比例执行国家1.5%底线。省征收办法全文仍待财政厅官网核对。",
     extraPolicies: [
+      localSubsidy({
+        id: "ah-subsidy-norm-2022",
+        code: "AH",
+        name: "安徽省",
+        title: "安徽省困难残疾人生活补贴和重度残疾人护理补贴工作规范",
+        shortTitle: "安徽两项补贴工作规范",
+        summary:
+          "皖民务字〔2022〕116号：规范对象范围、申请审核、主动发现与动态复核。生活补贴覆盖低保或脱贫人口（稳定脱贫户除外）中四级及以上持证残疾人；护理补贴覆盖一、二级重度残疾人。",
+        keyPoints: [
+          "生活补贴：户籍持证四级及以上，且纳入低保或脱贫人口（稳定脱贫户除外）。",
+          "护理补贴：户籍持证一、二级重度残疾人。",
+          "有条件地方可向低保边缘及三、四级智力/精神等扩面。",
+          "向户籍地乡镇（街道）申请；支持全国两项补贴信息系统办理。",
+        ],
+        eligibility:
+          "具有安徽省户籍、持有效残疾人证，并符合皖民务字〔2022〕116号对象范围的残疾人。",
+        howToApply:
+          "本人或监护人向户籍地乡镇人民政府（街道办事处）申请，或通过国家政务服务平台、民政一体化平台网办。",
+        body: "安徽省民政厅等《关于印发〈安徽省困难残疾人生活补贴和重度残疾人护理补贴工作规范〉的通知》（皖民务字〔2022〕116号，2022年12月6日）。广德市政府网转载全文；旌德县政府网标注文号。现行省定基础标准见皖民务函〔2024〕237号专条。",
+        sourceName: "安徽省民政厅等（广德市政府网转载）",
+        sourceUrl: "https://www.guangde.gov.cn/OpennessContent/show/3253817.html",
+        docNo: "皖民务字〔2022〕116号",
+        issuedAt: "2022-12-06",
+        effectiveAt: "2022-12-06",
+      }),
+      localSubsidy({
+        id: "ah-subsidy-2025",
+        code: "AH",
+        name: "安徽省",
+        title: "安徽省调整残疾人两项补贴标准（2025年）",
+        shortTitle: "安徽2025两项补贴94元",
+        summary:
+          "皖民务函〔2024〕237号：自2025年1月1日起，全省残疾人两项补贴基础标准由每人每月86元调整为94元，各地发放不得低于省级基础标准。",
+        keyPoints: [
+          "省定基础标准94元/人/月（原86元）。",
+          "生活补贴与护理补贴均适用该省定基础标准口径。",
+          "自2025年1月1日起执行；年初低于新标准的应补齐差额。",
+          "市县可高于省定基础标准。",
+        ],
+        eligibility: "安徽省符合两项补贴条件的持证残疾人。",
+        howToApply: "向户籍地乡镇街道或县民政申请；以当地公示为准。",
+        body: "关于调整残疾人“两项补贴”标准的通知（皖民务函〔2024〕237号）。绩溪县政府网2025年1月7日公开。铜陵等地转发口径一致。2026年是否再调，请核省民政厅最新通知。",
+        sourceName: "安徽省有关部门（绩溪县政府网公开皖民务函〔2024〕237号）",
+        sourceUrl: "https://www.ahjx.gov.cn/Jczwgk/show/3508544.html",
+        docNo: "皖民务函〔2024〕237号",
+        issuedAt: "2024",
+        effectiveAt: "2025-01-01",
+      }),
       localEmployment({
         id: "ah-employment-audit-2026",
         code: "AH",
