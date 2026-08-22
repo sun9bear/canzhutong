@@ -2389,6 +2389,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "http://www.yfq.gov.cn/sjzt/jczt/ztzl/cjrflywzt/gfbzcjrfl/t19700101_3515471.shtml",
     rehabAgeNote:
       "桂政发〔2018〕45号（柳州市鱼峰区政府网转载自治区残联、卫生健康委《关于规范广西残疾儿童康复救助医学诊断和救助要求的通知》完整引用）：自2018年10月1日起实施残疾儿童康复救助制度；对有康复救助需求且符合条件的0—17岁视力、听力、言语、肢体、智力等残疾儿童和孤独症儿童提供康复训练、手术及辅助器具配置救助。具体补助项目与额度以自治区残联配套及市县执行为准，本库不锁死过期金额。",
+    implementingUrl:
+      "https://www.cdpf.org.cn/ztzl/zxzt1/2024/cjrqybzflfggzxxgkxt/dfxfgjgz/gxzzzzq2/33a53dff264d42a7b5874a9cd590e0fb.htm",
+    implementingIssued:
+      "2012-11-30修订通过，2013-01-01施行（广西壮族自治区实施《中华人民共和国残疾人保障法》办法；中国残联残疾人权益保障法律法规规章信息公开系统公开全文）",
     employmentUrl: "http://www.gxdpf.org.cn/contents/646/44458.html",
     employmentNote:
       "桂财税〔2016〕47号：安排比例不得低于1.5%。自治区残联2026年2月通告：2026年联网认证申报时间为3月1日至10月31日。",
@@ -2697,6 +2701,12 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   GZ: {
+    planTitle: "贵州省“十四五”残疾人保障和发展规划",
+    planShortTitle: "贵州规划（残疾人）",
+    planUrl:
+      "http://www.gzsdpf.org.cn/zwgk/clxxgkml/ghjh/202201/t20220106_72254010.html",
+    planIssued:
+      "2021（省残联联合省发改委出台；贵州省残联网站2022-01-06公开文字阅读版全文）",
     implementingUrl:
       "https://czt.guizhou.gov.cn/ztzl/hmhnczbt/zcwj/202306/t20230625_80489973.html",
     implementingIssued: "2016（黔府发〔2016〕2号）",
