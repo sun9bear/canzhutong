@@ -644,6 +644,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     planUrl:
       "http://www.lishi.gov.cn/zwgk/fdzdgknr/ghtj/sjghjjd/sjwj/202401/t20240112_1834541.shtml",
     planIssued: "2022（晋政发〔2022〕9号，离石区政府网转载省政府通知全文）",
+    rehabUrl:
+      "https://www.sxgp.gov.cn/xxgk/gsgg_382/202504/t20250402_2124281.html",
+    rehabAgeNote:
+      "高平市残联《2025年残疾儿童抢救性康复救助政策解读》（市政府网2025-04-02公开，转引《山西省实施〈残疾预防和残疾人康复条例〉办法》《山西省残疾儿童康复救助制度》及2025年省、晋城市民生实事口径）：救助对象为具有本地户籍（或居住证）、经定点筛查诊断确诊的0—6岁（不满7周岁）残疾儿童，或持残疾人证的0—15岁（不满16周岁）视力、听力、言语、肢体、智力等残疾儿童和孤独症儿童；优先救助城乡低保家庭残疾儿童。具体补助项目与额度以省制度、民生实事方案及户籍地当年执行为准，本库不锁死金额。",
     implementingUrl:
       "http://www.npc.gov.cn/npc/c1773/c1849/c6680/c18674/c18676/201905/t20190522_51238.html",
     implementingIssued: "2010-07-16通过，2010-10-01施行（山西省残疾人保障条例；原1992年实施办法同时废止，中国人大网公开文本）",
@@ -1349,6 +1353,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   JX: {
+    rehabUrl:
+      "https://www.zgq.gov.cn/zgqxxgk/c108335/201908/770eda6274ff40e0b64d22d4553de021.shtml",
+    rehabAgeNote:
+      "赣州市章贡区人民政府办公室《章贡区残疾儿童康复救助制度实施细则》（区政府信息公开网全文；转引赣府发〔2018〕28号、赣市府发〔2019〕11号）：救助对象为具有章贡区户籍、0—8岁（不满9周岁）、有康复需求且诊断明确的视力、听力、言语、智力、肢体（脑瘫）残疾儿童和孤独症儿童；到2020年实现0—8岁重点保障对象应救尽救，到2025年实现0—8岁残疾儿童普遍享有基本康复服务。具体补助项目与额度以省、市制度及区县执行为准，本库不锁死金额。",
     implementingUrl:
       "https://www.gongqing.gov.cn/mzj/fdzdgknr_187053/fgzc/zcwj/202105/t20210503_4920859.html",
     implementingIssued: "2015-12-29（赣府发〔2015〕63号）",
@@ -1807,6 +1815,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     planUrl:
       "https://www.tj.gov.cn/zwgk/szfwj/tjsrmzf/202111/t20211129_5736378.html",
     planIssued: "2021-11-25（津政发〔2021〕19号）",
+    rehabUrl:
+      "http://www.tjdpf.org.cn/system/2025/02/21/030081908.shtml",
+    rehabAgeNote:
+      "天津市残联《2025年民心工程项目解读：残疾儿童康复救助》（官网2025-02-21，衔接津政发〔2018〕23号制度）：救助对象年龄一般应为0—7岁，部分项目可延长至17岁；儿童或其父母具有本市户籍，或外地户籍儿童之父/母持本市有效居住证并连续三年在本市纳税或缴纳社会保险；须持残疾人证或本市定点诊断评估机构证明。救助内容含医疗手术、康复训练、辅助器具适配及孤独症儿童关爱促进等。具体补助项目与额度以市残联民心工程公开口径及当年执行为准，本库不锁死金额。",
     implementingUrl:
       "https://mz.tj.gov.cn/ZWGK5878/ZCFG9602/zcwj/202307/t20230720_6358070.html",
     implementingIssued: "2023（津民发〔2023〕23号）",
@@ -1945,6 +1957,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   NM: {
+    rehabUrl:
+      "https://www.xam.gov.cn/xam/2023-11/18/article_2024041412015085403.html",
+    rehabAgeNote:
+      "兴安盟行政公署《关于建立残疾儿童康复救助制度的实施意见》（兴署发〔2019〕41号，盟公署网站公开全文；转引内政发〔2018〕45号）：救助对象为具有兴安盟户籍（或持兴安盟居住证）、符合条件的0—7岁（含7周岁）视力、听力、言语、肢体、智力等残疾儿童和孤独症儿童；包括城乡低保、建档立卡贫困户、儿童福利机构收留抚养、残疾孤儿、特困供养及其他经济困难家庭残疾儿童。有条件地区可扩大年龄范围或放宽家庭经济条件限制。救助内容及标准按内政发〔2018〕45号执行；具体补助额度以自治区配套及盟市旗县执行为准，本库不锁死金额。",
     implementingUrl:
       "http://www.npc.gov.cn/npc/c1773/c1849/c6680/c18674/c18676/201905/t20190522_51944.html",
     implementingIssued: "2012-03-31修订通过，2012-05-01施行（内蒙古自治区实施《中华人民共和国残疾人保障法》办法，中国人大网公开文本）",
@@ -2006,6 +2022,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     planUrl:
       "https://new.tzxm.gov.cn/zckd/fzgh/202112/t20211227_1310151.shtml",
     planIssued: "2021-12-16（豫政〔2021〕36号，国家投资项目在线审批监管平台公开全文）",
+    rehabUrl:
+      "https://www.jiyuan.gov.cn/zwgk/zfxxgk/zc/xzgfxwj/t829775.html",
+    rehabAgeNote:
+      "济源市人民政府《济源市残疾儿童康复救助实施办法》（济政〔2019〕8号，市政府网站公开全文；转引豫政〔2018〕40号）：救助对象为符合条件的0—14岁视力、听力、言语、肢体、智力等残疾儿童和孤独症儿童；优先保障城乡低保、建档立卡贫困户、儿童福利机构收留抚养、残疾孤儿、特困供养及其他经济困难家庭残疾儿童。救助内容含手术、辅助器具适配、康复训练等。具体补助项目与额度以豫政〔2018〕40号配套、市县实施办法及当年执行为准，本库不锁死金额。",
     implementingUrl: "https://public.zhongyuan.gov.cn/02Z/6078082.jhtml",
     implementingIssued: "2016-09-20（豫政〔2016〕60号，2016-01-01施行）",
     subsidyUrl: "https://public.zhongyuan.gov.cn/02Z/6078082.jhtml",
@@ -2975,6 +2995,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     planUrl:
       "http://www.qinghai.gov.cn/xxgk/xxgk/qhzb/n2022/202306/P020230606565635117494.pdf",
     planIssued: "2021-12-21（青政〔2021〕79号，省政府公报PDF全文）",
+    rehabUrl:
+      "http://www.qinghai.gov.cn/zwgk/system/2018/11/03/010316161.shtml",
+    rehabAgeNote:
+      "青海省政府网站转载《青海省政府关于建立残疾儿童康复救助制度的实施意见》公开介绍（2018-11-03）：在国家对符合条件的0—6周岁视力、听力、言语、肢体、智力、孤独症等残疾儿童实施康复救助基础上，扩大到对7—17周岁持残疾人证的同类残疾儿童实施康复救助；救助内容含矫治手术、辅助器具适配和康复训练等。具体补助项目与额度以省政府实施意见、省残联配套及户籍地执行为准，本库不锁死金额。",
     subsidyUrl:
       "http://www.qinghai.gov.cn/msfw/system/2025/04/04/030069272.shtml",
     subsidyPoints: [
