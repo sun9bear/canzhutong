@@ -213,6 +213,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "https://www.shanghai.gov.cn/nw12344/20250507/b3de0e1bc10a4a6597434edc37bd8386.html",
     rehabAgeNote:
       "沪府发〔2025〕1号：加强本市残疾儿童康复救助制度建设。救助对象为具有本市户籍未满18周岁，持视力/听力/言语/肢体/智力残疾人证或“阳光宝宝卡”，或经本市孤独症儿童康复救助诊断机构诊断为孤独症的儿童；持本市居住证且父母双方（或监护人）持居住证连续满1年以上、未享受户籍地同类救助的同类未满18周岁儿童也可申请。自2025年5月1日起施行，有效期至2030年4月30日；沪府规〔2018〕22号及延期文件同时废止。具体细则以市残联配套规定为准。",
+    implementingUrl:
+      "http://www.npc.gov.cn/zgrdw/npc/zt/2008-02/21/content_1393259.htm",
+    implementingIssued:
+      "1993-02-06通过，1999-07-12修正，1993-05-16施行（上海市实施《中华人民共和国残疾人保障法》办法，中国人大网公开文本）",
     subsidyUrl:
       "http://www.shanghai.gov.cn/202101zfwj/20210111/153f924083644203b929dba4ff67eac9.html",
     employmentUrl:
@@ -651,6 +655,8 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     implementingUrl:
       "http://www.npc.gov.cn/npc/c1773/c1849/c6680/c18674/c18676/201905/t20190522_51238.html",
     implementingIssued: "2010-07-16通过，2010-10-01施行（山西省残疾人保障条例；原1992年实施办法同时废止，中国人大网公开文本）",
+    subsidyUrl:
+      "http://www.lc.gov.cn/lcxxgk/xxgkml/jbxxgk/shgysy/shjz/202107/t20210705_2350481.html",
     employmentUrl:
       "https://xxgk.qinshui.gov.cn/xzf/qsczj/fdzdgknr/mlqd_25/202301/P020230118420849432752.pdf",
     employmentNote:
@@ -910,6 +916,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "https://www.sqq.gov.cn/art/2021/9/10/art_6521_888225.html",
     planIssued: "2021（冀政字〔2021〕46号，承德双桥区双峰寺镇政府网转载省政府通知全文）",
     planShortTitle: "河北规划（残疾人）",
+    rehabUrl:
+      "https://www.sjz.gov.cn/columns/7133f160-f760-4531-987a-2ec35f29d239/201905/10/34792d99-2a44-4922-afb9-b095c6963169.html",
+    rehabAgeNote:
+      "石家庄市人民政府《石家庄市残疾儿童康复救助实施方案》（石政规〔2019〕3号，市政府网站公开全文；转引冀政字〔2018〕59号）：救助对象主要为符合条件的0—6岁肢体、听力、视力、智力残疾和孤独症儿童；部分救助项目扩展到17岁。须具有本市户籍（居住证），诊断明确且有康复需求。有条件县（市、区）可扩大年龄或放宽家庭经济条件限制。具体补助项目与额度以冀政字〔2018〕59号配套、市县实施方案及当年执行为准，本库不锁死金额。",
     implementingUrl:
       "http://www.luanxian.gov.cn/index.php?a=show&c=index&catid=1688&id=33503&m=content",
     implementingIssued: "2015（冀政字〔2015〕74号，2016-01-01起制度实施）",
@@ -1031,6 +1041,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     rehabAgeNote:
       "浙政发〔2018〕36号（省政府公报PDF）：完善残疾儿童康复服务制度。服务对象以0—6周岁经鉴定符合国家标准的视力、听力、言语、肢体、智力、多重残疾儿童和孤独症儿童为主；不具备义务教育入学条件的，年龄可按规定放宽。具体补贴档次与目录以省残联工作细则及当地执行文件为准。",
     planShortTitle: "浙江规划（残疾人）",
+    implementingUrl:
+      "http://www.npc.gov.cn/c1773/c1849/c6680/c18674/c18676/201905/t20190522_54696.html",
+    implementingIssued:
+      "2009-11-27通过，2010-01-01施行（浙江省残疾人保障条例；原实施办法同时废止，中国人大网公开文本）",
     subsidyUrl:
       "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web2681/site/attach/0/68e8c1dc35ec4f35afeca1e57c50bdc6.pdf",
     employmentUrl:
@@ -1353,6 +1367,11 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   JX: {
+    planTitle: "江西省“十四五”残疾人保障和发展规划（赣州市规划转引）",
+    planShortTitle: "江西规划（残疾人）",
+    planUrl:
+      "https://www.ganzhou.gov.cn/zfxxgk/c145218/202205/f2325f7ac1a84dcc9f5d0d810f93d1b0.shtml",
+    planIssued: "2021-11-29（赣府发〔2021〕26号，赣州市政府信息公开网《赣州市“十四五”残疾人保障和发展规划》全文转引省规划）",
     rehabUrl:
       "https://www.zgq.gov.cn/zgqxxgk/c108335/201908/770eda6274ff40e0b64d22d4553de021.shtml",
     rehabAgeNote:
@@ -1957,6 +1976,11 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   NM: {
+    planTitle: "内蒙古自治区“十四五”残疾人事业发展规划（兴安盟转载盟规划衔接自治区规划）",
+    planShortTitle: "内蒙古规划（残疾人）",
+    planUrl:
+      "https://www.xam.gov.cn/xam/2022-06/01/article_2024041412130542056.html",
+    planIssued: "2022（兴署发口径兴安盟“十四五”残疾人事业发展规划全文，盟公署网站公开；转引内政发〔2021〕17号自治区规划）",
     rehabUrl:
       "https://www.xam.gov.cn/xam/2023-11/18/article_2024041412015085403.html",
     rehabAgeNote:
@@ -2428,6 +2452,12 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "http://mlqzf.haikou.gov.cn/xgk/mlqzf/mlqmzj_8434/fdzdgknr/bmwj_8957/202404/t1352506.shtml",
     implementingIssued:
       "海南省民政厅《关于完善困难残疾人生活补贴和重度残疾人护理补贴制度的实施意见》",
+    subsidyUrl:
+      "https://qsqzf.haikou.gov.cn/qsqmzj/gzdt/202104/7a9262e9303d40ec8a8ff4d19fd11ba2.shtml",
+    subsidyPoints: [
+      "琼山区民政局转载《海南省困难残疾人生活补贴和重度残疾人护理补贴实施办法》：生活补贴对象为户籍在海南省的最低生活保障家庭中的残疾人；护理补贴对象为户籍在海南省、残疾等级一级或二级且需要长期照护的重度残疾人。",
+      "该办法所列分档标准以省民政厅、市县动态调整及户籍地窗口为准，本库不锁死过期金额。",
+    ],
     employmentUrl: "https://www.hidpf.org.cn/zcwj/wjfb/",
     employmentNote:
       "海南省政策解答：安排比例不低于1.5%。琼残规字〔2026〕1号：超比例每超1人每年按上年度当地月最低工资5倍奖励，累计不超过6年；次年3—7月申请。分档减缴按财政部公告2023年第8号。",
@@ -2999,6 +3029,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "http://www.qinghai.gov.cn/zwgk/system/2018/11/03/010316161.shtml",
     rehabAgeNote:
       "青海省政府网站转载《青海省政府关于建立残疾儿童康复救助制度的实施意见》公开介绍（2018-11-03）：在国家对符合条件的0—6周岁视力、听力、言语、肢体、智力、孤独症等残疾儿童实施康复救助基础上，扩大到对7—17周岁持残疾人证的同类残疾儿童实施康复救助；救助内容含矫治手术、辅助器具适配和康复训练等。具体补助项目与额度以省政府实施意见、省残联配套及户籍地执行为准，本库不锁死金额。",
+    implementingUrl:
+      "http://www.npc.gov.cn/npc/c1773/c1849/c6680/c18674/c18676/201905/t20190522_58434.html",
+    implementingIssued:
+      "2011-09-29通过，2011-12-01施行（青海省残疾人保障条例；原实施办法同时废止，中国人大网公开文本）",
     subsidyUrl:
       "http://www.qinghai.gov.cn/msfw/system/2025/04/04/030069272.shtml",
     subsidyPoints: [
