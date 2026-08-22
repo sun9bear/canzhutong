@@ -89,6 +89,16 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "https://www.beijing.gov.cn/zhengce/zhengcefagui/201905/t20190522_61796.html",
     rehabAgeNote:
       "京政办发〔2018〕49号：完善本市残疾儿童康复服务制度，落实国发〔2018〕20号。加强0—15岁残疾儿童康复服务衔接，提供手术、康复训练和辅助器具配置等一体化服务；将疑似残疾儿童纳入康复服务范围。具体目录与补助以市残联配套办法及区残联审批为准。",
+    implementingUrl:
+      "https://www.beijing.gov.cn/zhengce/dfxfg/201905/t20190531_82361.html",
+    implementingIssued:
+      "2011-11-18修订，2019-05-30修正，2012-03-01施行（北京市实施《中华人民共和国残疾人保障法》办法，首都之窗地方性法规全文）",
+    subsidyUrl:
+      "https://www.beijing.gov.cn/zhengce/zhengcefagui/201905/t20190522_59725.html",
+    subsidyPoints: [
+      "京政发〔2016〕46号：本市户籍持第二代残疾人证或残疾人服务一卡通者，困难生活补贴与重度护理补贴可同时申领；与老年等福利性生活/护理补贴择高，与工伤护理费、特困供养不重复。自2016-01-01实施。",
+      "生活补贴覆盖低保、低收入未享低保、失业无稳定收入及全日制在校残疾学生、老年个人收入低于低保等情形；护理补贴覆盖一、二级及三级智力/精神等。分档标准以市民政动态调整及户籍地窗口为准，本条不锁死过期金额。",
+    ],
     employmentUrl:
       "https://invest.beijing.gov.cn/sy/zt/qyrx/202603/t20260316_4557787.html",
     employmentNote:
@@ -203,6 +213,8 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "https://www.shanghai.gov.cn/nw12344/20250507/b3de0e1bc10a4a6597434edc37bd8386.html",
     rehabAgeNote:
       "沪府发〔2025〕1号：加强本市残疾儿童康复救助制度建设。救助对象为具有本市户籍未满18周岁，持视力/听力/言语/肢体/智力残疾人证或“阳光宝宝卡”，或经本市孤独症儿童康复救助诊断机构诊断为孤独症的儿童；持本市居住证且父母双方（或监护人）持居住证连续满1年以上、未享受户籍地同类救助的同类未满18周岁儿童也可申请。自2025年5月1日起施行，有效期至2030年4月30日；沪府规〔2018〕22号及延期文件同时废止。具体细则以市残联配套规定为准。",
+    subsidyUrl:
+      "http://www.shanghai.gov.cn/202101zfwj/20210111/153f924083644203b929dba4ff67eac9.html",
     employmentUrl:
       "https://shanghai.chinatax.gov.cn/xwdt/ztzl/zcgll/cjrbzj/jfzy/202608/t481322.html",
     employmentNote:
@@ -440,6 +452,12 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "https://www.gd.gov.cn/gkmlpt/content/0/157/post_157297.html",
     rehabAgeNote:
       "粤府办〔2018〕43号《广东省残疾儿童康复救助实施办法》：救助对象主要为本省户籍0—6岁（截至申请当年度8月31日止不满7周岁，有条件地区可扩大年龄范围）视力、听力、言语、智力、肢体残疾儿童和孤独症儿童。自2018年10月1日起实施；原文载明有效期5年，现行执行口径以省残联/省政府最新配套为准，本库不锁死过期金额。",
+    implementingUrl:
+      "http://www.heyuan.gov.cn/bmjy/hyscl/zcfg/content/post_375867.html",
+    implementingIssued:
+      "2018-07-26修订通过，2018-09-01施行（广东省实施《中华人民共和国残疾人保障法》办法；河源市残联栏目转载省人大常委会公告全文）",
+    subsidyUrl:
+      "https://www.gd.gov.cn/zwgk/gongbao/2022/32/content/post_4053616.html",
     planShortTitle: "广东规划（残疾人）",
     employmentUrl:
       "https://guangdong.chinatax.gov.cn/gdsw/gzsw_cjrjybzj/2018-07/06/content_f3d584a796bd4f778b2a2a458f707748.shtml",
@@ -1236,6 +1254,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
   },
   XJ: {
     planShortTitle: "新疆规划（残疾人）",
+    rehabUrl:
+      "https://www.cj.gov.cn/p146/bmwj/20250103/314512.html",
+    rehabAgeNote:
+      "自治区残联等七部门《新疆维吾尔自治区残疾儿童康复救助实施办法》（昌吉州残联转载全文，2025-01-01施行、有效期5年）：救助对象为具有新疆户籍（或在新疆领取居住证）的0—14岁（不满15周岁）视力、听力、言语、肢体、智力等残疾儿童和孤独症儿童；0—6岁可凭残疾人证或二级以上医疗机构诊断证明，7—14岁须持残疾人证；低收入人口（家庭）、儿童福利机构收留抚养、残疾孤儿及其他经济困难家庭。有条件地区可放宽家庭经济条件与年龄限制。具体补助项目与额度以办法及各地执行为准，本库不锁死过期金额。",
     implementingUrl:
       "https://mzt.xinjiang.gov.cn/xjmzt/c113003/202309/1d0a76a885ba4ba7afad13e018812a9e.shtml",
     implementingIssued: "2022（新民规发〔2022〕3号）",
@@ -2207,6 +2229,12 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "https://www.hlj.gov.cn/hlj/c108372/201901/c00_31181304.shtml",
     rehabAgeNote:
       "黑政规〔2018〕20号：具有本省户籍（或居住证）、有康复需求并经评估认定的0—6岁视力、听力、言语、肢体、智力残疾儿童和孤独症儿童；优先低保、建档立卡贫困户、儿童福利机构收留抚养、残疾孤儿及特困供养对象。有条件地区可扩大年龄范围或放宽家庭经济条件限制。自2018年12月1日起全面实施；补助标准与目录以省残联配套及当地执行为准。",
+    subsidyUrl:
+      "https://www.hlj.gov.cn/hlj/c116003dp/202510/c00_31879135.shtml",
+    subsidyPoints: [
+      "黑民规〔2025〕3号（省民政厅、财政厅、残联，经省政府同意）：全省困难残疾人生活补贴指导标准提高至每人每月100元；自2025年5月1日起执行，有效期5年。",
+      "通过全省惠民惠农“一卡通”社会化发放；资金由市（地）、县（市）同级财政负担。护理补贴及其他分档以黑民规〔2023〕12号等配套及当地执行为准。",
+    ],
     employmentUrl:
       "https://www.hlj.gov.cn/hlj/c108040/202211/c00_31443922.shtml",
     employmentNote:
