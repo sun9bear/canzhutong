@@ -207,14 +207,20 @@ export default defineConfig(({ command }) => ({
             // manifest + head-tag middleware). Nitro v3 defaults serverDir to
             // false, so removing this silently unwires /?install=1 on deploys.
             serverDir: "./server",
-            hooks: {
-              compiled(nitro) {
-                copyPgliteServerAssets(
-                  nitro.options.output.dir,
-                  nitro.options.rootDir,
-                );
+            // Register via modules (addHooks) — NOT options.hooks.compiled.
+            // A direct hooks.compiled override replaces the vercel presets
+            // compiled hook, which skips generateFunctionFiles() and leaves
+            // .vercel/output without config.json / .vc-config.json (Vercel 404).
+            modules: [
+              (nitro) => {
+                nitro.hooks.hook("compiled", () => {
+                  copyPgliteServerAssets(
+                    nitro.options.output.dir,
+                    nitro.options.rootDir,
+                  );
+                });
               },
-            },
+            ],
           }),
         ]
       : []),
