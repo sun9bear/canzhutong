@@ -504,6 +504,13 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
   },
   HN: {
     planShortTitle: "湖南规划（残疾人）",
+    planUrl:
+      "http://www.hunan.gov.cn/xxgk/wjk/szfwj/202112/t20211206_21248570.html",
+    planIssued: "2021-11-23（湘政发〔2021〕13号）",
+    rehabUrl:
+      "http://www.hunan.gov.cn/xxgk/wjk/szfwj/201810/t20181012_5117777.html",
+    rehabAgeNote:
+      "湘政发〔2018〕23号：具有湖南户籍或有效居住证、有康复需求和适应指征的0—6岁视力、听力、言语、肢体、智力等残疾儿童和孤独症儿童；包括城乡低保、建档立卡贫困户、儿童福利机构收留抚养、残疾孤儿、特困供养及其他经济困难家庭残疾儿童。鼓励有条件地区扩大年龄范围。自2018年10月1日起全面实施；补助项目与额度以省残联配套及市县执行为准，本库不锁死过期金额。",
     subsidyUrl:
       "https://mzt.hunan.gov.cn/mzt/xxgk/zcfg/wj/202602/t20260204_33909648.html",
     employmentUrl:
@@ -776,6 +783,12 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     planTitle: "福建省“十五五”残疾人保障和发展规划",
     planIssued: "2026年7月21日（闽政办〔2026〕18号）",
     planShortTitle: "福建十五五残疾人规划",
+    planUrl:
+      "https://www.fujian.gov.cn/zwgk/zxwj/szfbgtwj/202607/t20260727_7192641.htm",
+    rehabUrl:
+      "https://www.fujian.gov.cn/zwgk/zfxxgk/szfwj/jgzz/mzcjbzzc/201809/t20180917_4505342.htm",
+    rehabAgeNote:
+      "闽政〔2018〕18号《福建省残疾儿童康复救助办法》：残疾儿童救助年龄为0—6岁（申请年度1月1日未满7周岁）；贫困残疾儿童救助年龄为0—14岁（申请年度1月1日未满15周岁）。有条件的市、县（区）可扩大年龄范围。自2018年10月1日起施行；具体补助项目与额度以办法及市县执行为准，本库不锁死过期金额。",
     planPoints: [
       "规划期2026—2030年。两项补贴覆盖率100%（约束性），基本康复服务率≥95%（约束性）。",
       "完善儿童康复救助实施细则；修订基本型辅具适配补贴办法和目录。",
@@ -1747,6 +1760,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   TJ: {
+    planTitle: "天津市“十四五”残疾人保障和发展规划",
+    planUrl:
+      "https://www.tj.gov.cn/zwgk/szfwj/tjsrmzf/202111/t20211129_5736378.html",
+    planIssued: "2021-11-25（津政发〔2021〕19号）",
     implementingUrl:
       "https://mz.tj.gov.cn/ZWGK5878/ZCFG9602/zcwj/202307/t20230720_6358070.html",
     implementingIssued: "2023（津民发〔2023〕23号）",
@@ -1943,6 +1960,9 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   HA: {
+    planUrl:
+      "https://new.tzxm.gov.cn/zckd/fzgh/202112/t20211227_1310151.shtml",
+    planIssued: "2021-12-16（豫政〔2021〕36号，国家投资项目在线审批监管平台公开全文）",
     implementingUrl: "https://public.zhongyuan.gov.cn/02Z/6078082.jhtml",
     implementingIssued: "2016-09-20（豫政〔2016〕60号，2016-01-01施行）",
     subsidyUrl: "https://public.zhongyuan.gov.cn/02Z/6078082.jhtml",
@@ -2696,6 +2716,9 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   AH: {
+    planUrl:
+      "https://www.guangde.gov.cn/OpennessContent/show/2400389.html",
+    planIssued: "2022（皖政〔2022〕4号，广德市政府网转载省政府通知全文）",
     implementingUrl:
       "https://www.guangde.gov.cn/OpennessContent/show/3253817.html",
     implementingIssued: "2022-12-06（皖民务字〔2022〕116号）",
