@@ -35,7 +35,7 @@ function AccessPage() {
         <h2 className="font-display text-lg font-semibold">盲人与读屏</h2>
         <ul className="mt-3 list-disc space-y-2 pl-5 leading-relaxed">
           <li>请打开系统读屏：iPhone「旁白」、安卓「TalkBack」、Windows「讲述人」或 NVDA。</li>
-          <li>每个页面开头可用「跳到正文」。切换页面后会朗读页名并把焦点放到标题。</li>
+          <li>每个页面开头可用「跳到正文」「跳到导航」。键盘 Tab 可见焦点环；切换页面后会朗读页名并把焦点放到标题。</li>
           <li>政策页、问答回复有「朗读」按钮，用系统语音读中文。</li>
           <li>底部四个按钮都有文字，不只靠图标。</li>
         </ul>

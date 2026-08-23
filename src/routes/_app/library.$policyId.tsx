@@ -53,7 +53,7 @@ function PolicyPage() {
   }, [policy]);
 
   return (
-    <article className="mx-auto max-w-3xl space-y-8">
+    <article className="mx-auto max-w-3xl space-y-8" aria-labelledby="policy-title">
       <div>
         <Link to="/library" className="inline-flex min-h-11 items-center text-sm font-medium text-primary">
           返回政策库
@@ -64,7 +64,7 @@ function PolicyPage() {
           <Badge className="bg-surface-2 text-muted">{categoryLabel(policy.category)}</Badge>
           <Badge className="bg-surface-2 text-muted">{policy.status}</Badge>
         </div>
-        <h1 className="mt-3 font-display text-2xl font-semibold leading-snug sm:text-3xl">{policy.title}</h1>
+        <h1 id="policy-title" className="mt-3 font-display text-2xl font-semibold leading-snug sm:text-3xl">{policy.title}</h1>
         <p className="mt-2 text-sm text-muted">
           {policy.docNo ? `${policy.docNo} · ` : ""}
           {policy.issuedAt ? `发布 ${policy.issuedAt}` : ""}
@@ -72,7 +72,7 @@ function PolicyPage() {
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2" role="group" aria-label="本条操作">
         <ReadAloud text={speakText} label="朗读本条" />
         {!isPending && user ? (
           <Button variant={saved ? "secondary" : "outline"} onClick={() => void onToggle()} aria-pressed={saved}>
@@ -105,6 +105,7 @@ function PolicyPage() {
           to="/ask"
           search={{ q: policy.shortTitle }}
           className="inline-flex h-11 items-center rounded-md bg-primary-soft px-4 text-sm font-medium text-primary"
+          aria-label={`就「${policy.shortTitle}」提问`}
         >
           就这一条提问
         </Link>
@@ -171,11 +172,13 @@ function PolicyPage() {
       {related.length > 0 ? (
         <section>
           <h2 className="font-display text-lg font-semibold">相关文件</h2>
-          <div className="mt-3 grid gap-3">
-            {related.map((p) => (
-              <PolicyCard key={p.id} policy={p} />
+          <ul className="mt-3 grid list-none gap-3 p-0">
+            {related.map((item) => (
+              <li key={item.id}>
+                <PolicyCard policy={item} />
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
       ) : null}
     </article>

@@ -1,3 +1,4 @@
+import type { MouseEvent } from "react";
 import { Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { BookOpenText, CircleUserRound, House, MessageCircleQuestion, Phone } from "lucide-react";
 import { A11yTrigger } from "@/components/a11y-panel";
@@ -35,33 +36,55 @@ function Logo() {
   );
 }
 
+function focusTarget(id: string, e: MouseEvent<HTMLAnchorElement>) {
+  e.preventDefault();
+  const el = document.getElementById(id);
+  if (!el) return;
+  // Skip-to-main focuses the landmark; skip-to-nav focuses the first nav link.
+  const preferLandmark = id === "main";
+  const child = preferLandmark
+    ? null
+    : (el.querySelector(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      ) as HTMLElement | null);
+  const target = child ?? el;
+  if (target === el && !el.hasAttribute("tabindex")) el.tabIndex = -1;
+  target.focus();
+  target.scrollIntoView({ block: preferLandmark ? "start" : "nearest" });
+}
+
 export function AppShell() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   return (
     <div className="min-h-dvh bg-bg text-fg">
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-3 focus:py-2 focus:text-primary-fg"
-        onClick={(e) => {
-          e.preventDefault();
-          const main = document.getElementById("main");
-          main?.focus();
-          main?.scrollIntoView({ block: "start" });
-        }}
-      >
+      <a href="#main" className="skip-link" onClick={(e) => focusTarget("main", e)}>
         跳到正文
+      </a>
+      {/* Desktop nav is md+; mobile bottom nav below md. Only one skip target in tab order. */}
+      <a
+        href="#app-nav-desktop"
+        className="skip-link skip-link-nav max-md:hidden"
+        onClick={(e) => focusTarget("app-nav-desktop", e)}
+      >
+        跳到导航
       </a>
       <a
         href="#app-nav"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-32 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-3 focus:py-2 focus:text-primary-fg"
+        className="skip-link skip-link-nav md:hidden"
+        onClick={(e) => focusTarget("app-nav", e)}
       >
         跳到导航
       </a>
       <header className="sticky top-0 z-30 border-b border-border bg-bg/95 backdrop-blur-sm">
         <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-2 sm:py-3">
           <Logo />
-          <nav className="hidden items-center gap-1 md:flex" aria-label="主导航" id="app-nav-desktop">
+          <nav
+            className="hidden items-center gap-1 md:flex"
+            aria-label="主导航"
+            id="app-nav-desktop"
+            tabIndex={-1}
+          >
             {NAV.map((item) => {
               const active = item.to === "/" ? pathname === "/" : pathname.startsWith(item.to);
               return (
@@ -90,6 +113,7 @@ export function AppShell() {
       </main>
       <nav
         id="app-nav"
+        tabIndex={-1}
         className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-surface pb-[env(safe-area-inset-bottom)] md:hidden"
         aria-label="底部导航"
       >

@@ -51,6 +51,7 @@ function AskPage() {
     if (!question || pending) return;
     setError(null);
     setInput("");
+    requestAnimationFrame(() => inputRef.current?.focus());
     const nextHistory: ChatTurn[] = [...messages, { role: "user", content: question }];
     setMessages((m) => [...m, { role: "user", content: question }]);
     setPending(true);
@@ -89,7 +90,14 @@ function AskPage() {
         </div>
       </header>
 
-      <div className="flex-1 space-y-4" aria-live="polite" aria-relevant="additions">
+      <div
+        className="flex-1 space-y-4"
+        role="log"
+        aria-live="polite"
+        aria-relevant="additions"
+        aria-busy={pending}
+        aria-label="对话记录"
+      >
         {messages.length === 0 && !pending ? (
           <ul className="flex flex-wrap gap-2">
             {QUICK_QUESTIONS.map((item) => (
@@ -97,6 +105,7 @@ function AskPage() {
                 <button
                   type="button"
                   className="min-h-11 rounded-full border border-border bg-surface px-3 py-2 text-left text-sm hover:border-primary"
+                  aria-label={`提问：${item}`}
                   onClick={() => void send(item)}
                 >
                   {item}
@@ -153,6 +162,7 @@ function AskPage() {
 
       <form
         className="sticky bottom-16 mt-4 flex flex-wrap items-end gap-2 bg-bg py-3 md:bottom-0"
+        aria-label="提问"
         onSubmit={(e) => {
           e.preventDefault();
           void send(input);

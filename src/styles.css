@@ -152,6 +152,9 @@
     text-underline-offset: 0.22em;
     text-decoration-thickness: 0.08em;
   }
+  html[data-links="on"] .skip-link {
+    text-decoration: none;
+  }
 
   html[data-easy="on"] {
     --tap: 3.25rem;
@@ -162,14 +165,17 @@
   html[data-easy="on"] [role="switch"],
   html[data-easy="on"] select,
   html[data-easy="on"] input:not([type="checkbox"]):not([type="hidden"]),
+  html[data-easy="on"] textarea,
   html[data-easy="on"] nav a,
-  html[data-easy="on"] header a {
+  html[data-easy="on"] header a,
+  html[data-easy="on"] #main a {
     min-height: 3.25rem;
   }
 
   html[data-easy="on"] .logo-tagline {
     display: none;
   }
+
 
   html[data-contrast="high"] {
     --color-bg: #ffffff;
@@ -222,6 +228,39 @@
     --color-danger: #ff8a8a;
     --color-ok: #9dffb5;
     --shadow-card: 0 0 0 2px #ffe600;
+  }
+
+  /* Skip links: visible on keyboard focus, reliable across breakpoints */
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    z-index: 60;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    background: var(--color-primary);
+    color: var(--color-primary-fg);
+    font-weight: 600;
+    text-decoration: none;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .skip-link:focus,
+  .skip-link:focus-visible {
+    clip: auto;
+    clip-path: none;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    outline: 3px solid var(--color-ring);
+    outline-offset: 3px;
+  }
+  .skip-link-nav {
+    left: 8rem;
   }
 
   *:focus-visible {
