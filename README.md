@@ -23,3 +23,7 @@ npm run dev
 本项目由 Grok Build 迁移而来。
 
 **免责声明:** 本应用提供的政策解读与问答仅供参考，不构成官方法律意见或正式法律援助。具体权利义务请以主管部门发布的现行法规、政策文件及专业法律服务为准。
+
+## WeChat mini-program
+See apps/mp/README.md for uni-app shell and DevTools preview.
+Root scripts: mp:install, mp:dev, mp:build.
