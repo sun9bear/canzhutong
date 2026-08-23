@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite dev --host 0.0.0.0 --port 8080",
-    "build": "vite build && npm run db:migrate",
+    "build": "node scripts/export-mp-policies.mjs && vite build && node scripts/migrate.mjs",
     "db:migrate": "node scripts/migrate.mjs",
     "build:dev": "vite build --mode development",
     "preview": "vite preview --host 0.0.0.0 --port 8080",
@@ -18,7 +18,8 @@
     "format": "prettier --write .",
     "mp:install": "npm install --prefix apps/mp",
     "mp:dev": "npm run dev:mp-weixin --prefix apps/mp",
-    "mp:build": "npm run build:mp-weixin --prefix apps/mp"
+    "mp:build": "npm run build:mp-weixin --prefix apps/mp",
+    "mp:data": "node scripts/export-mp-policies.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.4",
