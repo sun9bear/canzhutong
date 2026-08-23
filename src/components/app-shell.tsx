@@ -1,8 +1,16 @@
 import type { MouseEvent } from "react";
 import { Link, Outlet, useRouterState } from "@tanstack/react-router";
-import { BookOpenText, CircleUserRound, House, MessageCircleQuestion, Phone } from "lucide-react";
+import {
+  BookOpenText,
+  CircleUserRound,
+  House,
+  MessageCircleQuestion,
+  Phone,
+  Settings2,
+} from "lucide-react";
 import { A11yTrigger } from "@/components/a11y-panel";
 import { AccountChip } from "@/components/account-chip";
+import { useAdminStatus } from "@/hooks/use-admin-status";
 import { cn } from "@/lib/utils";
 
 const NAV = [
@@ -12,6 +20,9 @@ const NAV = [
   { to: "/orgs", label: "黄页", icon: Phone },
   { to: "/me", label: "我的", icon: CircleUserRound },
 ] as const;
+
+// Admin-only entry — appended for verified admins only (useAdminStatus).
+const ADMIN_NAV_ITEM = { to: "/admin", label: "管理", icon: Settings2 } as const;
 
 function Logo() {
   return (
@@ -55,6 +66,8 @@ function focusTarget(id: string, e: MouseEvent<HTMLAnchorElement>) {
 
 export function AppShell() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { isAdmin } = useAdminStatus();
+  const navItems = isAdmin ? [...NAV, ADMIN_NAV_ITEM] : NAV;
 
   return (
     <div className="min-h-dvh bg-bg text-fg">
@@ -85,7 +98,7 @@ export function AppShell() {
             id="app-nav-desktop"
             tabIndex={-1}
           >
-            {NAV.map((item) => {
+            {navItems.map((item) => {
               const active = item.to === "/" ? pathname === "/" : pathname.startsWith(item.to);
               return (
                 <Link
@@ -117,8 +130,8 @@ export function AppShell() {
         className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-surface pb-[env(safe-area-inset-bottom)] md:hidden"
         aria-label="底部导航"
       >
-        <ul className="grid grid-cols-5">
-          {NAV.map((item) => {
+        <ul className={cn("grid", navItems.length >= 6 ? "grid-cols-6" : "grid-cols-5")}>
+          {navItems.map((item) => {
             const Icon = item.icon;
             const active = item.to === "/" ? pathname === "/" : pathname.startsWith(item.to);
             return (
