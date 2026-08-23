@@ -19,6 +19,7 @@ import { Route as AppGuidesRouteImport } from './routes/_app/guides'
 import { Route as AppLibraryRouteImport } from './routes/_app/library'
 import { Route as AppMeRouteImport } from './routes/_app/me'
 import { Route as AppOrgsRouteImport } from './routes/_app/orgs'
+import { Route as AppAdminAiRouteImport } from './routes/_app/admin.ai'
 import { Route as AppLibraryIndexRouteImport } from './routes/_app/library.index'
 import { Route as AppLibraryPolicyIdRouteImport } from './routes/_app/library.$policyId'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
@@ -72,6 +73,11 @@ const AppOrgsRoute = AppOrgsRouteImport.update({
   path: '/orgs',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAdminAiRoute = AppAdminAiRouteImport.update({
+  id: '/admin/ai',
+  path: '/admin/ai',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppLibraryIndexRoute = AppLibraryIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -98,6 +104,7 @@ export interface FileRoutesByFullPath {
   '/library': typeof AppLibraryRouteWithChildren
   '/me': typeof AppMeRoute
   '/orgs': typeof AppOrgsRoute
+  '/admin/ai': typeof AppAdminAiRoute
   '/library/$policyId': typeof AppLibraryPolicyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/library/': typeof AppLibraryIndexRoute
@@ -111,6 +118,7 @@ export interface FileRoutesByTo {
   '/me': typeof AppMeRoute
   '/orgs': typeof AppOrgsRoute
   '/': typeof AppIndexRoute
+  '/admin/ai': typeof AppAdminAiRoute
   '/library/$policyId': typeof AppLibraryPolicyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/library': typeof AppLibraryIndexRoute
@@ -127,6 +135,7 @@ export interface FileRoutesById {
   '/_app/me': typeof AppMeRoute
   '/_app/orgs': typeof AppOrgsRoute
   '/_app/': typeof AppIndexRoute
+  '/_app/admin/ai': typeof AppAdminAiRoute
   '/_app/library/$policyId': typeof AppLibraryPolicyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/_app/library/': typeof AppLibraryIndexRoute
@@ -143,6 +152,7 @@ export interface FileRouteTypes {
     | '/library'
     | '/me'
     | '/orgs'
+    | '/admin/ai'
     | '/library/$policyId'
     | '/api/auth/$'
     | '/library/'
@@ -156,6 +166,7 @@ export interface FileRouteTypes {
     | '/me'
     | '/orgs'
     | '/'
+    | '/admin/ai'
     | '/library/$policyId'
     | '/api/auth/$'
     | '/library'
@@ -171,6 +182,7 @@ export interface FileRouteTypes {
     | '/_app/me'
     | '/_app/orgs'
     | '/_app/'
+    | '/_app/admin/ai'
     | '/_app/library/$policyId'
     | '/api/auth/$'
     | '/_app/library/'
@@ -254,6 +266,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppOrgsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/admin/ai': {
+      id: '/_app/admin/ai'
+      path: '/admin/ai'
+      fullPath: '/admin/ai'
+      preLoaderRoute: typeof AppAdminAiRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/library/': {
       id: '/_app/library/'
       path: '/'
@@ -301,6 +320,7 @@ interface AppRouteChildren {
   AppMeRoute: typeof AppMeRoute
   AppOrgsRoute: typeof AppOrgsRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppAdminAiRoute: typeof AppAdminAiRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
@@ -312,6 +332,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppMeRoute: AppMeRoute,
   AppOrgsRoute: AppOrgsRoute,
   AppIndexRoute: AppIndexRoute,
+  AppAdminAiRoute: AppAdminAiRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
@@ -324,12 +345,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

@@ -31,3 +31,5 @@ artifacts/
 attachments/
 screenshots/
 .grok/
+.neon-claimable.json
+.better-auth-secret.tmp

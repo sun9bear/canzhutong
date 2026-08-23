@@ -4,6 +4,7 @@ import { retrieveOrgs } from "./orgs";
 import { DISCLAIMER } from "@/data/copy";
 import type { PolicyDetail } from "./policies";
 import type { OrgRecord } from "@/data/orgs";
+import { chatCompletion } from "./llm";
 
 function formatContext(policies: PolicyDetail[]): string {
   return policies
@@ -76,9 +77,6 @@ export const askPolicy = createServerFn({ method: "POST" })
     const question = data.question.trim().slice(0, 800);
     if (!question) return { ok: false, error: "请输入问题" };
 
-    const apiKey = process.env.XAI_API_KEY;
-    if (!apiKey) return { ok: false, error: "智能咨询暂时不可用，请先在政策库中检索，或拨打 12385。" };
-
     const wantOrg = /电话|地址|残联|热线|怎么找|联系|黄页|窗口/.test(question);
     const [policies, orgs] = await Promise.all([
       retrieveForQuestion(question, data.region, data.disabilityTypes, 8),
@@ -87,41 +85,40 @@ export const askPolicy = createServerFn({ method: "POST" })
     const context = formatContext(policies);
     const orgBlock = formatOrgs(orgs);
     const history = (data.history ?? []).slice(-6).map((m) => ({
-      role: m.role,
+      role: m.role as "user" | "assistant",
       content: m.content.slice(0, 2000),
     }));
 
-    const res = await fetch("https://api.x.ai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: "grok-4.5",
-        temperature: 0.2,
-        max_tokens: 1200,
-        messages: [
-          { role: "system", content: SYSTEM },
-          ...history,
-          {
-            role: "user",
-            content: `${question}\n\n【政策库摘录】\n${context}\n\n【机构黄页】\n${orgBlock || "（无）"}\n\n【声明】${DISCLAIMER}`,
-          },
-        ],
-      }),
+    const llm = await chatCompletion({
+      system: SYSTEM,
+      temperature: 0.2,
+      max_tokens: 1200,
+      messages: [
+        ...history,
+        {
+          role: "user",
+          content: `${question}\n\n【政策库摘录】\n${context}\n\n【机构黄页】\n${orgBlock || "（无）"}\n\n【声明】${DISCLAIMER}`,
+        },
+      ],
     });
 
-    if (!res.ok) {
-      return { ok: false, error: `咨询服务暂时繁忙（${res.status}），请稍后重试或改用政策库检索。` };
+    if (!llm.ok) {
+      if (llm.error === "no_config") {
+        return {
+          ok: false,
+          error: "智能咨询暂时不可用，请先在政策库中检索，或拨打 12385。",
+        };
+      }
+      const status = llm.status ? `（${llm.status}）` : "";
+      return {
+        ok: false,
+        error: `咨询服务暂时繁忙${status}，请稍后重试或改用政策库检索。`,
+      };
     }
-    const body = (await res.json()) as {
-      choices: { message: { content: string } }[];
-    };
-    const text = body.choices[0]?.message.content ?? "";
+
     return {
       ok: true,
-      text,
+      text: llm.text,
       citations: policies.map((p) => ({
         id: p.id,
         title: p.title,

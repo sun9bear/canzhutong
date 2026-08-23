@@ -28,6 +28,7 @@ import {
   type ProfileInput,
 } from "@/lib/server/profile";
 import type { PolicyListItem } from "@/lib/server/policies";
+import { getAdminStatus } from "@/lib/server/ai-settings";
 
 export const Route = createFileRoute("/_app/me")({
   component: MePage,
@@ -73,8 +74,12 @@ function MeInner() {
   const [error, setError] = useState<string | null>(null);
   const [bookmarks, setBookmarks] = useState<PolicyListItem[]>([]);
   const [unbookmarkingId, setUnbookmarkingId] = useState<string | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
+    void getAdminStatus()
+      .then((s) => setIsAdmin(s.isAdmin))
+      .catch(() => setIsAdmin(false));
     void getProfile()
       .then((p) => {
         if (p) setForm(p);
@@ -169,6 +174,19 @@ function MeInner() {
           </Link>
         </div>
       </section>
+
+      {isAdmin ? (
+        <section className="rounded-xl bg-surface p-4 shadow-card">
+          <h2 className="text-base font-medium">AI 设置</h2>
+          <p className="mt-1 text-sm text-muted">配置问一问与个人建议所用的大模型接口。</p>
+          <Link
+            to="/admin/ai"
+            className="mt-3 inline-flex h-11 items-center rounded-md border border-border bg-bg px-3 text-sm font-medium"
+          >
+            打开 AI 设置
+          </Link>
+        </section>
+      ) : null}
 
       <form
         className="space-y-4 rounded-xl bg-surface p-5 shadow-card"

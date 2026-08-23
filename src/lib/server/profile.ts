@@ -4,6 +4,7 @@ import { authMiddleware } from "@/lib/auth/middleware";
 import { retrieveForQuestion } from "./policies";
 import { DISCLAIMER } from "@/data/copy";
 import { regionName, disabilityLabel } from "@/data/catalog";
+import { chatCompletion } from "./llm";
 
 export type ProfileInput = {
   displayName: string;
@@ -104,9 +105,6 @@ export type AdviceResult =
 export const generateAdvice = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
   .handler(async ({ context }): Promise<AdviceResult> => {
-    const apiKey = process.env.XAI_API_KEY;
-    if (!apiKey) return { ok: false, error: "个性化建议暂时不可用。" };
-
     const sql = await getSql();
     const rows = await sql<{
       display_name: string;
@@ -167,37 +165,33 @@ export const generateAdvice = createServerFn({ method: "POST" })
 需求：${needs.join("、") || "未填"}
 补充：${row.extra_notes || "无"}`;
 
-    const res = await fetch("https://api.x.ai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: "grok-4.5",
-        temperature: 0.3,
-        max_tokens: 1600,
-        messages: [
-          {
-            role: "system",
-            content: `你是「残助通」个性化顾问。根据用户档案和【政策库摘录】写出可执行的建议。
+    const llm = await chatCompletion({
+      temperature: 0.3,
+      max_tokens: 1600,
+      system: `你是「残助通」个性化顾问。根据用户档案和【政策库摘录】写出可执行的建议。
 结构必须为：
 一、可能符合的政策（只列摘录里能对应上的，标文件名，不确定就写“需当地核实”）
 二、康复与日常生活（政策路径与生活适应，不做医疗诊断）
 三、教育或职业发展（按年龄和就业状态）
 四、下一步行动清单（3—7条，写清去哪个窗口）
 禁止编造金额和地方独有标准。语气尊重、具体、不煽情。不要使用星号、井号、反引号等 Markdown 符号，用「一、二、三」和小标题即可。`,
-          },
-          {
-            role: "user",
-            content: `档案：\n${profileText}\n\n【政策库摘录】\n${contextBlock}\n\n${DISCLAIMER}`,
-          },
-        ],
-      }),
+      messages: [
+        {
+          role: "user",
+          content: `档案：\n${profileText}\n\n【政策库摘录】\n${contextBlock}\n\n${DISCLAIMER}`,
+        },
+      ],
     });
-    if (!res.ok) return { ok: false, error: `生成失败（${res.status}），请稍后重试。` };
-    const body = (await res.json()) as { choices: { message: { content: string } }[] };
-    const text = body.choices[0]?.message.content ?? "";
+
+    if (!llm.ok) {
+      if (llm.error === "no_config") {
+        return { ok: false, error: "个性化建议暂时不可用。" };
+      }
+      const status = llm.status ? `（${llm.status}）` : "";
+      return { ok: false, error: `生成失败${status}，请稍后重试。` };
+    }
+
+    const text = llm.text;
     const citations = policies.map((p) => ({
       id: p.id,
       title: p.title,
