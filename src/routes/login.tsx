@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { GROK_PROVIDERS, authClient, authEnabled, signIn } from "@/lib/auth/client";
+import { authClient, authEnabled } from "@/lib/auth/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { A11yTrigger } from "@/components/a11y-panel";
@@ -48,25 +48,12 @@ function Login() {
             </Link>
             <h1 className="mt-1 font-display text-2xl font-semibold">登录残助通</h1>
             <p className="mt-1 text-sm text-muted">登录后可保存档案、收藏政策和生成个人建议。</p>
+            <p className="mt-2 text-xs text-subtle">微信登录即将开通（需开放平台/服务号资质）</p>
           </div>
           <A11yTrigger className="shrink-0 border border-border" />
         </div>
         {authEnabled ? (
           <>
-            <div className="space-y-2">
-              {GROK_PROVIDERS.map((p) => (
-                <Button
-                  key={p.providerId}
-                  type="button"
-                  variant="outline"
-                  className="w-full"
-                  onClick={() => void signIn(p.providerId, { callbackURL: "/me" })}
-                >
-                  使用 {p.label} 继续
-                </Button>
-              ))}
-            </div>
-            <p className="text-center text-xs text-subtle">或使用邮箱</p>
             <form className="space-y-3" onSubmit={(e) => void onEmail(e)}>
               <label className="block text-sm">
                 <span className="text-muted">邮箱</span>
@@ -100,6 +87,16 @@ function Login() {
                 {mode === "in" ? "登录" : "注册"}
               </Button>
             </form>
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full"
+              disabled
+              aria-disabled="true"
+              title="微信登录即将开通（需开放平台/服务号资质）"
+            >
+              微信登录（即将开通）
+            </Button>
             <button
               type="button"
               className="inline-flex min-h-11 w-full items-center justify-center text-sm text-muted"
