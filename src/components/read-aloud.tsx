@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import { Pause, Volume2 } from "lucide-react";
-import { canSpeak, isSpeaking, speak, stopSpeak, subscribeSpeech } from "@/lib/speech";
+import {
+  canSpeak,
+  isLikelySilentSpeechEnv,
+  isSpeaking,
+  speak,
+  stopSpeak,
+  subscribeSpeech,
+  warmVoices,
+} from "@/lib/speech";
 import { cn } from "@/lib/utils";
 
 export function ReadAloud({
@@ -16,6 +24,7 @@ export function ReadAloud({
   const [hint, setHint] = useState<string | null>(null);
 
   useEffect(() => {
+    warmVoices();
     return subscribeSpeech((speaking) => {
       if (!speaking) setOn(false);
     });
@@ -31,6 +40,9 @@ export function ReadAloud({
     if (!canSpeak()) {
       setHint("此浏览器不能朗读。请打开手机读屏：iPhone 旁白，安卓 TalkBack。");
       return;
+    }
+    if (isLikelySilentSpeechEnv()) {
+      setHint("当前微信内置浏览器可能无法外放系统朗读。请用系统读屏，或在系统浏览器（Safari / Chrome）中打开本页再试。");
     }
     const ok = speak(text);
     setOn(ok);

@@ -6,7 +6,8 @@ export function stripMarkdownForSpeech(src: string): string {
   t = t.replace(/!\[([^\]]*)\]\([^)]*\)/g, "$1");
   t = t.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1");
   t = t.replace(/^#{1,6}\s+/gm, "");
-  t = t.replace(/^\s{0,3}([-*+]|\d+[.)])\s+/gm, "");
+  // 1. / 1) / 1、 / 1． 以及 - * +
+  t = t.replace(/^\s{0,3}(?:[-*+]\s+|\d+(?:[.)]\s+|、\s*|．\s*))/gm, "");
   t = t.replace(/^\s{0,3}>\s?/gm, "");
   t = t.replace(/^\s{0,3}([-*_]){3,}\s*$/gm, "");
   t = t.replace(/(\*\*|__)([\s\S]*?)\1/g, "$2");
@@ -34,7 +35,7 @@ type Block =
   | { type: "p"; children: InlineNode[] }
   | { type: "h"; level: 1 | 2 | 3; children: InlineNode[] }
   | { type: "ul"; items: InlineNode[][] }
-  | { type: "ol"; items: InlineNode[][] }
+  | { type: "ol"; start: number; items: InlineNode[][] }
   | { type: "quote"; children: InlineNode[] };
 
 function parseInline(raw: string): InlineNode[] {
@@ -62,6 +63,44 @@ function headingLevel(line: string): 1 | 2 | 3 | 0 {
   return 0;
 }
 
+/** 中文建议常用「一、二、三」作小节标题（非阿拉伯数字列表）。 */
+function isCnSectionHeading(line: string): boolean {
+  return /^[一二三四五六七八九十百]+[、．.]\s*\S/.test(line.trim());
+}
+
+/**
+ * 有序项：1. / 1) / 1、 / 1．（中文模型极爱用顿号）。
+ * 返回起始编号；非列表行返回 null。
+ */
+function matchOrdered(line: string): { n: number; rest: string } | null {
+  // 中文「1、项」常无空格；Markdown「1. 项」一般有空格
+  const m = line.match(/^\s{0,3}(\d+)(?:[.)]\s+|、\s*|．\s*)(.*)$/);
+  if (!m) return null;
+  const n = Number(m[1]);
+  if (!Number.isFinite(n) || n < 1) return null;
+  return { n, rest: (m[2] ?? "").trimStart() };
+}
+
+function matchUnordered(line: string): string | null {
+  const m = line.match(/^\s{0,3}[-*+]\s+(.*)$/);
+  return m ? (m[1] ?? "") : null;
+}
+
+function isBlank(line: string | undefined): boolean {
+  return !line || !line.trim();
+}
+
+/**
+ * 跳过空行后，若下一行是任意有序项标记，则视为同一列表续写
+ *（LLM 常整列都用「1.」，编号不递增也应保持同一列表）。
+ */
+function peekContinuesOl(lines: string[], from: number): boolean {
+  let j = from;
+  while (j < lines.length && isBlank(lines[j])) j += 1;
+  if (j >= lines.length) return false;
+  return matchOrdered(lines[j] ?? "") !== null;
+}
+
 export function parseMarkdownBlocks(src: string): Block[] {
   const lines = src.replace(/\r\n/g, "\n").split("\n");
   const blocks: Block[] = [];
@@ -74,7 +113,7 @@ export function parseMarkdownBlocks(src: string): Block[] {
 
   while (i < lines.length) {
     const line = lines[i] ?? "";
-    if (!line.trim()) {
+    if (isBlank(line)) {
       i += 1;
       continue;
     }
@@ -90,6 +129,16 @@ export function parseMarkdownBlocks(src: string): Block[] {
       continue;
     }
 
+    if (isCnSectionHeading(line)) {
+      blocks.push({
+        type: "h",
+        level: 2,
+        children: parseInline(line.trim()),
+      });
+      i += 1;
+      continue;
+    }
+
     if (/^\s{0,3}>\s?/.test(line)) {
       const buf: string[] = [];
       while (i < lines.length && /^\s{0,3}>\s?/.test(lines[i] ?? "")) {
@@ -100,23 +149,39 @@ export function parseMarkdownBlocks(src: string): Block[] {
       continue;
     }
 
-    if (/^\s{0,3}[-*+]\s+/.test(line)) {
+    if (matchUnordered(line) !== null) {
       const items: InlineNode[][] = [];
-      while (i < lines.length && /^\s{0,3}[-*+]\s+/.test(lines[i] ?? "")) {
-        items.push(parseInline((lines[i] ?? "").replace(/^\s{0,3}[-*+]\s+/, "")));
+      while (i < lines.length) {
+        const rest = matchUnordered(lines[i] ?? "");
+        if (rest === null) break;
+        items.push(parseInline(rest));
         i += 1;
       }
       blocks.push({ type: "ul", items });
       continue;
     }
 
-    if (/^\s{0,3}\d+[.)]\s+/.test(line)) {
+    const ordered = matchOrdered(line);
+    if (ordered) {
+      // 首个标记编号作为 start；后续有序项无论编号是否重复/跳号都并入同一列表
+      //（LLM 常输出「1. 1. 1.」，按编号严格递增会把列表拆散）。
+      const start = ordered.n;
       const items: InlineNode[][] = [];
-      while (i < lines.length && /^\s{0,3}\d+[.)]\s+/.test(lines[i] ?? "")) {
-        items.push(parseInline((lines[i] ?? "").replace(/^\s{0,3}\d+[.)]\s+/, "")));
+      while (i < lines.length) {
+        // 允许空行后续写：空行后仍是任意有序项即续同一列表
+        if (isBlank(lines[i])) {
+          if (peekContinuesOl(lines, i)) {
+            while (i < lines.length && isBlank(lines[i])) i += 1;
+            continue;
+          }
+          break;
+        }
+        const hit = matchOrdered(lines[i] ?? "");
+        if (!hit) break;
+        items.push(parseInline(hit.rest));
         i += 1;
       }
-      blocks.push({ type: "ol", items });
+      blocks.push({ type: "ol", start, items });
       continue;
     }
 
@@ -124,9 +189,12 @@ export function parseMarkdownBlocks(src: string): Block[] {
     i += 1;
     while (
       i < lines.length &&
-      (lines[i] ?? "").trim() &&
+      !isBlank(lines[i]) &&
       !headingLevel(lines[i] ?? "") &&
-      !/^\s{0,3}([-*+]|\d+[.)]|>)\s+/.test(lines[i] ?? "")
+      !isCnSectionHeading(lines[i] ?? "") &&
+      matchUnordered(lines[i] ?? "") === null &&
+      matchOrdered(lines[i] ?? "") === null &&
+      !/^\s{0,3}>\s?/.test(lines[i] ?? "")
     ) {
       buf.push(lines[i] ?? "");
       i += 1;

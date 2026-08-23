@@ -49,9 +49,9 @@ export function ReadableMd({ text, className }: { text: string; className?: stri
         }
         if (b.type === "ol") {
           return (
-            <ol key={i}>
+            <ol key={i} start={b.start > 1 ? b.start : undefined}>
               {b.items.map((item, j) => (
-                <li key={j}>
+                <li key={j} value={b.start + j}>
                   <InlineBits bits={item} />
                 </li>
               ))}
