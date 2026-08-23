@@ -176,13 +176,6 @@
     display: none;
   }
 
-  html[data-easy="on"] #main {
-    scroll-padding-top: 6rem;
-  }
-
-  html[data-easy="on"] #main .shadow-card {
-    padding-block: max(1rem, 0.75em);
-  }
 
   html[data-contrast="high"] {
     --color-bg: #ffffff;
