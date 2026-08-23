@@ -79,6 +79,15 @@ function PolicyPage() {
             {saved ? <BookmarkCheck className="size-4" aria-hidden /> : <Bookmark className="size-4" aria-hidden />}
             {saved ? "已收藏" : "收藏"}
           </Button>
+        ) : !isPending ? (
+          <Link
+            to="/login"
+            className="inline-flex h-11 min-h-11 items-center gap-2 rounded-md border border-border bg-surface px-4 text-sm font-medium"
+            aria-label="登录后收藏"
+          >
+            <Bookmark className="size-4" aria-hidden />
+            登录后收藏
+          </Link>
         ) : null}
         {policy.sourceUrl ? (
           <a

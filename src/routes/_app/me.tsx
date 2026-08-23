@@ -19,7 +19,7 @@ import {
 } from "@/data/catalog";
 import { RedirectToSignIn } from "@/lib/auth/gates";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
-import { listBookmarks } from "@/lib/server/policies";
+import { listBookmarks, toggleBookmark } from "@/lib/server/policies";
 import {
   generateAdvice,
   getProfile,
@@ -46,6 +46,11 @@ const empty: ProfileInput = {
   extraNotes: "",
 };
 
+function isPlaceholderRegion(code: string) {
+  const trimmed = code.trim();
+  return !trimmed || trimmed === "CN" || trimmed === "ALL";
+}
+
 function MePage() {
   const { user, isPending } = useCurrentUserState();
   if (isPending) {
@@ -67,6 +72,7 @@ function MeInner() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [bookmarks, setBookmarks] = useState<PolicyListItem[]>([]);
+  const [unbookmarkingId, setUnbookmarkingId] = useState<string | null>(null);
 
   useEffect(() => {
     void getProfile()
@@ -89,6 +95,11 @@ function MeInner() {
 
   async function onSave() {
     setError(null);
+    setSavedMsg(null);
+    if (isPlaceholderRegion(form.regionCode)) {
+      setError("请选择具体的户籍或常住地区（不能只选「全国」）。");
+      return;
+    }
     try {
       await saveProfile({ data: form });
       setSavedMsg("档案已保存，仅用于为你匹配政策和生成建议。");
@@ -100,6 +111,11 @@ function MeInner() {
   async function onAdvice() {
     setBusy(true);
     setError(null);
+    if (isPlaceholderRegion(form.regionCode)) {
+      setError("请选择具体的户籍或常住地区（不能只选「全国」）。");
+      setBusy(false);
+      return;
+    }
     try {
       await saveProfile({ data: form });
       const res = await generateAdvice();
@@ -113,6 +129,21 @@ function MeInner() {
       setError("生成失败，请稍后重试。");
     } finally {
       setBusy(false);
+    }
+  }
+
+  async function onUnbookmark(policyId: string) {
+    setUnbookmarkingId(policyId);
+    setError(null);
+    try {
+      const res = await toggleBookmark({ data: policyId });
+      if (!res.saved) {
+        setBookmarks((prev) => prev.filter((p) => p.id !== policyId));
+      }
+    } catch {
+      setError("取消收藏失败，请稍后重试。");
+    } finally {
+      setUnbookmarkingId(null);
     }
   }
 
@@ -281,16 +312,38 @@ function MeInner() {
         </section>
       ) : null}
 
-      <section>
-        <h2 className="font-display text-lg font-semibold">收藏</h2>
+      <section aria-labelledby="bookmarks-heading">
+        <h2 id="bookmarks-heading" className="font-display text-lg font-semibold">
+          收藏{bookmarks.length > 0 ? `（${bookmarks.length}）` : ""}
+        </h2>
         {bookmarks.length === 0 ? (
-          <p className="mt-2 text-sm text-muted">还没有收藏。在政策详情页可以收藏。</p>
-        ) : (
-          <div className="mt-3 grid gap-3">
-            {bookmarks.map((p) => (
-              <PolicyCard key={p.id} policy={p} />
-            ))}
+          <div className="mt-3 rounded-xl border border-dashed border-border bg-surface p-6 text-center">
+            <p className="text-sm text-muted">还没有收藏。去政策库看看，把有用的政策收进来。</p>
+            <Link
+              to="/library"
+              className="mt-4 inline-flex min-h-11 items-center rounded-md bg-primary px-4 text-sm font-medium text-primary-fg"
+            >
+              去政策库看看
+            </Link>
           </div>
+        ) : (
+          <ul className="mt-3 grid gap-3">
+            {bookmarks.map((p) => (
+              <li key={p.id} className="space-y-2">
+                <PolicyCard policy={p} />
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="min-h-11"
+                  disabled={unbookmarkingId === p.id}
+                  onClick={() => void onUnbookmark(p.id)}
+                  aria-label={`取消收藏 ${p.shortTitle}`}
+                >
+                  {unbookmarkingId === p.id ? "正在取消…" : "取消收藏"}
+                </Button>
+              </li>
+            ))}
+          </ul>
         )}
       </section>
     </div>
