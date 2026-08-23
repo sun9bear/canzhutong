@@ -10,7 +10,7 @@ export type ChatCompletionResult =
   | { ok: false; error: string; status?: number };
 
 /**
- * OpenAI-compatible chat completion against admin-configured (or XAI fallback) LLM.
+ * OpenAI-compatible chat completion against admin-configured (or DeepSeek / XAI env fallback) LLM.
  */
 export async function chatCompletion(opts: {
   system?: string;
