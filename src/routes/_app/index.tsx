@@ -142,7 +142,7 @@ function Home() {
           <Accessibility className="mt-0.5 size-6 shrink-0 text-primary" aria-hidden />
           <div>
             <h3 className="font-semibold">无障碍使用</h3>
-            <p className="mt-1 text-sm text-muted">大字、高对比、朗读、读屏。</p>
+            <p className="mt-1 text-sm text-muted">大字、高对比、朗读、读屏。也可点顶部「无障碍」按钮随时调整。</p>
           </div>
         </Link>
         <a

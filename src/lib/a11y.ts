@@ -14,7 +14,7 @@ export type A11ySettings = {
 };
 
 const DEFAULTS: A11ySettings = {
-  fontScale: "md",
+  fontScale: "lg",
   contrast: "standard",
   spacing: "normal",
   underlineLinks: false,

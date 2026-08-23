@@ -24,7 +24,7 @@ function AccessPage() {
       <section className="rounded-xl bg-surface p-5 shadow-card">
         <h2 className="font-display text-lg font-semibold">低视力</h2>
         <ul className="mt-3 list-disc space-y-2 pl-5 leading-relaxed">
-          <li>点顶部「无障碍」，把字号调到大、特大或超大。</li>
+          <li>默认字号为「大」。点顶部「无障碍」，可调到标准、特大或超大。</li>
           <li>黑白高对比、黑底白字、黑底黄字三种模式，按自己看清的选。</li>
           <li>打开「下划线链接」，不用只靠颜色找按钮。</li>
           <li>手机可双指放大。本应用不限制缩放。</li>

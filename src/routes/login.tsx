@@ -39,6 +39,19 @@ function Login() {
   }
 
   return (
+    <div className="min-h-dvh bg-bg">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-3 focus:py-2 focus:text-primary-fg"
+        onClick={(e) => {
+          e.preventDefault();
+          const main = document.getElementById("main");
+          main?.focus();
+          main?.scrollIntoView({ block: "start" });
+        }}
+      >
+        跳到正文
+      </a>
     <main id="main" tabIndex={-1} className="flex min-h-dvh w-full items-center justify-center bg-bg px-4 py-10">
       <div className="w-full max-w-sm space-y-6 rounded-2xl bg-surface p-6 shadow-card">
         <div className="flex items-start justify-between gap-2">
@@ -110,5 +123,6 @@ function Login() {
         )}
       </div>
     </main>
+    </div>
   );
 }

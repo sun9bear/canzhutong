@@ -43,6 +43,12 @@ export function AppShell() {
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-3 focus:py-2 focus:text-primary-fg"
+        onClick={(e) => {
+          e.preventDefault();
+          const main = document.getElementById("main");
+          main?.focus();
+          main?.scrollIntoView({ block: "start" });
+        }}
       >
         跳到正文
       </a>
@@ -74,12 +80,12 @@ export function AppShell() {
             })}
           </nav>
           <div className="flex items-center gap-1">
-            <A11yTrigger />
+            <A11yTrigger className="border border-border" />
             <AccountChip />
           </div>
         </div>
       </header>
-      <main id="main" tabIndex={-1} className="mx-auto w-full max-w-6xl px-4 pb-24 pt-6 outline-none md:pb-12">
+      <main id="main" tabIndex={-1} className="mx-auto w-full max-w-6xl px-4 pb-24 pt-6 md:pb-12">
         <Outlet />
       </main>
       <nav

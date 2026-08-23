@@ -12,7 +12,7 @@ const xBanner = host
   ? `https://og.grok.me/v1/banner.png?host=${encodeURIComponent(host)}&title=${encodeURIComponent(APP_NAME)}&color=1B4D47`
   : undefined;
 
-const A11Y_BOOT = `(function(){try{var d=document.documentElement;var s={};try{s=JSON.parse(localStorage.getItem("cz-a11y")||"{}")}catch(e){}var f=s.fontScale||localStorage.getItem("cz-a11y-font");var c=s.contrast||localStorage.getItem("cz-a11y-contrast");if(f)d.setAttribute("data-type",f);if(c)d.setAttribute("data-contrast",c);if(s.spacing)d.setAttribute("data-spacing",s.spacing);if(s.underlineLinks)d.setAttribute("data-links","on");if(s.easyRead)d.setAttribute("data-easy","on");if(s.reduceMotion)d.setAttribute("data-motion","reduce");}catch(e){}})();`;
+const A11Y_BOOT = `(function(){try{var d=document.documentElement;var s={};try{s=JSON.parse(localStorage.getItem("cz-a11y")||"{}")}catch(e){}var f=s.fontScale||localStorage.getItem("cz-a11y-font")||"lg";var c=s.contrast||localStorage.getItem("cz-a11y-contrast");d.setAttribute("data-type",f);if(c)d.setAttribute("data-contrast",c);if(s.spacing)d.setAttribute("data-spacing",s.spacing);if(s.underlineLinks)d.setAttribute("data-links","on");if(s.easyRead)d.setAttribute("data-easy","on");if(s.reduceMotion)d.setAttribute("data-motion","reduce");}catch(e){}})();`;
 
 export const Route = createRootRoute({
   head: () => ({
