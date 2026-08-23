@@ -98,10 +98,10 @@ function AdminAiInner() {
       <div className="mx-auto max-w-lg space-y-4">
         <h1 className="font-display text-2xl font-semibold">AI 设置</h1>
         <p className="rounded-xl bg-surface p-4 text-danger" role="alert">
-          无权限
+          你没有管理权限；如需开通请联系站点管理员
         </p>
-        <Link to="/me" className="text-sm text-primary underline-offset-4 hover:underline">
-          返回我的档案
+        <Link to="/admin" className="text-sm text-primary underline-offset-4 hover:underline">
+          返回管理中心
         </Link>
       </div>
     );
@@ -113,6 +113,7 @@ function AdminAiInner() {
     <div className="mx-auto max-w-lg space-y-6">
       <header>
         <h1 className="font-display text-2xl font-semibold">AI 设置</h1>
+        <p className="mt-1 text-sm text-muted">仅管理员可访问。</p>
         <p className="mt-1 text-sm text-muted">
           配置 OpenAI 兼容接口，供「问一问」与「个人建议」使用。密钥仅保存在服务端，界面不会回显完整密钥。
         </p>
@@ -182,8 +183,8 @@ function AdminAiInner() {
         ) : null}
       </form>
 
-      <Link to="/me" className="inline-block text-sm text-primary underline-offset-4 hover:underline">
-        返回我的档案
+      <Link to="/admin" className="inline-block text-sm text-primary underline-offset-4 hover:underline">
+        返回管理中心
       </Link>
     </div>
   );
