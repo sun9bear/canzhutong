@@ -457,6 +457,7 @@ users. Full guides + snippets: the **`neon` skill** (database) and the
   platform injects `DATABASE_URL` + per-app auth creds. Set
   `VITE_AUTH_ENABLED=false` only to turn sign-in OFF. Never expose server-only
   vars to the client (only `VITE_`-prefixed reach the browser).
+- **残助通 LLM env fallback:** `getLlmConfig()` uses admin DB settings first, then `DEEPSEEK_API_KEY` (+ optional `DEEPSEEK_BASE_URL` / `DEEPSEEK_MODEL`), then `XAI_API_KEY` + grok-4.5.
 - **AI features (chat, images, video, voice):** when `XAI_API_KEY` is in the
   env, the app has real xAI API access (server-only; latest model `grok-4.5`,
   docs at [docs.x.ai](https://docs.x.ai)) — chat/LLM **plus Imagine

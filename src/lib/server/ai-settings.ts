@@ -81,7 +81,8 @@ async function readSettingsRow(): Promise<AiSettingsRow | null> {
 
 /**
  * Internal: resolve OpenAI-compatible LLM config from admin DB settings,
- * else fall back to XAI_API_KEY + grok-4.5. Returns null when nothing usable.
+ * else DEEPSEEK_API_KEY (+ optional DEEPSEEK_BASE_URL / DEEPSEEK_MODEL),
+ * else XAI_API_KEY + grok-4.5. Returns null when nothing usable.
  */
 export async function getLlmConfig(): Promise<LlmConfig | null> {
   const row = await readSettingsRow();
@@ -96,6 +97,17 @@ export async function getLlmConfig(): Promise<LlmConfig | null> {
     } catch {
       // Corrupt cipher or rotated secret — fall through to env fallback.
     }
+  }
+
+  const deepseek = process.env.DEEPSEEK_API_KEY?.trim();
+  if (deepseek) {
+    return {
+      baseUrl: normalizeLlmBaseUrl(
+        process.env.DEEPSEEK_BASE_URL || "https://api.deepseek.com",
+      ),
+      model: (process.env.DEEPSEEK_MODEL || "deepseek-chat").trim(),
+      apiKey: deepseek,
+    };
   }
 
   const xai = process.env.XAI_API_KEY?.trim();
