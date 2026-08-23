@@ -42,7 +42,7 @@ function Login() {
     <div className="min-h-dvh bg-bg">
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-3 focus:py-2 focus:text-primary-fg"
+        className="skip-link"
         onClick={(e) => {
           e.preventDefault();
           const main = document.getElementById("main");

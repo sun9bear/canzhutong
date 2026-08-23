@@ -40,6 +40,8 @@ function Home() {
         </p>
         <form
           className="mt-6 flex flex-col gap-2 sm:flex-row"
+          role="search"
+          aria-label="搜索政策"
           onSubmit={(e) => {
             e.preventDefault();
             goSearch(q);
@@ -92,11 +94,13 @@ function Home() {
             全部政策
           </Link>
         </div>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+        <ul className="mt-4 grid list-none gap-3 p-0 sm:grid-cols-2">
           {featured.map((p) => (
-            <PolicyCard key={p.id} policy={p} />
+            <li key={p.id}>
+              <PolicyCard policy={p} />
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
       <section>

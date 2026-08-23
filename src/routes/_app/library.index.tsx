@@ -87,6 +87,8 @@ function Library() {
 
       <form
         className="rounded-xl bg-surface p-4 shadow-card"
+        role="search"
+        aria-label="筛选政策"
         onSubmit={(e) => {
           e.preventDefault();
           patch({ q: draft.trim() || undefined });
@@ -107,49 +109,60 @@ function Library() {
             搜索
           </Button>
         </div>
-        <div className="mt-4 space-y-3">
+        <fieldset className="mt-4 space-y-3">
+          <legend className="sr-only">筛选条件</legend>
           <RegionPicker
             value={search.region ?? "ALL"}
             onChange={(v) => patch({ region: v === "ALL" ? undefined : v })}
           />
           <div className="grid gap-3 sm:grid-cols-3">
-          <Select
-            id="category"
-            label="主题"
-            value={search.category ?? ""}
-            onChange={(v) => patch({ category: v || undefined })}
-            options={[{ id: "", label: "全部主题" }, ...CATEGORIES.map((c) => ({ id: c.id, label: c.label }))]}
-          />
-          <Select
-            id="level"
-            label="效力层级"
-            value={search.level ?? ""}
-            onChange={(v) => patch({ level: v || undefined })}
-            options={[{ id: "", label: "全部层级" }, ...LEVELS.map((l) => ({ id: l.id, label: l.label }))]}
-          />
-          <Select
-            id="disability"
-            label="残疾类别"
-            value={search.disability ?? ""}
-            onChange={(v) => patch({ disability: v || undefined })}
-            options={[{ id: "", label: "全部类别" }, ...DISABILITY_TYPES.map((d) => ({ id: d.id, label: d.label }))]}
-          />
+            <Select
+              id="category"
+              label="主题"
+              value={search.category ?? ""}
+              onChange={(v) => patch({ category: v || undefined })}
+              options={[{ id: "", label: "全部主题" }, ...CATEGORIES.map((c) => ({ id: c.id, label: c.label }))]}
+            />
+            <Select
+              id="level"
+              label="效力层级"
+              value={search.level ?? ""}
+              onChange={(v) => patch({ level: v || undefined })}
+              options={[{ id: "", label: "全部层级" }, ...LEVELS.map((l) => ({ id: l.id, label: l.label }))]}
+            />
+            <Select
+              id="disability"
+              label="残疾类别"
+              value={search.disability ?? ""}
+              onChange={(v) => patch({ disability: v || undefined })}
+              options={[{ id: "", label: "全部类别" }, ...DISABILITY_TYPES.map((d) => ({ id: d.id, label: d.label }))]}
+            />
           </div>
-        </div>
+        </fieldset>
       </form>
 
-      <p className="text-sm text-muted" aria-live="polite">
-        共 <span className="tabular-nums font-medium text-fg">{total}</span> 条
-      </p>
-      {items.length === 0 ? (
-        <p className="rounded-xl bg-surface p-8 text-center text-muted">没有匹配结果。可改用更短的词，或切换到「问一问」。</p>
-      ) : (
-        <div className="grid gap-3 sm:grid-cols-2">
-          {items.map((p) => (
-            <PolicyCard key={p.id} policy={p} />
-          ))}
-        </div>
-      )}
+      <div aria-live="polite">
+        <p className="text-sm text-muted">
+          共 <span className="tabular-nums font-medium text-fg">{total}</span> 条
+        </p>
+        {items.length === 0 ? (
+          <p className="mt-3 rounded-xl bg-surface p-8 text-center text-muted">
+            没有匹配结果。可改用更短的词，或{" "}
+            <Link to="/ask" className="font-medium text-primary">
+              去「问一问」文字咨询
+            </Link>
+            。
+          </p>
+        ) : (
+          <ul className="mt-3 grid list-none gap-3 p-0 sm:grid-cols-2">
+            {items.map((p) => (
+              <li key={p.id}>
+                <PolicyCard policy={p} />
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }
