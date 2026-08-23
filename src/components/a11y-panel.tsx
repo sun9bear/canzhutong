@@ -3,7 +3,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Accessibility, RotateCcw, Volume2, X } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useA11y, type Contrast, type FontScale, type Spacing } from "@/lib/a11y";
-import { canSpeak, speak, stopSpeak, warmVoices } from "@/lib/speech";
+import { canSpeak, speak, warmVoices } from "@/lib/speech";
 import { cn } from "@/lib/utils";
 
 type Ui = { open: boolean; setOpen: (v: boolean) => void };
@@ -223,7 +223,6 @@ function A11yPanel() {
                 className="inline-flex min-h-12 items-center gap-2 rounded-lg border border-border bg-bg px-4 text-base font-medium"
                 onClick={() => {
                   if (!canSpeak()) return;
-                  stopSpeak();
                   speak("这是朗读试听。残助通支持大字、高对比、读屏和文字咨询。");
                 }}
               >

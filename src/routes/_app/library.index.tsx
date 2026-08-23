@@ -141,28 +141,26 @@ function Library() {
         </fieldset>
       </form>
 
-      <div aria-live="polite">
-        <p className="text-sm text-muted">
-          共 <span className="tabular-nums font-medium text-fg">{total}</span> 条
+      <p className="text-sm text-muted" aria-live="polite" aria-atomic="true">
+        共 <span className="tabular-nums font-medium text-fg">{total}</span> 条
+      </p>
+      {items.length === 0 ? (
+        <p className="mt-3 rounded-xl bg-surface p-8 text-center text-muted">
+          没有匹配结果。可改用更短的词，或{" "}
+          <Link to="/ask" className="font-medium text-primary">
+            去「问一问」文字咨询
+          </Link>
+          。
         </p>
-        {items.length === 0 ? (
-          <p className="mt-3 rounded-xl bg-surface p-8 text-center text-muted">
-            没有匹配结果。可改用更短的词，或{" "}
-            <Link to="/ask" className="font-medium text-primary">
-              去「问一问」文字咨询
-            </Link>
-            。
-          </p>
-        ) : (
-          <ul className="mt-3 grid list-none gap-3 p-0 sm:grid-cols-2">
-            {items.map((p) => (
-              <li key={p.id}>
-                <PolicyCard policy={p} />
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      ) : (
+        <ul className="mt-3 grid list-none gap-3 p-0 sm:grid-cols-2">
+          {items.map((p) => (
+            <li key={p.id}>
+              <PolicyCard policy={p} />
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
