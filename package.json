@@ -15,7 +15,10 @@
     "typecheck": "tsc --noEmit",
     "test": "node --test 'scripts/**/*.test.mjs'",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "mp:install": "npm install --prefix apps/mp",
+    "mp:dev": "npm run dev:mp-weixin --prefix apps/mp",
+    "mp:build": "npm run build:mp-weixin --prefix apps/mp"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.4",
