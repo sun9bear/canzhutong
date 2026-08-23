@@ -5,6 +5,10 @@ import { getAdminStatus } from "@/lib/server/ai-settings";
 /** Client gate for admin-only UI (nav). Never shows admin chrome while session is loading. */
 export function useAdminStatus() {
   const { user, isPending: authPending } = useCurrentUserState();
+  // Stable primitives only: the hook above returns a fresh AppUser object every
+  // render, so depending on it would re-run the fetch loop indefinitely.
+  const userId = user?.id;
+  const isSignedIn = Boolean(user);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isPending, setIsPending] = useState(true);
 
@@ -13,7 +17,7 @@ export function useAdminStatus() {
       setIsPending(true);
       return;
     }
-    if (!user) {
+    if (!isSignedIn || !userId) {
       setIsAdmin(false);
       setIsPending(false);
       return;
@@ -34,7 +38,7 @@ export function useAdminStatus() {
     return () => {
       cancelled = true;
     };
-  }, [user, authPending]);
+  }, [userId, isSignedIn, authPending]);
 
   return { isAdmin, isPending };
 }
