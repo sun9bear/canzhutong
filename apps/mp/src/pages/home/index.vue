@@ -14,8 +14,10 @@
     </view>
     <view class="card">
       <text class="card-title">政策速览</text>
-      <view v-if="policies.length === 0" class="empty">
-        <text>暂无本地占位数据。后续将对接主站政策 API / 静态 JSON。</text>
+      <view v-if="loading" class="empty"><text>加载中…</text></view>
+      <view v-else-if="error" class="empty"><text>{{ error }}</text></view>
+      <view v-else-if="policies.length === 0" class="empty">
+        <text>暂无精选政策。</text>
       </view>
       <navigator
         v-for="item in policies"
@@ -27,13 +29,40 @@
         <text class="policy-summary">{{ item.summary }}</text>
       </navigator>
     </view>
-    <view class="disclaimer"><text>本应用整理自公开发布的法律法规和政府文件，供查询参考，不构成法律意见或官方答复。具体申办条件、标准和材料以户籍地或常住地残联、民政、人社、教育等部门最新文件为准。</text></view>
+    <view class="disclaimer"><text>{{ disclaimer }}</text></view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { POLICY_PLACEHOLDERS } from "../../data/policies";
-const policies = POLICY_PLACEHOLDERS;
+import { ref } from "vue";
+import { onShow } from "@dcloudio/uni-app";
+import {
+  listFeaturedPolicies,
+  loadPoliciesCatalog,
+  type PolicyRecord,
+} from "../../data/policies";
+
+const loading = ref(true);
+const error = ref("");
+const policies = ref<PolicyRecord[]>([]);
+const disclaimer = ref(
+  "本应用整理自公开发布的法律法规和政府文件，供查询参考，不构成法律意见或官方答复。具体申办条件、标准和材料以户籍地或常住地残联、民政、人社、教育等部门最新文件为准。",
+);
+
+onShow(async () => {
+  loading.value = true;
+  error.value = "";
+  try {
+    const catalog = await loadPoliciesCatalog();
+    if (catalog.disclaimer) disclaimer.value = catalog.disclaimer;
+    policies.value = listFeaturedPolicies();
+  } catch (e) {
+    error.value = e instanceof Error ? e.message : String(e);
+    policies.value = [];
+  } finally {
+    loading.value = false;
+  }
+});
 </script>
 
 <style scoped>

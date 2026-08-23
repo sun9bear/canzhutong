@@ -33,3 +33,6 @@ screenshots/
 .grok/
 .neon-claimable.json
 .better-auth-secret.tmp
+
+# Generated shared policy dump for MP / static hosting
+public/data/policies.json
