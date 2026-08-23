@@ -91,19 +91,14 @@ function isBlank(line: string | undefined): boolean {
 }
 
 /**
- * 跳过空行后，若下一有序项编号正好接上 expected，则视为同一列表续写
- *（修复「1. 2.\n\n3. 4.」被拆成两个从 1 起算的 ol）。
+ * 跳过空行后，若下一行是任意有序项标记，则视为同一列表续写
+ *（LLM 常整列都用「1.」，编号不递增也应保持同一列表）。
  */
-function peekContinuesOl(
-  lines: string[],
-  from: number,
-  expected: number,
-): boolean {
+function peekContinuesOl(lines: string[], from: number): boolean {
   let j = from;
   while (j < lines.length && isBlank(lines[j])) j += 1;
   if (j >= lines.length) return false;
-  const hit = matchOrdered(lines[j] ?? "");
-  return Boolean(hit && hit.n === expected);
+  return matchOrdered(lines[j] ?? "") !== null;
 }
 
 export function parseMarkdownBlocks(src: string): Block[] {
@@ -168,22 +163,22 @@ export function parseMarkdownBlocks(src: string): Block[] {
 
     const ordered = matchOrdered(line);
     if (ordered) {
+      // 首个标记编号作为 start；后续有序项无论编号是否重复/跳号都并入同一列表
+      //（LLM 常输出「1. 1. 1.」，按编号严格递增会把列表拆散）。
       const start = ordered.n;
       const items: InlineNode[][] = [];
-      let expected = start;
       while (i < lines.length) {
-        // 允许空行后续写同一编号序列
+        // 允许空行后续写：空行后仍是任意有序项即续同一列表
         if (isBlank(lines[i])) {
-          if (peekContinuesOl(lines, i, expected)) {
+          if (peekContinuesOl(lines, i)) {
             while (i < lines.length && isBlank(lines[i])) i += 1;
             continue;
           }
           break;
         }
         const hit = matchOrdered(lines[i] ?? "");
-        if (!hit || hit.n !== expected) break;
+        if (!hit) break;
         items.push(parseInline(hit.rest));
-        expected += 1;
         i += 1;
       }
       blocks.push({ type: "ol", start, items });
