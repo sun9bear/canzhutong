@@ -3,7 +3,7 @@ import { getSql } from "@/lib/db";
 import { authMiddleware } from "@/lib/auth/middleware";
 import {
   apiKeyLast4,
-  decryptApiKey,
+  decryptApiKeyWithLegacyFallback,
   encryptApiKey,
 } from "./ai-settings-crypto";
 
@@ -78,6 +78,49 @@ export function normalizeLlmBaseUrl(raw: string): string {
   return url;
 }
 
+/** Extract embedded IPv4 from IPv4-mapped IPv6 (::ffff:a.b.c.d or ::ffff:7f00:1). */
+function ipv4FromMappedIpv6(host: string): string | null {
+  const dotted = /^::ffff:(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$/i.exec(host);
+  if (dotted) return dotted[1];
+
+  // Node's URL canonicalizes ::ffff:127.0.0.1 → ::ffff:7f00:1
+  const hex = /^::ffff:([0-9a-f]{1,4}):([0-9a-f]{1,4})$/i.exec(host);
+  if (hex) {
+    const hi = Number.parseInt(hex[1], 16);
+    const lo = Number.parseInt(hex[2], 16);
+    if (!Number.isFinite(hi) || !Number.isFinite(lo)) return null;
+    return `${(hi >>> 8) & 0xff}.${hi & 0xff}.${(lo >>> 8) & 0xff}.${lo & 0xff}`;
+  }
+  return null;
+}
+
+/** True if host looks like IPv6 loopback / link-local (fe80::/10) / ULA (fc00::/7). */
+function isBlockedIpv6(host: string): boolean {
+  if (host === "::1" || host === "::" || host === "0:0:0:0:0:0:0:1") {
+    return true;
+  }
+
+  // Link-local fe80::/10 and unique-local fc00::/7 on the first hextet.
+  const first = host.split(":", 1)[0] ?? "";
+  if (/^fe[89ab]/i.test(first)) return true;
+  if (/^f[cd]/i.test(first)) return true;
+
+  // Compact forms where the first hextet is omitted (e.g. ::ffff:… handled elsewhere)
+  // but fe80/fc/fd may appear after leading zeros compression only as fe80:: / fc00::.
+  if (
+    host.startsWith("fe8") ||
+    host.startsWith("fe9") ||
+    host.startsWith("fea") ||
+    host.startsWith("feb") ||
+    host.startsWith("fc") ||
+    host.startsWith("fd")
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
 /** True for private / link-local / loopback IPv4 or IPv6 hostnames. */
 function isBlockedHost(hostname: string): boolean {
   const host = hostname.trim().toLowerCase().replace(/^\[|\]$/g, "");
@@ -106,17 +149,15 @@ function isBlockedHost(hostname: string): boolean {
     return false;
   }
 
-  // IPv6: loopback, link-local (fe80::/10), unique-local (fc00::/7), IPv4-mapped
   if (host.includes(":")) {
-    if (host === "::1" || host === "::") return true;
-    const compact = host.replace(/^0+/, "").toLowerCase();
-    if (compact.startsWith("fe8") || compact.startsWith("fe9") || compact.startsWith("fea") || compact.startsWith("feb")) {
-      return true;
-    }
-    if (compact.startsWith("fc") || compact.startsWith("fd")) return true;
-    const mapped = host.match(/::ffff:(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$/i);
-    if (mapped) return isBlockedHost(mapped[1]);
-    return false;
+    const mapped = ipv4FromMappedIpv6(host);
+    if (mapped) return isBlockedHost(mapped);
+
+    // Deprecated IPv4-compatible IPv6 (::a.b.c.d)
+    const compat = /^::(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$/.exec(host);
+    if (compat) return isBlockedHost(compat[1]);
+
+    return isBlockedIpv6(host);
   }
 
   return false;
@@ -166,6 +207,31 @@ async function readSettingsRow(): Promise<AiSettingsRow | null> {
 }
 
 /**
+ * Decrypt DB api_key_cipher; if it was encrypted with the legacy DEV fallback
+ * key, re-encrypt with the current BETTER_AUTH_SECRET-derived key and persist.
+ */
+async function decryptAndMaybeMigrateApiKey(cipher: string): Promise<string> {
+  const { plaintext, usedLegacyFallback } =
+    decryptApiKeyWithLegacyFallback(cipher);
+  const apiKey = plaintext.trim();
+  if (!usedLegacyFallback || !apiKey) {
+    return apiKey;
+  }
+
+  const newCipher = encryptApiKey(apiKey);
+  const last4 = apiKeyLast4(apiKey);
+  const sql = await getSql();
+  await sql`
+    update ai_settings
+    set api_key_cipher = ${newCipher},
+        api_key_last4 = ${last4},
+        updated_at = now()
+    where id = 1
+  `;
+  return apiKey;
+}
+
+/**
  * Internal: resolve OpenAI-compatible LLM config from admin DB settings,
  * else DEEPSEEK_API_KEY (+ optional DEEPSEEK_BASE_URL / DEEPSEEK_MODEL),
  * else XAI_API_KEY + grok-4.5. Returns null when nothing usable.
@@ -174,14 +240,14 @@ export async function getLlmConfig(): Promise<LlmConfig | null> {
   const row = await readSettingsRow();
   if (row?.api_key_cipher) {
     try {
-      const apiKey = decryptApiKey(row.api_key_cipher).trim();
+      const apiKey = await decryptAndMaybeMigrateApiKey(row.api_key_cipher);
       const baseUrl = normalizeLlmBaseUrl(row.base_url);
       const model = row.model.trim();
       if (apiKey && baseUrl && model) {
         return { baseUrl, model, apiKey };
       }
     } catch {
-      // Corrupt cipher or rotated secret — fall through to env fallback.
+      // Corrupt cipher or unknown key — fall through to env fallback.
     }
   }
 
@@ -222,9 +288,19 @@ export const getAiSettings = createServerFn({ method: "GET" })
     const last4 = row?.api_key_last4?.trim() ?? "";
     const baseUrl = row?.base_url ?? "";
     const model = row?.model ?? "";
-    const configured = Boolean(
-      row?.api_key_cipher && baseUrl.trim() && model.trim(),
-    );
+
+    // Only report configured when the stored cipher actually decrypts (and
+    // migrate legacy DEV_FALLBACK ciphertext when possible).
+    let configured = false;
+    if (row?.api_key_cipher && baseUrl.trim() && model.trim()) {
+      try {
+        const apiKey = await decryptAndMaybeMigrateApiKey(row.api_key_cipher);
+        configured = Boolean(apiKey);
+      } catch {
+        configured = false;
+      }
+    }
+
     return {
       baseUrl,
       model,
@@ -255,6 +331,21 @@ export const saveAiSettings = createServerFn({ method: "POST" })
     if (incomingKey) {
       cipher = encryptApiKey(incomingKey);
       last4 = apiKeyLast4(incomingKey);
+    } else if (cipher) {
+      // Keep existing key, but migrate legacy ciphertext if needed so the
+      // saved row stays readable under the current secret.
+      try {
+        const existingKey = await decryptAndMaybeMigrateApiKey(cipher);
+        if (existingKey) {
+          const refreshed = await readSettingsRow();
+          cipher = refreshed?.api_key_cipher ?? cipher;
+          last4 = refreshed?.api_key_last4 ?? last4;
+        }
+      } catch {
+        throw new Error(
+          "已保存的 API Key 无法解密（密钥可能已轮换）。请重新填写 API Key 后再保存。",
+        );
+      }
     }
 
     await sql`
