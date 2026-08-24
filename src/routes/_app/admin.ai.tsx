@@ -52,8 +52,14 @@ function AdminAiInner() {
         setModel(settings.model);
         setApiKeyLast4(settings.apiKeyLast4);
         setConfigured(settings.configured);
-      } catch {
-        if (!cancelled) setError("加载设置失败，请稍后重试。");
+      } catch (err) {
+        if (!cancelled) {
+          const msg =
+            err instanceof Error && /无权限|Forbidden|403/i.test(err.message)
+              ? "无管理权限，无法加载设置。请确认账号已列入服务端 ADMIN_EMAILS。"
+              : "加载设置失败，请稍后重试。";
+          setError(msg);
+        }
       } finally {
         if (!cancelled) setChecking(false);
       }
@@ -82,8 +88,12 @@ function AdminAiInner() {
       setConfigured(res.configured);
       setApiKey("");
       setMsg("已保存。问一问与个人建议将使用此配置。");
-    } catch {
-      setError("保存失败（可能无权限或服务异常）。");
+    } catch (err) {
+      if (err instanceof Error && err.message && !/^Forbidden$/i.test(err.message)) {
+        setError(err.message);
+      } else {
+        setError("保存失败（可能无权限、Base URL 无效或服务异常）。");
+      }
     } finally {
       setBusy(false);
     }
@@ -98,7 +108,8 @@ function AdminAiInner() {
       <div className="mx-auto max-w-lg space-y-4">
         <h1 className="font-display text-2xl font-semibold">AI 设置</h1>
         <p className="rounded-xl bg-surface p-4 text-danger" role="alert">
-          你没有管理权限；如需开通请联系站点管理员
+          你没有管理权限（HTTP 403）。管理员名单由服务端环境变量 ADMIN_EMAILS
+          配置；如需开通请联系站点管理员。
         </p>
         <Link to="/admin" className="text-sm text-primary underline-offset-4 hover:underline">
           返回管理中心
