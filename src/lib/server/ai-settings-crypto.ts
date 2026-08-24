@@ -1,10 +1,22 @@
 import { createCipheriv, createDecipheriv, createHash, randomBytes } from "node:crypto";
 
-/** Stable fallback when BETTER_AUTH_SECRET is unset (local / preview). */
+/** DEV-ONLY fallback when BETTER_AUTH_SECRET is unset and there is no DATABASE_URL. */
 const DEV_FALLBACK_SECRET = "canzhutong-dev-preview-ai-settings-secret";
 
+function hasDatabaseUrl(): boolean {
+  return Boolean(process.env.DATABASE_URL?.trim());
+}
+
 function deriveKey(): Buffer {
-  const secret = process.env.BETTER_AUTH_SECRET?.trim() || DEV_FALLBACK_SECRET;
+  const secret = process.env.BETTER_AUTH_SECRET?.trim();
+  if (!secret) {
+    if (hasDatabaseUrl()) {
+      throw new Error(
+        "BETTER_AUTH_SECRET is required when DATABASE_URL is set (refusing public fallback)",
+      );
+    }
+    return createHash("sha256").update(DEV_FALLBACK_SECRET, "utf8").digest();
+  }
   return createHash("sha256").update(secret, "utf8").digest();
 }
 

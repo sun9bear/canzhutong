@@ -37,7 +37,10 @@ async function main() {
 
     let files;
     try {
-      files = (await readdir(migrationsDir)).filter((f) => f.endsWith(".sql")).sort();
+      // Same comparator as src/lib/db.ts (basename + localeCompare)
+      files = (await readdir(migrationsDir))
+        .filter((f) => f.endsWith(".sql"))
+        .sort((a, b) => a.localeCompare(b));
     } catch {
       console.log("[migrate] no migrations/ directory — nothing to do.");
       return;

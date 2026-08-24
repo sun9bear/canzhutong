@@ -7,25 +7,40 @@ import {
   encryptApiKey,
 } from "./ai-settings-crypto";
 
-const HARDCODED_ADMIN_EMAILS = ["sun9bear@126.com"];
-
+/**
+ * Thrown by admin-only server functions. Carries `status: 403` so TanStack Start
+ * maps it to HTTP Forbidden (same pattern as UnauthorizedError / CrossSiteRequestError).
+ */
 export class ForbiddenError extends Error {
+  readonly status = 403;
   constructor(message = "Forbidden") {
     super(message);
     this.name = "ForbiddenError";
   }
 }
 
+function adminEmailsFromEnv(): string[] {
+  return (process.env.ADMIN_EMAILS ?? "")
+    .split(",")
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean);
+}
+
+/**
+ * Admins come ONLY from `ADMIN_EMAILS` (comma-separated).
+ * When `DATABASE_URL` is set and `ADMIN_EMAILS` is empty → fail closed (no admins).
+ */
 export function isAdminEmail(email: string | null | undefined): boolean {
   if (!email) return false;
   const normalized = email.trim().toLowerCase();
   if (!normalized) return false;
-  if (HARDCODED_ADMIN_EMAILS.includes(normalized)) return true;
-  const extras = (process.env.ADMIN_EMAILS ?? "")
-    .split(",")
-    .map((s) => s.trim().toLowerCase())
-    .filter(Boolean);
-  return extras.includes(normalized);
+  const admins = adminEmailsFromEnv();
+  if (admins.length === 0) {
+    // Fail closed in production (DATABASE_URL set); local PGLite likewise has no
+    // admins until ADMIN_EMAILS is configured.
+    return false;
+  }
+  return admins.includes(normalized);
 }
 
 async function lookupUserEmail(userId: string): Promise<string | null> {
@@ -55,6 +70,71 @@ export function normalizeLlmBaseUrl(raw: string): string {
     url = `${url}/v1`;
   }
   return url;
+}
+
+/** True for private / link-local / loopback IPv4 or IPv6 hostnames. */
+function isBlockedHost(hostname: string): boolean {
+  const host = hostname.trim().toLowerCase().replace(/^\[|\]$/g, "");
+  if (
+    !host ||
+    host === "localhost" ||
+    host === "0.0.0.0" ||
+    host === "::" ||
+    host === "::1" ||
+    host.endsWith(".localhost") ||
+    host.endsWith(".local")
+  ) {
+    return true;
+  }
+
+  const v4 = /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/.exec(host);
+  if (v4) {
+    const a = Number(v4[1]);
+    const b = Number(v4[2]);
+    const octets = [a, b, Number(v4[3]), Number(v4[4])];
+    if (octets.some((n) => n > 255)) return true;
+    if (a === 0 || a === 10 || a === 127) return true;
+    if (a === 169 && b === 254) return true;
+    if (a === 172 && b >= 16 && b <= 31) return true;
+    if (a === 192 && b === 168) return true;
+    return false;
+  }
+
+  // IPv6: loopback, link-local (fe80::/10), unique-local (fc00::/7), IPv4-mapped
+  if (host.includes(":")) {
+    if (host === "::1" || host === "::") return true;
+    const compact = host.replace(/^0+/, "").toLowerCase();
+    if (compact.startsWith("fe8") || compact.startsWith("fe9") || compact.startsWith("fea") || compact.startsWith("feb")) {
+      return true;
+    }
+    if (compact.startsWith("fc") || compact.startsWith("fd")) return true;
+    const mapped = host.match(/::ffff:(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$/i);
+    if (mapped) return isBlockedHost(mapped[1]);
+    return false;
+  }
+
+  return false;
+}
+
+/**
+ * Require an absolute https:// URL whose host is not private / link-local / loopback.
+ * Returns the trimmed input (normalization to …/v1 happens separately at call time).
+ */
+export function assertPublicHttpsBaseUrl(raw: string): string {
+  const trimmed = raw.trim();
+  let parsed: URL;
+  try {
+    parsed = new URL(trimmed);
+  } catch {
+    throw new Error("Base URL 必须是合法的 https:// 绝对地址");
+  }
+  if (parsed.protocol !== "https:") {
+    throw new Error("Base URL 必须使用 https://");
+  }
+  if (!parsed.hostname || isBlockedHost(parsed.hostname)) {
+    throw new Error("Base URL 不能指向内网、本地或链路本地地址");
+  }
+  return trimmed;
 }
 
 export type LlmConfig = {
@@ -154,8 +234,11 @@ export const saveAiSettings = createServerFn({ method: "POST" })
   )
   .handler(async ({ context, data }) => {
     const admin = await requireAdmin(context);
-    const baseUrl = data.baseUrl.trim();
+    const baseUrl = assertPublicHttpsBaseUrl(data.baseUrl);
     const model = data.model.trim();
+    if (!model) {
+      throw new Error("模型名不能为空");
+    }
     const incomingKey = data.apiKey?.trim() ?? "";
 
     const sql = await getSql();

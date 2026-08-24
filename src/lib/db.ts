@@ -142,9 +142,12 @@ async function createPgliteSql(): Promise<Sql> {
       "select name from _migrations",
     );
     const done = new Set(doneRows.rows.map((r) => r.name));
-    for (const [path, text] of Object.entries(migrations).sort(([a], [b]) =>
-      a.localeCompare(b),
-    )) {
+    // Sort by basename with localeCompare — same comparator as scripts/migrate.mjs
+    for (const [path, text] of Object.entries(migrations).sort(([a], [b]) => {
+      const nameA = a.split("/").pop() ?? a;
+      const nameB = b.split("/").pop() ?? b;
+      return nameA.localeCompare(nameB);
+    })) {
       const name = path.split("/").pop() as string;
       if (done.has(name)) continue;
       // Apply + record atomically (parity with scripts/migrate.mjs) so a failed

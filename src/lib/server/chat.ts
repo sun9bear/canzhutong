@@ -1,10 +1,44 @@
 import { createServerFn } from "@tanstack/react-start";
+import { getRequest } from "@tanstack/react-start/server";
 import { retrieveForQuestion } from "./policies";
 import { retrieveOrgs } from "./orgs";
 import { DISCLAIMER } from "@/data/copy";
 import type { PolicyDetail } from "./policies";
 import type { OrgRecord } from "@/data/orgs";
 import { chatCompletion } from "./llm";
+
+/** In-memory askPolicy rate limit: ~20 requests per IP per hour. */
+const ASK_RATE_LIMIT = 20;
+const ASK_WINDOW_MS = 60 * 60 * 1000;
+
+type AskBucket = { count: number; resetAt: number };
+const askBuckets = new Map<string, AskBucket>();
+
+function clientIp(): string {
+  const request = getRequest();
+  if (!request) return "unknown";
+  const forwarded = request.headers.get("x-forwarded-for");
+  if (forwarded) {
+    const first = forwarded.split(",")[0]?.trim();
+    if (first) return first;
+  }
+  const realIp = request.headers.get("x-real-ip")?.trim();
+  if (realIp) return realIp;
+  return "unknown";
+}
+
+/** Returns false when the IP is over the hourly budget. */
+function takeAskToken(ip: string): boolean {
+  const now = Date.now();
+  let bucket = askBuckets.get(ip);
+  if (!bucket || now >= bucket.resetAt) {
+    bucket = { count: 0, resetAt: now + ASK_WINDOW_MS };
+    askBuckets.set(ip, bucket);
+  }
+  if (bucket.count >= ASK_RATE_LIMIT) return false;
+  bucket.count += 1;
+  return true;
+}
 
 function formatContext(policies: PolicyDetail[]): string {
   return policies
@@ -74,6 +108,14 @@ export const askPolicy = createServerFn({ method: "POST" })
     }) => input,
   )
   .handler(async ({ data }): Promise<AskResult> => {
+    const ip = clientIp();
+    if (!takeAskToken(ip)) {
+      return {
+        ok: false,
+        error: "提问过于频繁，请稍后再试（每小时约 20 次），或先用政策库检索。",
+      };
+    }
+
     const question = data.question.trim().slice(0, 800);
     if (!question) return { ok: false, error: "请输入问题" };
 
