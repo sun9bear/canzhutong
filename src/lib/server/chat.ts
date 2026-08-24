@@ -1,5 +1,4 @@
 import { createServerFn } from "@tanstack/react-start";
-import { getRequest } from "@tanstack/react-start/server";
 import { retrieveForQuestion } from "./policies";
 import { retrieveOrgs } from "./orgs";
 import { DISCLAIMER } from "@/data/copy";
@@ -14,7 +13,11 @@ const ASK_WINDOW_MS = 60 * 60 * 1000;
 type AskBucket = { count: number; resetAt: number };
 const askBuckets = new Map<string, AskBucket>();
 
-function clientIp(): string {
+async function clientIp(): Promise<string> {
+  // Dynamic import: this module is pulled into the client via askPolicy RPC.
+  // A static `@tanstack/react-start/server` import would ship AsyncLocalStorage
+  // to the browser (see isolation.server.ts).
+  const { getRequest } = await import("@tanstack/react-start/server");
   const request = getRequest();
   if (!request) return "unknown";
   const forwarded = request.headers.get("x-forwarded-for");
@@ -108,7 +111,7 @@ export const askPolicy = createServerFn({ method: "POST" })
     }) => input,
   )
   .handler(async ({ data }): Promise<AskResult> => {
-    const ip = clientIp();
+    const ip = await clientIp();
     if (!takeAskToken(ip)) {
       return {
         ok: false,

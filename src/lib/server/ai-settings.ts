@@ -26,6 +26,12 @@ function adminEmailsFromEnv(): string[] {
     .filter(Boolean);
 }
 
+if (process.env.DATABASE_URL?.trim() && adminEmailsFromEnv().length === 0) {
+  console.error(
+    "[admin] DATABASE_URL is set but ADMIN_EMAILS is empty — no admins (fail closed).",
+  );
+}
+
 /**
  * Admins come ONLY from `ADMIN_EMAILS` (comma-separated).
  * When `DATABASE_URL` is set and `ADMIN_EMAILS` is empty → fail closed (no admins).
