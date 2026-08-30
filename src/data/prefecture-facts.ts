@@ -698,7 +698,7 @@ export const PREFECTURE_PATCHES: Record<
         effectiveAt: "2026-03-01",
         status: "2026年办理口径",
         keywords: "鄂州,年审,1.5%",
-        relatedIds: ["hb-employment-fund", "sc-employment-ordinance"],
+        relatedIds: ["hb-employment", "sc-employment-ordinance"],
       },
     ],
   },
@@ -794,7 +794,7 @@ export const PREFECTURE_PATCHES: Record<
         effectiveAt: "2026-03-01",
         status: "2026年办理口径",
         keywords: "南宁,年审,1.5%",
-        relatedIds: ["gx-employment-fund", "sc-employment-ordinance"],
+        relatedIds: ["gx-employment-fund-2016", "sc-employment-ordinance"],
       },
       {
         id: "nng-subsidy-122",

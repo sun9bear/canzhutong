@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { authClient, authEnabled } from "@/lib/auth/client";
+import { emailSignUpUiEnabled } from "@/lib/auth/email-password";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { A11yTrigger } from "@/components/a11y-panel";
@@ -13,13 +14,14 @@ function Login() {
   const [mode, setMode] = useState<"in" | "up">("in");
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
+  const signupEnabled = emailSignUpUiEnabled;
 
   async function onEmail(e: FormEvent) {
     e.preventDefault();
     setError(null);
     setPending(true);
     try {
-      if (mode === "up") {
+      if (signupEnabled && mode === "up") {
         const { error: err } = await authClient.signUp.email({
           email,
           password,
@@ -86,7 +88,7 @@ function Login() {
                   type="password"
                   required
                   minLength={8}
-                  autoComplete={mode === "up" ? "new-password" : "current-password"}
+                  autoComplete={signupEnabled && mode === "up" ? "new-password" : "current-password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -97,7 +99,7 @@ function Login() {
                 </p>
               ) : null}
               <Button type="submit" className="w-full" disabled={pending}>
-                {mode === "in" ? "登录" : "注册"}
+                {signupEnabled && mode === "up" ? "注册" : "登录"}
               </Button>
             </form>
             <Button
@@ -110,13 +112,17 @@ function Login() {
             >
               微信登录（即将开通）
             </Button>
-            <button
-              type="button"
-              className="inline-flex min-h-11 w-full items-center justify-center text-sm text-muted"
-              onClick={() => setMode(mode === "in" ? "up" : "in")}
-            >
-              {mode === "in" ? "没有账号？注册" : "已有账号？登录"}
-            </button>
+            {signupEnabled ? (
+              <button
+                type="button"
+                className="inline-flex min-h-11 w-full items-center justify-center text-sm text-muted"
+                onClick={() => setMode(mode === "in" ? "up" : "in")}
+              >
+                {mode === "in" ? "没有账号？注册" : "已有账号？登录"}
+              </button>
+            ) : (
+              <p className="text-center text-xs text-subtle">本环境不开放公开注册，已有账号可直接登录。</p>
+            )}
           </>
         ) : (
           <p className="text-sm text-muted">当前环境未开启登录。</p>

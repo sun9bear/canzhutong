@@ -14,6 +14,7 @@
     "preview": "vite preview --host 0.0.0.0 --port 8080",
     "typecheck": "tsc --noEmit",
     "test": "node --test 'scripts/**/*.test.mjs'",
+    "check:data": "node scripts/check-policy-ids.mjs",
     "lint": "eslint .",
     "format": "prettier --write .",
     "mp:install": "npm install --prefix apps/mp",
