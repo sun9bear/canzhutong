@@ -49,20 +49,44 @@ export function isAdminEmail(email: string | null | undefined): boolean {
   return admins.includes(normalized);
 }
 
-async function lookupUserEmail(userId: string): Promise<string | null> {
+async function lookupAdminUser(userId: string): Promise<{
+  email: string | null;
+  emailVerified: boolean;
+} | null> {
   const sql = await getSql();
-  const rows = await sql<{ email: string }>`
-    select "email" from "user" where "id" = ${userId} limit 1
+  const rows = await sql<{ email: string; emailVerified: boolean }>`
+    select "email", "emailVerified" from "user" where "id" = ${userId} limit 1
   `;
-  return rows[0]?.email ?? null;
+  return rows[0] ?? null;
 }
 
+/**
+ * Admin gate: email must be in ADMIN_EMAILS.
+ *
+ * We do **not** require `emailVerified` by default. Better Auth only sets that
+ * flag when email verification / SMTP is configured; password users (including
+ * the real ADMIN_EMAILS owner) stay `emailVerified=false`. Requiring the flag
+ * would lock them out of the admin hub. Public email sign-up is disabled in
+ * production instead (see `isEmailSignUpEnabled`), which is what actually
+ * stops an attacker from registering the admin address.
+ *
+ * If SMTP verification is later enabled, set REQUIRE_ADMIN_EMAIL_VERIFIED=true
+ * to also demand `emailVerified` (OAuth users with a verified mailbox still
+ * pass via ADMIN_EMAILS as today).
+ */
 export async function requireAdmin(context: { userId: string }): Promise<{
   userId: string;
   email: string;
 }> {
-  const email = await lookupUserEmail(context.userId);
+  const user = await lookupAdminUser(context.userId);
+  const email = user?.email ?? null;
   if (!isAdminEmail(email)) {
+    throw new ForbiddenError("无权限");
+  }
+  const requireVerified =
+    (process.env.REQUIRE_ADMIN_EMAIL_VERIFIED ?? "").trim().toLowerCase() ===
+    "true";
+  if (requireVerified && !user?.emailVerified) {
     throw new ForbiddenError("无权限");
   }
   return { userId: context.userId, email: email! };
@@ -276,8 +300,8 @@ export async function getLlmConfig(): Promise<LlmConfig | null> {
 export const getAdminStatus = createServerFn({ method: "GET" })
   .middleware([authMiddleware])
   .handler(async ({ context }) => {
-    const email = await lookupUserEmail(context.userId);
-    return { isAdmin: isAdminEmail(email) };
+    const user = await lookupAdminUser(context.userId);
+    return { isAdmin: isAdminEmail(user?.email) };
   });
 
 export const getAiSettings = createServerFn({ method: "GET" })
