@@ -13,6 +13,13 @@ const ASK_WINDOW_MS = 60 * 60 * 1000;
 type AskBucket = { count: number; resetAt: number };
 const askBuckets = new Map<string, AskBucket>();
 
+function headerIp(request: Request, name: string): string | undefined {
+  const raw = request.headers.get(name);
+  if (!raw) return undefined;
+  const first = raw.split(",")[0]?.trim();
+  return first || undefined;
+}
+
 async function clientIp(): Promise<string> {
   // Dynamic import: this module is pulled into the client via askPolicy RPC.
   // A static `@tanstack/react-start/server` import would ship AsyncLocalStorage
@@ -20,13 +27,18 @@ async function clientIp(): Promise<string> {
   const { getRequest } = await import("@tanstack/react-start/server");
   const request = getRequest();
   if (!request) return "unknown";
+  // Prefer platform-set headers; the first X-Forwarded-For hop is client-spoofable.
+  const vercel = headerIp(request, "x-vercel-forwarded-for");
+  if (vercel) return vercel;
+  const realIp = headerIp(request, "x-real-ip");
+  if (realIp) return realIp;
   const forwarded = request.headers.get("x-forwarded-for");
   if (forwarded) {
-    const first = forwarded.split(",")[0]?.trim();
-    if (first) return first;
+    const hops = forwarded.split(",").map((s) => s.trim()).filter(Boolean);
+    // Last hop is typically appended by the trusted proxy.
+    const last = hops[hops.length - 1];
+    if (last) return last;
   }
-  const realIp = request.headers.get("x-real-ip")?.trim();
-  if (realIp) return realIp;
   return "unknown";
 }
 
@@ -152,6 +164,12 @@ export const askPolicy = createServerFn({ method: "POST" })
         return {
           ok: false,
           error: "智能咨询暂时不可用，请先在政策库中检索，或拨打 12385。",
+        };
+      }
+      if (llm.error === "timeout") {
+        return {
+          ok: false,
+          error: "咨询请求超时，请稍后重试，或改用政策库检索。",
         };
       }
       const status = llm.status ? `（${llm.status}）` : "";

@@ -2,6 +2,7 @@ import type { MouseEvent } from "react";
 import { Link, Outlet, useRouterState } from "@tanstack/react-router";
 import {
   BookOpenText,
+  Briefcase,
   CircleUserRound,
   House,
   MessageCircleQuestion,
@@ -16,6 +17,7 @@ import { cn } from "@/lib/utils";
 const NAV = [
   { to: "/", label: "首页", icon: House },
   { to: "/library", label: "政策库", icon: BookOpenText },
+  { to: "/jobs", label: "就业", icon: Briefcase },
   { to: "/ask", label: "问一问", icon: MessageCircleQuestion },
   { to: "/orgs", label: "黄页", icon: Phone },
   { to: "/me", label: "我的", icon: CircleUserRound },
@@ -130,7 +132,12 @@ export function AppShell() {
         className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-surface pb-[env(safe-area-inset-bottom)] md:hidden"
         aria-label="底部导航"
       >
-        <ul className={cn("grid", navItems.length >= 6 ? "grid-cols-6" : "grid-cols-5")}>
+        <ul
+          className={cn(
+            "grid",
+            navItems.length >= 7 ? "grid-cols-7" : navItems.length >= 6 ? "grid-cols-6" : "grid-cols-5",
+          )}
+        >
           {navItems.map((item) => {
             const Icon = item.icon;
             const active = item.to === "/" ? pathname === "/" : pathname.startsWith(item.to);

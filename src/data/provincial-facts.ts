@@ -100,9 +100,9 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "生活补贴覆盖低保、低收入未享低保、失业无稳定收入及全日制在校残疾学生、老年个人收入低于低保等情形；护理补贴覆盖一、二级及三级智力/精神等。分档标准以市民政动态调整及户籍地窗口为准，本条不锁死过期金额。",
     ],
     employmentUrl:
-      "https://invest.beijing.gov.cn/sy/zt/qyrx/202603/t20260316_4557787.html",
+      "https://www.bdpf.org.cn/cms68/web1459/subject/n1/n1459/n1551/n5605/n5606/",
     employmentNote:
-      "京财税〔2019〕1333号：本市用人单位应按不少于在职职工总数1.5%的比例安排残疾人就业，达不到比例的缴纳残保金。安排就业的，先到税务登记地残疾人就业服务机构审核，再向主管税务机关申报缴纳。北京市投资促进局2026年3月企业问答仍引用该口径。",
+      "京财税〔2019〕1333号：本市用人单位应按不少于在职职工总数1.5%的比例安排残疾人就业，达不到比例的缴纳残保金。安排就业的，先到税务登记地残疾人就业服务机构审核，再向主管税务机关申报缴纳。市残联就业创业栏目与2026版按比例申报政策问答公开现行口径。",
     extraPolicies: [
       localSubsidy({
         id: "bj-subsidy-chaoyang-guide",
@@ -198,10 +198,33 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
         body: "北京市残疾人联合会官网「按比例安排残疾人就业情况申报审核专题」公开2026年通告。依据《北京市按比例安排残疾人就业情况申报审核实施办法（暂行）》（京残发〔2022〕5号）。",
         sourceName: "北京市残疾人联合会",
         sourceUrl:
-          "https://www.bdpf.org.cn/cms68/web1459/subject/n1/n1459/n2476/index.html",
+          "https://www.bdpf.org.cn/cms68/web1459/subject/n1/n1459/n2476/c140710/content.html",
         docNo: "京残发〔2022〕5号",
         issuedAt: "2026",
         effectiveAt: "2026-03-01",
+      }),
+      localEmployment({
+        id: "bj-employment-qa-2026",
+        code: "BJ",
+        name: "北京市",
+        title: "北京市按比例安排残疾人就业申报政策问答（2026版）",
+        shortTitle: "北京申报政策问答2026",
+        summary:
+          "市残联按比例申报审核专题公开的2026版政策问答。申报对象、材料、网办与现场渠道以该问答和当年通告原文为准。本条不收录网报系统登录页。",
+        keyPoints: [
+          "来源：市残联官网按比例申报专题「政策问答（2026版）」。",
+          "审核期、材料清单以问答及当年通告为准，本条不另锁截止日期。",
+          "网报登录页不作为本库外链。",
+        ],
+        eligibility: "在北京市申报按比例安排残疾人就业情况的用人单位。",
+        howToApply: "按问答所列网上、现场或邮寄方式，向税务登记地残疾人就业服务机构办理。",
+        body: "北京市残疾人联合会官网「按比例安排残疾人就业情况申报审核专题」政策问答（2026版）。具体口径以该页原文为准。",
+        sourceName: "北京市残疾人联合会",
+        sourceUrl:
+          "https://www.bdpf.org.cn/cms68/web1459/subject/n1/n1459/n2476/c140710/content.html",
+        docNo: "北京市按比例申报政策问答（2026版）",
+        issuedAt: "2026",
+        effectiveAt: "2026",
       }),
     ],
   },
@@ -220,9 +243,9 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     subsidyUrl:
       "http://www.shanghai.gov.cn/202101zfwj/20210111/153f924083644203b929dba4ff67eac9.html",
     employmentUrl:
-      "https://shanghai.chinatax.gov.cn/xwdt/ztzl/zcgll/cjrbzj/jfzy/202608/t481322.html",
+      "https://www.shdpf.org.cn/clwz/clwz/ggl/2026/03/16/2c9934e39ce660b5019cf5c4f8d61e41.html",
     employmentNote:
-      "沪财发〔2020〕9号：安排比例1.5%。市税务局2026年8月19日指南：2025年度就业情况联网认证为2026年3月16日至10月31日（11月1日零时关闭）；2025年度残保金缴费开始时间为2026年8月19日。安排就业的须先认证、再选择申请或放弃超比例奖励，再申报残保金。",
+      "沪财发〔2020〕9号：安排比例1.5%。市残联公开2026年联网认证通知；安排就业的须先认证、再选择申请或放弃超比例奖励，再申报残保金。认证窗口与缴费开始时间以市残联通知和税务部门指南原文为准。",
     subsidyPoints: [
       "上海发布2026年5月转载市民政局解答：仍按2025年7月1日调整后的标准执行。",
       "生活补贴：重残无业和低保家庭450元/月，低保边缘家庭320元/月。",
@@ -329,6 +352,29 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
         issuedAt: "2026-08-19",
         effectiveAt: "2026-03-16",
       }),
+      localEmployment({
+        id: "sh-employment-notice-2026",
+        code: "SH",
+        name: "上海市",
+        title: "上海市2026年残疾人按比例就业情况联网认证工作通知",
+        shortTitle: "上海2026联网认证通知",
+        summary:
+          "市残联官网公告栏公开《关于开展上海市2026年残疾人按比例就业情况联网认证工作的通知》。认证对象、时间和系统入口以通知原文为准。",
+        keyPoints: [
+          "来源：上海市残疾人联合会官网公告。",
+          "安排比例仍按沪财发〔2020〕9号。",
+          "办理时限与网办路径以通知原文为准，本条不另锁截止日期。",
+        ],
+        eligibility: "在上海市注册、须申报按比例就业情况的用人单位。",
+        howToApply: "按市残联通知所列渠道办理联网认证。",
+        body: "上海市残疾人联合会《关于开展上海市2026年残疾人按比例就业情况联网认证工作的通知》（官网2026年3月16日公开）。具体窗口以通知原文为准。",
+        sourceName: "上海市残疾人联合会",
+        sourceUrl:
+          "https://www.shdpf.org.cn/clwz/clwz/ggl/2026/03/16/2c9934e39ce660b5019cf5c4f8d61e41.html",
+        docNo: "上海市残联2026年联网认证通知",
+        issuedAt: "2026-03-16",
+        effectiveAt: "2026",
+      }),
     ],
   },
   CQ: {
@@ -348,6 +394,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "渝民发〔2021〕15号：生活补贴对象为重庆市户籍城乡低保中持有效残疾人证且符合衔接条件者；护理补贴对象为一级、二级持证残疾人。可同时申领两项。",
       "重庆市民政局2025年12月报道：自2026年1月1日起，生活补贴100元/月；护理补贴一级110元/月、二级100元/月。",
     ],
+    employmentUrl:
+      "https://www.cqdpf.org.cn/web/article/1385733981142347776/web/content_1385733981142347776.html",
+    employmentNote:
+      "渝财综〔2016〕58号：本市用人单位应按在职职工总数1.5%安排残疾人就业。市残联公开2025年联网认证通告。认证时间与入口以通告原文为准。",
     extraPolicies: [
       localSubsidy({
         id: "cq-subsidy-rule-2021",
@@ -446,6 +496,29 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
         issuedAt: "2026-02-28",
         effectiveAt: "2026-03-01",
       }),
+      localEmployment({
+        id: "cq-employment-audit-2025",
+        code: "CQ",
+        name: "重庆市",
+        title: "重庆市2025年按比例就业联网认证通告",
+        shortTitle: "重庆2025联网认证通告",
+        summary:
+          "市残联网站公开的2025年联网认证通告。认证对象、时间和办理入口以通告原文为准。",
+        keyPoints: [
+          "来源：重庆市残疾人联合会官网文章页。",
+          "安排比例仍按渝财综〔2016〕58号1.5%。",
+          "窗口日期以通告原文为准，本条不另锁截止日期。",
+        ],
+        eligibility: "通告列明的重庆市用人单位。",
+        howToApply: "按市残联通告所列渠道办理。",
+        body: "重庆市残疾人联合会《2025年联网认证通告》。具体时限与入口以通告原文为准。",
+        sourceName: "重庆市残疾人联合会",
+        sourceUrl:
+          "https://www.cqdpf.org.cn/web/article/1385733981142347776/web/content_1385733981142347776.html",
+        docNo: "重庆市2025年联网认证通告",
+        issuedAt: "2025",
+        effectiveAt: "2025",
+      }),
     ],
   },
   GD: {
@@ -463,10 +536,9 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     subsidyUrl:
       "https://www.gd.gov.cn/zwgk/gongbao/2022/32/content/post_4053616.html",
     planShortTitle: "广东规划（残疾人）",
-    employmentUrl:
-      "https://guangdong.chinatax.gov.cn/gdsw/gzsw_cjrjybzj/2018-07/06/content_f3d584a796bd4f778b2a2a458f707748.shtml",
+    employmentUrl: "https://jyzx.gddpf.org.cn/",
     employmentNote:
-      "粤财社〔2017〕51号：用人单位安排残疾人就业的比例不得低于本单位在职职工总数的1.5%，达不到比例的缴纳残保金。税务机关征收。分档减缴按财政部公告2023年第8号。深圳经济特区另有本市办法，见深圳专条。",
+      "粤财社〔2017〕51号：用人单位安排残疾人就业的比例不得低于本单位在职职工总数的1.5%，达不到比例的缴纳残保金。税务机关征收。分档减缴按财政部公告2023年第8号。年审与联网认证见省残疾人就业服务中心网站。深圳经济特区另有本市办法，见深圳专条。",
     subsidyPoints: [
       "广东省财政厅、民政厅、残联关于2026年提高两项补贴标准的通知：困难残疾人生活补贴每人每月217元，重度残疾人护理补贴每人每月290元。",
       "已高于该标准的地区继续按已定标准执行。列入2026年省十件民生实事。",
@@ -521,6 +593,50 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
         docNo: "粤财社〔2017〕51号",
         issuedAt: "2017",
         effectiveAt: "2018-01-01",
+      }),
+      localEmployment({
+        id: "gd-employment-guide",
+        code: "GD",
+        name: "广东省",
+        title: "广东省按比例就业年审申报操作指南",
+        shortTitle: "广东年审申报指南",
+        summary:
+          "省残疾人就业服务中心公开的年审申报操作指南。账号、步骤和材料以该页原文为准。",
+        keyPoints: [
+          "来源：广东省残疾人就业服务中心办事指南栏目。",
+          "安排比例仍按粤财社〔2017〕51号1.5%。",
+          "操作细节以指南原文为准，本条不编造系统截图外的步骤。",
+        ],
+        eligibility: "在广东省办理按比例就业年审的用人单位（深圳另见本市办法）。",
+        howToApply: "按省残疾人就业服务中心年审申报操作指南办理。",
+        body: "广东省残疾人就业服务中心《年审申报操作指南》。本条只锁定该公开页，不另写未核验的截止日期或金额。",
+        sourceName: "广东省残疾人就业服务中心",
+        sourceUrl: "https://jyzx.gddpf.org.cn/jyns/bszn/content/post_1012994.html",
+        docNo: "广东省年审申报操作指南",
+        issuedAt: "",
+        effectiveAt: "",
+      }),
+      localEmployment({
+        id: "gd-employment-audit-2025",
+        code: "GD",
+        name: "广东省",
+        title: "广东省2025年按比例就业联网认证通告",
+        shortTitle: "广东2025联网认证通告",
+        summary:
+          "省残疾人就业服务中心信息公开栏目发布的2025年联网认证通告。认证对象、时间和入口以通告原文为准。",
+        keyPoints: [
+          "来源：广东省残疾人就业服务中心通知公告。",
+          "安排比例仍按粤财社〔2017〕51号。",
+          "窗口日期以通告原文为准，本条不另锁截止日期。",
+        ],
+        eligibility: "通告列明的广东省用人单位。",
+        howToApply: "按通告所列网办或窗口渠道办理。",
+        body: "广东省残疾人就业服务中心《2025年联网认证通告》。具体时限与入口以通告原文为准。",
+        sourceName: "广东省残疾人就业服务中心",
+        sourceUrl: "https://jyzx.gddpf.org.cn/xxgk/tzgg/content/post_1321688.html",
+        docNo: "广东省2025年联网认证通告",
+        issuedAt: "2025",
+        effectiveAt: "2025",
       }),
     ],
   },
@@ -757,6 +873,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     implementingUrl:
       "http://www.npc.gov.cn/npc/c1773/c1849/c6680/c18674/c18676/201905/t20190522_52920.html",
     implementingIssued: "2011-11-24通过，2012-02-01施行（辽宁省实施《中华人民共和国残疾人保障法》办法，中国人大网公开文本）",
+    employmentUrl:
+      "https://www.ln.gov.cn/web/zwgkx/zfxxgk1/zc/gz/719D009202F84BD881363F265B39B5A5/index.shtml",
+    employmentNote:
+      "辽宁省政府网公开按比例分散安置规定。残保金计征见辽财非〔2016〕415号及税务部门口径。安排比例与奖惩以规定和省财政、残联现行文件原文为准。",
     subsidyUrl:
       "https://mzt.ln.gov.cn/mzt/zfxxgk/fdzdgknr/lzyj/mztgfxwj/lmf/2026040916485552844/index.shtml",
     subsidyPoints: [
@@ -808,6 +928,29 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
         docNo: "辽财非〔2016〕415号",
         issuedAt: "2016",
         effectiveAt: "2016",
+      }),
+      localEmployment({
+        id: "ln-employment-scatter",
+        code: "LN",
+        name: "辽宁省",
+        title: "辽宁省按比例分散安置规定",
+        shortTitle: "辽宁按比例分散安置",
+        summary:
+          "辽宁省政府网公开的按比例分散安置规定。用人单位安排比例、残保金与奖惩以该规定及省财政、残联现行文件原文为准。本条不锁死未在原文核验的金额或截止日期。",
+        keyPoints: [
+          "来源：辽宁省人民政府网站规章栏目。",
+          "残保金计征另见辽财非〔2016〕415号及税务部门口径。",
+          "具体比例、奖惩和办理以规定原文为准。",
+        ],
+        eligibility: "在辽宁省注册的用人单位；在本省求职的持证残疾人。",
+        howToApply: "单位按省残联、税务部门当年通知申报。个人到残联就业服务机构登记。",
+        body: "辽宁省人民政府网公开《按比例分散安置规定》。本条只锁定该公开文本地址，不编造未核验的补贴金额或申报截止日。",
+        sourceName: "辽宁省人民政府",
+        sourceUrl:
+          "https://www.ln.gov.cn/web/zwgkx/zfxxgk1/zc/gz/719D009202F84BD881363F265B39B5A5/index.shtml",
+        docNo: "辽宁省按比例分散安置规定",
+        issuedAt: "",
+        effectiveAt: "",
       }),
     ],
   },
@@ -1641,10 +1784,9 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "生活补贴按当地低保标准分档：低保家庭内重度30%－40%、非重度25%；低保外无固定收入智力/肢体/精神/视力重度按低保标准100%；一户多残、依老养残（家庭人均收入在低保标准2倍以内）不低于低保标准60%。",
       "自2023年4月1日起施行，有效期5年。具体元/月以户籍地低保标准和市县细则为准。",
     ],
-    employmentUrl:
-      "https://jiangsu.chinatax.gov.cn/art/2021/6/11/art_8774_348913.html",
+    employmentUrl: "https://service.jscl.gov.cn/",
     employmentNote:
-      "苏财综〔2017〕2号：安排比例未达1.5%的缴纳残保金。应缴额=（上年职工人数\xD71.5%－上年实际安排人数）\xD7上年职工年平均工资\xD7征收比例。分档减缴按国家公告。",
+      "苏财综〔2017〕2号：安排比例未达1.5%的缴纳残保金。应缴额=（上年职工人数\xD71.5%－上年实际安排人数）\xD7上年职工年平均工资\xD7征收比例。分档减缴按国家公告。省残联服务网可办理相关就业服务事项。",
     extraPolicies: [
       localSubsidy({
         id: "js-subsidy-rule-2022",
@@ -2152,10 +2294,9 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "陕政发〔2016〕2号：生活补贴对象为低保家庭持证残疾人、非低保家庭中1—3级低收入及其他困难残疾人；护理补贴对象为1—2级需经常照护者。",
       "该意见载明：生活补贴18岁以下100元/月、18岁及以上60元/月；护理补贴一级120元/月、二级80元/月。有条件地方可提高；已高于者继续执行。现行元/月以市县公示为准。",
     ],
-    employmentUrl:
-      "http://www.weibin.gov.cn/col15477/col15480/col15503/col16841/202605/t20260529_1273875.html",
+    employmentUrl: "https://www.gov.cn/zhengce/2018-04/10/content_5717277.htm",
     employmentNote:
-      "陕财办综〔2016〕85号：安排比例不得低于在职职工总数1.5%。年缴纳额=（上年职工人数\xD71.5%－上年实际安排人数）\xD7上年职工年平均工资。",
+      "陕西省按比例安排残疾人就业办法（中国政府网2018年公开）。陕财办综〔2016〕85号：安排比例不得低于在职职工总数1.5%。年缴纳额=（上年职工人数\xD71.5%－上年实际安排人数）\xD7上年职工年平均工资。",
     extraPolicies: [
       localSubsidy({
         id: "sn-subsidy-rule-2016",
@@ -2205,6 +2346,28 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
         docNo: "陕财办综〔2016〕85号",
         issuedAt: "2016",
         effectiveAt: "2016",
+      }),
+      localEmployment({
+        id: "sn-employment-ratio-2018",
+        code: "SN",
+        name: "陕西省",
+        title: "陕西省按比例安排残疾人就业办法",
+        shortTitle: "陕西按比例就业办法",
+        summary:
+          "中国政府网2018年公开的陕西省按比例安排残疾人就业办法。安排比例、奖惩与实施以办法原文和省残联现行解释为准。本条不锁死未在原文核验的金额或截止日期。",
+        keyPoints: [
+          "来源：中国政府网政策栏目转载的陕西省办法。",
+          "残保金计征另见陕财办综〔2016〕85号。",
+          "具体条款以办法原文为准。",
+        ],
+        eligibility: "在陕西省注册的用人单位；在本省求职的持证残疾人。",
+        howToApply: "单位按省残联、税务部门当年通知申报。个人到残联就业服务机构登记。",
+        body: "《陕西省按比例安排残疾人就业办法》，中国政府网2018年4月10日公开。本条只锁定该公开文本，不编造未核验的补贴金额或申报截止日。",
+        sourceName: "中国政府网",
+        sourceUrl: "https://www.gov.cn/zhengce/2018-04/10/content_5717277.htm",
+        docNo: "陕西省按比例安排残疾人就业办法",
+        issuedAt: "2018",
+        effectiveAt: "2018",
       }),
     ],
   },

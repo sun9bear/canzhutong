@@ -3,11 +3,11 @@ import { ALL_ORGS } from "@/data/orgs";
 import { getSql } from "@/lib/db";
 
 const globalRef = globalThis as typeof globalThis & {
-  __policySeedPromiseV65__?: Promise<void>;
+  __policySeedPromiseV66__?: Promise<void>;
 };
 
 export async function seedIfNeeded(): Promise<void> {
-  globalRef.__policySeedPromiseV65__ ??= (async () => {
+  globalRef.__policySeedPromiseV66__ ??= (async () => {
     const sql = await getSql();
     await sql.query(`
       create table if not exists orgs (
@@ -100,8 +100,8 @@ export async function seedIfNeeded(): Promise<void> {
       `;
     }
   })().catch((err) => {
-    globalRef.__policySeedPromiseV65__ = undefined;
+    globalRef.__policySeedPromiseV66__ = undefined;
     throw err;
   });
-  return globalRef.__policySeedPromiseV65__;
+  return globalRef.__policySeedPromiseV66__;
 }

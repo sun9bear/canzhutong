@@ -33,6 +33,8 @@ export async function chatCompletion(opts: {
 
   const url = `${config.baseUrl.replace(/\/+$/, "")}/chat/completions`;
 
+  const LLM_TIMEOUT_MS = 30_000;
+
   let res: Response;
   try {
     res = await fetch(url, {
@@ -47,8 +49,12 @@ export async function chatCompletion(opts: {
         max_tokens: opts.max_tokens ?? 1200,
         messages,
       }),
+      signal: AbortSignal.timeout(LLM_TIMEOUT_MS),
     });
-  } catch {
+  } catch (err) {
+    if (isLlmTimeoutError(err)) {
+      return { ok: false, error: "timeout" };
+    }
     return { ok: false, error: "network_error" };
   }
 
@@ -62,7 +68,17 @@ export async function chatCompletion(opts: {
     };
     const text = body.choices?.[0]?.message?.content ?? "";
     return { ok: true, text };
-  } catch {
+  } catch (err) {
+    // Headers arrived but the JSON body stalled under AbortSignal.timeout.
+    if (isLlmTimeoutError(err)) {
+      return { ok: false, error: "timeout" };
+    }
     return { ok: false, error: "parse_error" };
   }
+}
+
+/** Fetch / res.json() abort from AbortSignal.timeout (TimeoutError or AbortError). */
+export function isLlmTimeoutError(err: unknown): boolean {
+  const name = err instanceof Error ? err.name : "";
+  return name === "TimeoutError" || name === "AbortError";
 }

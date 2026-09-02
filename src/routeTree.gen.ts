@@ -20,6 +20,7 @@ import { Route as AppGuidesRouteImport } from './routes/_app/guides'
 import { Route as AppLibraryRouteImport } from './routes/_app/library'
 import { Route as AppMeRouteImport } from './routes/_app/me'
 import { Route as AppOrgsRouteImport } from './routes/_app/orgs'
+import { Route as AppJobsRouteImport } from './routes/_app/jobs'
 import { Route as AppAdminIndexRouteImport } from './routes/_app/admin.index'
 import { Route as AppAdminAiRouteImport } from './routes/_app/admin.ai'
 import { Route as AppLibraryIndexRouteImport } from './routes/_app/library.index'
@@ -80,6 +81,11 @@ const AppOrgsRoute = AppOrgsRouteImport.update({
   path: '/orgs',
   getParentRoute: () => AppRoute,
 } as any)
+const AppJobsRoute = AppJobsRouteImport.update({
+  id: '/jobs',
+  path: '/jobs',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppAdminIndexRoute = AppAdminIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -117,6 +123,7 @@ export interface FileRoutesByFullPath {
   '/library': typeof AppLibraryRouteWithChildren
   '/me': typeof AppMeRoute
   '/orgs': typeof AppOrgsRoute
+  '/jobs': typeof AppJobsRoute
   '/admin/ai': typeof AppAdminAiRoute
   '/library/$policyId': typeof AppLibraryPolicyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/guides': typeof AppGuidesRoute
   '/me': typeof AppMeRoute
   '/orgs': typeof AppOrgsRoute
+  '/jobs': typeof AppJobsRoute
   '/': typeof AppIndexRoute
   '/admin/ai': typeof AppAdminAiRoute
   '/library/$policyId': typeof AppLibraryPolicyIdRoute
@@ -150,6 +158,7 @@ export interface FileRoutesById {
   '/_app/library': typeof AppLibraryRouteWithChildren
   '/_app/me': typeof AppMeRoute
   '/_app/orgs': typeof AppOrgsRoute
+  '/_app/jobs': typeof AppJobsRoute
   '/_app/': typeof AppIndexRoute
   '/_app/admin/ai': typeof AppAdminAiRoute
   '/_app/library/$policyId': typeof AppLibraryPolicyIdRoute
@@ -170,6 +179,7 @@ export interface FileRouteTypes {
     | '/library'
     | '/me'
     | '/orgs'
+    | '/jobs'
     | '/admin/ai'
     | '/library/$policyId'
     | '/api/auth/$'
@@ -184,6 +194,7 @@ export interface FileRouteTypes {
     | '/guides'
     | '/me'
     | '/orgs'
+    | '/jobs'
     | '/'
     | '/admin/ai'
     | '/library/$policyId'
@@ -202,6 +213,7 @@ export interface FileRouteTypes {
     | '/_app/library'
     | '/_app/me'
     | '/_app/orgs'
+    | '/_app/jobs'
     | '/_app/'
     | '/_app/admin/ai'
     | '/_app/library/$policyId'
@@ -295,6 +307,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppOrgsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/jobs': {
+      id: '/_app/jobs'
+      path: '/jobs'
+      fullPath: '/jobs'
+      preLoaderRoute: typeof AppJobsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/admin/': {
       id: '/_app/admin/'
       path: '/'
@@ -370,6 +389,7 @@ interface AppRouteChildren {
   AppLibraryRoute: typeof AppLibraryRouteWithChildren
   AppMeRoute: typeof AppMeRoute
   AppOrgsRoute: typeof AppOrgsRoute
+  AppJobsRoute: typeof AppJobsRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
@@ -382,6 +402,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppLibraryRoute: AppLibraryRouteWithChildren,
   AppMeRoute: AppMeRoute,
   AppOrgsRoute: AppOrgsRoute,
+  AppJobsRoute: AppJobsRoute,
   AppIndexRoute: AppIndexRoute,
 }
 
