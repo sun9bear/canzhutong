@@ -66,9 +66,9 @@ async function lookupAdminUser(userId: string): Promise<{
  * We do **not** require `emailVerified` by default. Better Auth only sets that
  * flag when email verification / SMTP is configured; password users (including
  * the real ADMIN_EMAILS owner) stay `emailVerified=false`. Requiring the flag
- * would lock them out of the admin hub. Public email sign-up is disabled in
- * production instead (see `isEmailSignUpEnabled`), which is what actually
- * stops an attacker from registering the admin address.
+ * would lock them out of the admin hub. Public email sign-up is allowed, but
+ * addresses in ADMIN_EMAILS cannot *register* (see `isAdminSignUpEmailBlocked`
+ * + `databaseHooks.user.create.before` in auth/server). Existing admins sign in.
  *
  * If SMTP verification is later enabled, set REQUIRE_ADMIN_EMAIL_VERIFIED=true
  * to also demand `emailVerified` (OAuth users with a verified mailbox still
