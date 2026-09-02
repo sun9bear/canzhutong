@@ -9,6 +9,7 @@ const TITLES: Record<string, string> = {
   "/guides": "办事指南",
   "/access": "无障碍说明",
   "/login": "登录",
+  "/verify-email": "验证邮箱",
   "/admin": "管理中心",
   "/admin/ai": "AI 设置",
 };

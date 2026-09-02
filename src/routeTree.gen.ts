@@ -19,6 +19,7 @@ import { Route as AppCoverageRouteImport } from './routes/_app/coverage'
 import { Route as AppGuidesRouteImport } from './routes/_app/guides'
 import { Route as AppLibraryRouteImport } from './routes/_app/library'
 import { Route as AppMeRouteImport } from './routes/_app/me'
+import { Route as AppVerifyEmailRouteImport } from './routes/_app/verify-email'
 import { Route as AppOrgsRouteImport } from './routes/_app/orgs'
 import { Route as AppJobsRouteImport } from './routes/_app/jobs'
 import { Route as AppAdminIndexRouteImport } from './routes/_app/admin.index'
@@ -76,6 +77,11 @@ const AppMeRoute = AppMeRouteImport.update({
   path: '/me',
   getParentRoute: () => AppRoute,
 } as any)
+const AppVerifyEmailRoute = AppVerifyEmailRouteImport.update({
+  id: '/verify-email',
+  path: '/verify-email',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppOrgsRoute = AppOrgsRouteImport.update({
   id: '/orgs',
   path: '/orgs',
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/guides': typeof AppGuidesRoute
   '/library': typeof AppLibraryRouteWithChildren
   '/me': typeof AppMeRoute
+  '/verify-email': typeof AppVerifyEmailRoute
   '/orgs': typeof AppOrgsRoute
   '/jobs': typeof AppJobsRoute
   '/admin/ai': typeof AppAdminAiRoute
@@ -137,6 +144,7 @@ export interface FileRoutesByTo {
   '/coverage': typeof AppCoverageRoute
   '/guides': typeof AppGuidesRoute
   '/me': typeof AppMeRoute
+  '/verify-email': typeof AppVerifyEmailRoute
   '/orgs': typeof AppOrgsRoute
   '/jobs': typeof AppJobsRoute
   '/': typeof AppIndexRoute
@@ -157,6 +165,7 @@ export interface FileRoutesById {
   '/_app/guides': typeof AppGuidesRoute
   '/_app/library': typeof AppLibraryRouteWithChildren
   '/_app/me': typeof AppMeRoute
+  '/_app/verify-email': typeof AppVerifyEmailRoute
   '/_app/orgs': typeof AppOrgsRoute
   '/_app/jobs': typeof AppJobsRoute
   '/_app/': typeof AppIndexRoute
@@ -178,6 +187,7 @@ export interface FileRouteTypes {
     | '/guides'
     | '/library'
     | '/me'
+    | '/verify-email'
     | '/orgs'
     | '/jobs'
     | '/admin/ai'
@@ -193,6 +203,7 @@ export interface FileRouteTypes {
     | '/coverage'
     | '/guides'
     | '/me'
+    | '/verify-email'
     | '/orgs'
     | '/jobs'
     | '/'
@@ -212,6 +223,7 @@ export interface FileRouteTypes {
     | '/_app/guides'
     | '/_app/library'
     | '/_app/me'
+    | '/_app/verify-email'
     | '/_app/orgs'
     | '/_app/jobs'
     | '/_app/'
@@ -298,6 +310,13 @@ declare module '@tanstack/react-router' {
       path: '/me'
       fullPath: '/me'
       preLoaderRoute: typeof AppMeRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/verify-email': {
+      id: '/_app/verify-email'
+      path: '/verify-email'
+      fullPath: '/verify-email'
+      preLoaderRoute: typeof AppVerifyEmailRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/orgs': {
@@ -388,6 +407,7 @@ interface AppRouteChildren {
   AppGuidesRoute: typeof AppGuidesRoute
   AppLibraryRoute: typeof AppLibraryRouteWithChildren
   AppMeRoute: typeof AppMeRoute
+  AppVerifyEmailRoute: typeof AppVerifyEmailRoute
   AppOrgsRoute: typeof AppOrgsRoute
   AppJobsRoute: typeof AppJobsRoute
   AppIndexRoute: typeof AppIndexRoute
@@ -401,6 +421,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppGuidesRoute: AppGuidesRoute,
   AppLibraryRoute: AppLibraryRouteWithChildren,
   AppMeRoute: AppMeRoute,
+  AppVerifyEmailRoute: AppVerifyEmailRoute,
   AppOrgsRoute: AppOrgsRoute,
   AppJobsRoute: AppJobsRoute,
   AppIndexRoute: AppIndexRoute,

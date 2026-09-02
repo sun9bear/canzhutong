@@ -17,6 +17,8 @@ import {
   LIVING_SITUATIONS,
   NEED_OPTIONS,
 } from "@/data/catalog";
+import { useVerifiedFeatureStatus } from "@/hooks/use-verified-feature-status";
+import { ADVICE_NEEDS_VERIFICATION } from "@/lib/auth/email-otp-lib";
 import { RedirectToSignIn } from "@/lib/auth/gates";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { listBookmarks, toggleBookmark } from "@/lib/server/policies";
@@ -65,10 +67,13 @@ function toggle(list: string[], id: string) {
 }
 
 function MeInner() {
+  const { needsVerification } = useVerifiedFeatureStatus();
   const [form, setForm] = useState<ProfileInput>(empty);
   const [savedMsg, setSavedMsg] = useState<string | null>(null);
   const [advice, setAdvice] = useState<string | null>(null);
-  const [citations, setCitations] = useState<{ id: string; title: string; docNo: string; regionName: string }[]>([]);
+  const [citations, setCitations] = useState<
+    { id: string; title: string; docNo: string; regionName: string }[]
+  >([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [bookmarks, setBookmarks] = useState<PolicyListItem[]>([]);
@@ -111,6 +116,11 @@ function MeInner() {
   async function onAdvice() {
     setBusy(true);
     setError(null);
+    if (needsVerification) {
+      setError(ADVICE_NEEDS_VERIFICATION);
+      setBusy(false);
+      return;
+    }
     if (isPlaceholderRegion(form.regionCode)) {
       setError("请选择具体的户籍或常住地区（不能只选「全国」）。");
       setBusy(false);
@@ -275,9 +285,22 @@ function MeInner() {
         </label>
         <div className="flex flex-wrap gap-2">
           <Button type="submit">保存档案</Button>
-          <Button type="button" variant="secondary" disabled={busy} onClick={() => void onAdvice()}>
+          <Button
+            type="button"
+            variant="secondary"
+            disabled={busy || needsVerification}
+            onClick={() => void onAdvice()}
+          >
             {busy ? "正在生成…" : "生成个人建议"}
           </Button>
+          {needsVerification ? (
+            <Link
+              to="/verify-email"
+              className="inline-flex h-11 items-center text-sm font-medium text-primary"
+            >
+              验证邮箱后生成建议
+            </Link>
+          ) : null}
         </div>
         {savedMsg ? (
           <p className="text-sm text-ok" role="status">
@@ -302,7 +325,11 @@ function MeInner() {
             <ul className="mt-4 space-y-1 border-t border-border pt-3 text-sm">
               {citations.map((c) => (
                 <li key={c.id}>
-                  <Link to="/library/$policyId" params={{ policyId: c.id }} className="text-primary">
+                  <Link
+                    to="/library/$policyId"
+                    params={{ policyId: c.id }}
+                    className="text-primary"
+                  >
                     {c.regionName} · {c.title}
                   </Link>
                 </li>

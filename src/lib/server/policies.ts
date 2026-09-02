@@ -1,6 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getSql } from "@/lib/db";
 import { authMiddleware } from "@/lib/auth/middleware";
+import { FAVORITE_NEEDS_VERIFICATION } from "@/lib/auth/email-otp-lib";
+import { requireVerifiedFeatures } from "@/lib/auth/verified-features";
 import { seedIfNeeded } from "@/lib/seed";
 import { expandQuery, scorePolicy, matchesRegionFilter, type PolicyRow } from "@/lib/search";
 import { FEATURED_IDS } from "@/data/copy";
@@ -76,8 +78,12 @@ export const getStats = createServerFn({ method: "GET" }).handler(async () => {
   await seedIfNeeded();
   const sql = await getSql();
   const [all] = await sql<{ n: number }>`select count(*)::int as n from policies`;
-  const [nat] = await sql<{ n: number }>`select count(*)::int as n from policies where level = ${"national"}`;
-  const regions = await sql<{ n: number }>`select count(distinct region_code)::int as n from policies`;
+  const [nat] = await sql<{
+    n: number;
+  }>`select count(*)::int as n from policies where level = ${"national"}`;
+  const regions = await sql<{
+    n: number;
+  }>`select count(distinct region_code)::int as n from policies`;
   return {
     total: all?.n ?? 0,
     national: nat?.n ?? 0,
@@ -165,6 +171,7 @@ export const toggleBookmark = createServerFn({ method: "POST" })
       await sql`delete from bookmarks where user_id = ${context.userId} and policy_id = ${policyId}`;
       return { saved: false };
     }
+    await requireVerifiedFeatures(context.userId, FAVORITE_NEEDS_VERIFICATION);
     await sql`insert into bookmarks (user_id, policy_id) values (${context.userId}, ${policyId})`;
     return { saved: true };
   });

@@ -1,5 +1,6 @@
-import { genericOAuthClient } from "better-auth/client/plugins";
+import { emailOTPClient, genericOAuthClient } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
+import { mapEmailOtpError } from "./email-otp-lib";
 import { GROK_PROVIDERS } from "./providers";
 
 /**
@@ -13,7 +14,7 @@ import { GROK_PROVIDERS } from "./providers";
  * is stored, so nothing changes.
  */
 export const authClient = createAuthClient({
-  plugins: [genericOAuthClient()],
+  plugins: [genericOAuthClient(), emailOTPClient()],
   fetchOptions: {
     onRequest(ctx) {
       const token = getBearerToken();
@@ -66,10 +67,7 @@ function setBearerToken(token: string | null): void {
  * popup there and a normal redirect everywhere else.
  */
 function inLivePreview(): boolean {
-  return (
-    typeof window !== "undefined" &&
-    window.location.hostname.endsWith(".grok-sandbox.com")
-  );
+  return typeof window !== "undefined" && window.location.hostname.endsWith(".grok-sandbox.com");
 }
 
 /** Message the popup posts back to the opener once sign-in completes. */
@@ -130,7 +128,11 @@ export async function signIn(
     if (typeof window !== "undefined") {
       const dest = new URL(callbackURL, window.location.origin);
       const here = window.location;
-      if (dest.origin !== here.origin || dest.pathname !== here.pathname || dest.search !== here.search) {
+      if (
+        dest.origin !== here.origin ||
+        dest.pathname !== here.pathname ||
+        dest.search !== here.search
+      ) {
         window.location.href = callbackURL;
       }
     }
@@ -198,6 +200,31 @@ function waitForPopupToken(popup: Window): Promise<string | null> {
     }
     window.addEventListener("message", onMessage);
   });
+}
+
+export async function sendEmailVerificationOtp(
+  email: string,
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { error } = await authClient.emailOtp.sendVerificationOtp({
+    email,
+    type: "email-verification",
+  });
+  if (error) return { ok: false, error: mapEmailOtpError(error.message, error.code) };
+  return { ok: true };
+}
+
+export async function verifyEmailOtp(
+  email: string,
+  otp: string,
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { error } = await authClient.emailOtp.verifyEmail({ email, otp });
+  if (error) return { ok: false, error: mapEmailOtpError(error.message, error.code) };
+  try {
+    await authClient.getSession();
+  } catch {
+    /* session store will recover on next useSession fetch */
+  }
+  return { ok: true };
 }
 
 /** Sign out of THIS app's local session, clear the preview token, then redirect. */

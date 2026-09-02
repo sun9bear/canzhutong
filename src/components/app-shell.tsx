@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { A11yTrigger } from "@/components/a11y-panel";
 import { AccountChip } from "@/components/account-chip";
+import { VerifyEmailBanner } from "@/components/verify-email-banner";
 import { useAdminStatus } from "@/hooks/use-admin-status";
 import { cn } from "@/lib/utils";
 
@@ -29,7 +30,10 @@ const ADMIN_NAV_ITEM = { to: "/admin", label: "管理", icon: Settings2 } as con
 function Logo() {
   return (
     <Link to="/" className="flex min-h-11 items-center gap-2.5" aria-label="残助通首页">
-      <span className="grid size-9 place-items-center rounded-lg bg-primary text-primary-fg" aria-hidden>
+      <span
+        className="grid size-9 place-items-center rounded-lg bg-primary text-primary-fg"
+        aria-hidden
+      >
         <svg viewBox="0 0 32 32" className="size-5">
           <path
             d="M8 22V12.5c0-.8.6-1.5 1.5-1.5H14v11M14 22h10M14 10.5h5.5c.8 0 1.5.7 1.5 1.5V16"
@@ -124,6 +128,7 @@ export function AppShell() {
         </div>
       </header>
       <main id="main" tabIndex={-1} className="mx-auto w-full max-w-6xl px-4 pb-24 pt-6 md:pb-12">
+        <VerifyEmailBanner />
         <Outlet />
       </main>
       <nav
@@ -135,7 +140,11 @@ export function AppShell() {
         <ul
           className={cn(
             "grid",
-            navItems.length >= 7 ? "grid-cols-7" : navItems.length >= 6 ? "grid-cols-6" : "grid-cols-5",
+            navItems.length >= 7
+              ? "grid-cols-7"
+              : navItems.length >= 6
+                ? "grid-cols-6"
+                : "grid-cols-5",
           )}
         >
           {navItems.map((item) => {

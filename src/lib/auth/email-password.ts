@@ -4,8 +4,9 @@
  * Sign-in is ON (`emailAndPasswordEnabled`). Public **sign-up** is ON by default
  * (including production). Admin addresses in `ADMIN_EMAILS` are a hard gate:
  * they cannot *register* (prevents empty-DB squat) but can still *sign in*.
- * We do not require `emailVerified` — no SMTP is configured, so password users
- * (including the real admin) stay unverified.
+ * Login does **not** require `emailVerified`. Unverified password users may sign
+ * in; 收藏 / 个人建议 are gated separately. ADMIN_EMAILS and Google/X OAuth
+ * users are not blocked on OTP. Do not set REQUIRE_ADMIN_EMAIL_VERIFIED.
  *
  * Override: `ALLOW_EMAIL_SIGNUP=false` disables sign-up POSTs;
  * `VITE_ALLOW_EMAIL_SIGNUP=false` hides the 注册 UI (rebuild required).
