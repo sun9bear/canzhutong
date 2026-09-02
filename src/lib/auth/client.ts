@@ -1,6 +1,6 @@
 import { emailOTPClient, genericOAuthClient } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
-import { mapEmailOtpError } from "./email-otp-lib";
+import { mapEmailOtpError, OTP_SEND_FAILED_MESSAGE } from "./email-otp-lib";
 import { GROK_PROVIDERS } from "./providers";
 
 /**
@@ -205,6 +205,9 @@ function waitForPopupToken(popup: Window): Promise<string | null> {
 export async function sendEmailVerificationOtp(
   email: string,
 ): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { getEmailOtpMailStatus } = await import("./verified-features");
+  const mail = await getEmailOtpMailStatus();
+  if (!mail.canSend) return { ok: false, error: OTP_SEND_FAILED_MESSAGE };
   const { error } = await authClient.emailOtp.sendVerificationOtp({
     email,
     type: "email-verification",

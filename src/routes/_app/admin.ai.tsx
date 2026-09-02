@@ -4,11 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { RedirectToSignIn } from "@/lib/auth/gates";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
-import {
-  getAdminStatus,
-  getAiSettings,
-  saveAiSettings,
-} from "@/lib/server/ai-settings";
+import { getAdminStatus } from "@/lib/server/admin-status";
+import { getAiSettings, saveAiSettings } from "@/lib/server/ai-settings";
 
 export const Route = createFileRoute("/_app/admin/ai")({
   component: AdminAiPage,

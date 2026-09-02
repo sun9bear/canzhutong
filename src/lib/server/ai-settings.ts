@@ -296,13 +296,6 @@ export async function getLlmConfig(): Promise<LlmConfig | null> {
   return null;
 }
 
-export const getAdminStatus = createServerFn({ method: "GET" })
-  .middleware([authMiddleware])
-  .handler(async ({ context }) => {
-    const user = await lookupAdminUser(context.userId);
-    return { isAdmin: isAdminEmail(user?.email) };
-  });
-
 export const getAiSettings = createServerFn({ method: "GET" })
   .middleware([authMiddleware])
   .handler(async ({ context }) => {

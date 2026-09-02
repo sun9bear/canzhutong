@@ -70,8 +70,7 @@ export function EmailOtpForm({
   return (
     <form className="space-y-3" onSubmit={(e) => void onSubmit(e)}>
       <p className="text-sm text-muted">
-        验证码已发到 <span className="text-fg">{email}</span>
-        。请输入 6 位数字，不含链接。
+        请输入发到 <span className="text-fg">{email}</span> 的 6 位数字验证码，邮件不含链接。
       </p>
       <label className="block text-sm">
         <span className="text-muted">验证码</span>

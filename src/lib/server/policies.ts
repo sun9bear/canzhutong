@@ -2,7 +2,6 @@ import { createServerFn } from "@tanstack/react-start";
 import { getSql } from "@/lib/db";
 import { authMiddleware } from "@/lib/auth/middleware";
 import { FAVORITE_NEEDS_VERIFICATION } from "@/lib/auth/email-otp-lib";
-import { requireVerifiedFeatures } from "@/lib/auth/verified-features";
 import { seedIfNeeded } from "@/lib/seed";
 import { expandQuery, scorePolicy, matchesRegionFilter, type PolicyRow } from "@/lib/search";
 import { FEATURED_IDS } from "@/data/copy";
@@ -171,6 +170,7 @@ export const toggleBookmark = createServerFn({ method: "POST" })
       await sql`delete from bookmarks where user_id = ${context.userId} and policy_id = ${policyId}`;
       return { saved: false };
     }
+    const { requireVerifiedFeatures } = await import("@/lib/auth/verified-features.server");
     await requireVerifiedFeatures(context.userId, FAVORITE_NEEDS_VERIFICATION);
     await sql`insert into bookmarks (user_id, policy_id) values (${context.userId}, ${policyId})`;
     return { saved: true };
