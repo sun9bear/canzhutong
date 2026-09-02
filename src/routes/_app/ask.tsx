@@ -179,6 +179,7 @@ function AskPage() {
           placeholder="描述你的情况和问题，例如：我是二级肢体残疾、低保家庭，两项补贴怎么申请？"
           className="min-h-20 min-w-[12rem] flex-1"
           onKeyDown={(e) => {
+            if (e.nativeEvent.isComposing) return;
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
               void send(input);

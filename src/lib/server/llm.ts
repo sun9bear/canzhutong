@@ -33,6 +33,8 @@ export async function chatCompletion(opts: {
 
   const url = `${config.baseUrl.replace(/\/+$/, "")}/chat/completions`;
 
+  const LLM_TIMEOUT_MS = 30_000;
+
   let res: Response;
   try {
     res = await fetch(url, {
@@ -47,8 +49,13 @@ export async function chatCompletion(opts: {
         max_tokens: opts.max_tokens ?? 1200,
         messages,
       }),
+      signal: AbortSignal.timeout(LLM_TIMEOUT_MS),
     });
-  } catch {
+  } catch (err) {
+    const name = err instanceof Error ? err.name : "";
+    if (name === "TimeoutError" || name === "AbortError") {
+      return { ok: false, error: "timeout" };
+    }
     return { ok: false, error: "network_error" };
   }
 
