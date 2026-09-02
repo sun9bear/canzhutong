@@ -3,10 +3,10 @@ import { Briefcase } from "lucide-react";
 import { OrgCard } from "@/components/org-card";
 import { PolicyCard } from "@/components/policy-card";
 import { RegionPicker } from "@/components/region-picker";
+import { EMPLOYMENT_PORTALS, isEmploymentDeepLink } from "@/data/employment-links";
 import { isOfficialOpenableUrl } from "@/lib/official-url";
-import { listOrgs } from "@/lib/server/orgs";
+import { matchesRegionFilter } from "@/lib/search";
 import { listPolicies, type PolicyListItem } from "@/lib/server/policies";
-import type { OrgKind, OrgRecord } from "@/data/orgs";
 
 type SearchParams = { region?: string };
 
@@ -17,10 +17,9 @@ export const Route = createFileRoute("/_app/jobs")({
   loaderDeps: ({ search }) => search,
   loader: async ({ deps }) => {
     const region = deps.region;
-    const [byCat, byKw, orgs] = await Promise.all([
+    const [byCat, byKw] = await Promise.all([
       listPolicies({ data: { category: "employment", region, limit: 80 } }),
       listPolicies({ data: { q: "按比例 超比例 就业服务", region, limit: 40 } }),
-      listOrgs({ data: { region } }),
     ]);
     const seen = new Set<string>();
     const policies: PolicyListItem[] = [];
@@ -36,9 +35,11 @@ export const Route = createFileRoute("/_app/jobs")({
       seen.add(p.id);
       policies.push(p);
     }
-    const JOB_KINDS = new Set<OrgKind>(["cdpf", "hrss", "employment_service"]);
-    const portals: OrgRecord[] = orgs.items.filter(
-      (o) => JOB_KINDS.has(o.kind) && isOfficialOpenableUrl(o.website),
+    const portals = EMPLOYMENT_PORTALS.filter(
+      (o) =>
+        isEmploymentDeepLink(o.website) &&
+        isOfficialOpenableUrl(o.website) &&
+        matchesRegionFilter(o.regionCode, region),
     );
     return { policies, portals };
   },
@@ -60,7 +61,7 @@ function JobsPage() {
           </span>
         </h1>
         <p className="mt-2 max-w-2xl text-muted">
-          只展示政策库中的就业相关文件，以及残联、人社、残疾人就业服务机构的官方网站。本栏不发布岗位、不接受简历、不匹配求职、不提供网申表格。金额、比例、申报时间和材料以当地公示和文件原文为准。
+          只展示政策库中的就业相关文件，以及已核验的就业专栏、服务网和官方文件深链。不收录残联、人社、政务网门户首页。本栏不发布岗位、不接受简历、不匹配求职、不提供网申表格。金额、比例、申报时间和材料以当地公示和文件原文为准。
         </p>
       </header>
 
@@ -117,17 +118,17 @@ function JobsPage() {
           </Link>
         </div>
         <p className="mt-1 text-sm text-muted">
-          仅列出黄页中已核验、可打开的官方网站。没有单独官网的机构，请拨 12385 / 12333，或通过黄页查找。
+          仅列出已核验的就业专栏、服务网和官方文件深链，不收录残联、人社、政务网门户首页。没有深链的地区本栏为空，请拨 12385 / 12333，或通过黄页查找。
         </p>
         {portals.length === 0 ? (
           <p className="mt-4 rounded-xl bg-surface p-8 text-center text-muted">
-            当前筛选下没有可打开的官网链接。请改选地区或使用黄页。
+            当前地区暂无已核验的就业深链。请改选全国或其他已收录地区，或使用黄页。
           </p>
         ) : (
           <ul className="mt-4 grid list-none gap-3 p-0 sm:grid-cols-2">
             {portals.map((o) => (
               <li key={o.id}>
-                <OrgCard org={o} />
+                <OrgCard org={o} headingAs="h3" />
               </li>
             ))}
           </ul>

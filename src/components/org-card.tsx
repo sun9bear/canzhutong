@@ -3,8 +3,16 @@ import { Badge } from "@/components/ui/badge";
 import { ORG_KIND_LABEL, ORG_LEVEL_LABEL, type OrgKind, type OrgRecord } from "@/data/orgs";
 import { isOfficialOpenableUrl } from "@/lib/official-url";
 
-export function OrgCard({ org }: { org: OrgRecord }) {
+export function OrgCard({
+  org,
+  headingAs = "h2",
+}: {
+  org: OrgRecord;
+  /** /jobs sits under section h2「官方办事入口」; 黄页 keeps h2. */
+  headingAs?: "h2" | "h3";
+}) {
   const website = isOfficialOpenableUrl(org.website) ? org.website : "";
+  const Title = headingAs;
   return (
     <article className="flex h-full flex-col rounded-xl bg-surface p-4 shadow-card">
       <div className="flex flex-wrap gap-1.5">
@@ -12,7 +20,7 @@ export function OrgCard({ org }: { org: OrgRecord }) {
         <Badge className="bg-surface-2 text-muted">{ORG_KIND_LABEL[org.kind as OrgKind]}</Badge>
         <Badge className="bg-surface-2 text-muted">{org.regionName}</Badge>
       </div>
-      <h2 className="mt-2 font-display text-base font-semibold leading-snug">{org.shortName}</h2>
+      <Title className="mt-2 font-display text-base font-semibold leading-snug">{org.shortName}</Title>
       <p className="mt-1 text-sm text-muted">{org.name}</p>
       {org.address ? (
         <p className="mt-2 flex items-start gap-1.5 text-sm">

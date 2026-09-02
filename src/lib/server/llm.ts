@@ -52,8 +52,7 @@ export async function chatCompletion(opts: {
       signal: AbortSignal.timeout(LLM_TIMEOUT_MS),
     });
   } catch (err) {
-    const name = err instanceof Error ? err.name : "";
-    if (name === "TimeoutError" || name === "AbortError") {
+    if (isLlmTimeoutError(err)) {
       return { ok: false, error: "timeout" };
     }
     return { ok: false, error: "network_error" };
@@ -69,7 +68,17 @@ export async function chatCompletion(opts: {
     };
     const text = body.choices?.[0]?.message?.content ?? "";
     return { ok: true, text };
-  } catch {
+  } catch (err) {
+    // Headers arrived but the JSON body stalled under AbortSignal.timeout.
+    if (isLlmTimeoutError(err)) {
+      return { ok: false, error: "timeout" };
+    }
     return { ok: false, error: "parse_error" };
   }
+}
+
+/** Fetch / res.json() abort from AbortSignal.timeout (TimeoutError or AbortError). */
+export function isLlmTimeoutError(err: unknown): boolean {
+  const name = err instanceof Error ? err.name : "";
+  return name === "TimeoutError" || name === "AbortError";
 }
