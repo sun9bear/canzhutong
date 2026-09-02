@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { PolicyCard } from "@/components/policy-card";
 import { ReadAloud } from "@/components/read-aloud";
 import { categoryLabel, disabilityLabel, levelLabel } from "@/data/catalog";
+import { useVerifiedFeatureStatus } from "@/hooks/use-verified-feature-status";
+import { FAVORITE_NEEDS_VERIFICATION } from "@/lib/auth/email-otp-lib";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { getPolicy, isBookmarked, toggleBookmark } from "@/lib/server/policies";
 
@@ -21,7 +23,9 @@ export const Route = createFileRoute("/_app/library/$policyId")({
 function PolicyPage() {
   const { policy, related } = Route.useLoaderData();
   const { user, isPending } = useCurrentUserState();
+  const { needsVerification } = useVerifiedFeatureStatus();
   const [saved, setSaved] = useState(false);
+  const [actionError, setActionError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!user) return;
@@ -31,10 +35,16 @@ function PolicyPage() {
   }, [user, policy.id]);
 
   async function onToggle() {
+    setActionError(null);
     try {
       const res = await toggleBookmark({ data: policy.id });
       setSaved(res.saved);
-    } catch {
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "";
+      if (message.includes("请先验证邮箱")) {
+        setActionError(FAVORITE_NEEDS_VERIFICATION);
+        return;
+      }
       window.location.href = "/login";
     }
   }
@@ -55,7 +65,10 @@ function PolicyPage() {
   return (
     <article className="mx-auto max-w-3xl space-y-8" aria-labelledby="policy-title">
       <div>
-        <Link to="/library" className="inline-flex min-h-11 items-center text-sm font-medium text-primary">
+        <Link
+          to="/library"
+          className="inline-flex min-h-11 items-center text-sm font-medium text-primary"
+        >
           返回政策库
         </Link>
         <div className="mt-3 flex flex-wrap gap-1.5">
@@ -64,7 +77,12 @@ function PolicyPage() {
           <Badge className="bg-surface-2 text-muted">{categoryLabel(policy.category)}</Badge>
           <Badge className="bg-surface-2 text-muted">{policy.status}</Badge>
         </div>
-        <h1 id="policy-title" className="mt-3 font-display text-2xl font-semibold leading-snug sm:text-3xl">{policy.title}</h1>
+        <h1
+          id="policy-title"
+          className="mt-3 font-display text-2xl font-semibold leading-snug sm:text-3xl"
+        >
+          {policy.title}
+        </h1>
         <p className="mt-2 text-sm text-muted">
           {policy.docNo ? `${policy.docNo} · ` : ""}
           {policy.issuedAt ? `发布 ${policy.issuedAt}` : ""}
@@ -74,9 +92,25 @@ function PolicyPage() {
 
       <div className="flex flex-wrap gap-2" role="group" aria-label="本条操作">
         <ReadAloud text={speakText} label="朗读本条" />
-        {!isPending && user ? (
-          <Button variant={saved ? "secondary" : "outline"} onClick={() => void onToggle()} aria-pressed={saved}>
-            {saved ? <BookmarkCheck className="size-4" aria-hidden /> : <Bookmark className="size-4" aria-hidden />}
+        {!isPending && user && needsVerification && !saved ? (
+          <Link
+            to="/verify-email"
+            className="inline-flex h-11 min-h-11 items-center gap-2 rounded-md border border-border bg-surface px-4 text-sm font-medium"
+          >
+            <Bookmark className="size-4" aria-hidden />
+            验证邮箱后收藏
+          </Link>
+        ) : !isPending && user ? (
+          <Button
+            variant={saved ? "secondary" : "outline"}
+            onClick={() => void onToggle()}
+            aria-pressed={saved}
+          >
+            {saved ? (
+              <BookmarkCheck className="size-4" aria-hidden />
+            ) : (
+              <Bookmark className="size-4" aria-hidden />
+            )}
             {saved ? "已收藏" : "收藏"}
           </Button>
         ) : !isPending ? (
@@ -109,6 +143,11 @@ function PolicyPage() {
         >
           就这一条提问
         </Link>
+        {actionError ? (
+          <p className="basis-full text-sm text-danger" role="alert">
+            {actionError}
+          </p>
+        ) : null}
       </div>
 
       <section className="rounded-xl bg-surface p-5 shadow-card">
@@ -130,7 +169,9 @@ function PolicyPage() {
       <section className="grid gap-4 md:grid-cols-2">
         <div className="rounded-xl bg-surface p-5 shadow-card">
           <h2 className="font-display text-lg font-semibold">适用对象</h2>
-          <p className="mt-2 whitespace-pre-wrap leading-relaxed text-muted">{policy.eligibility}</p>
+          <p className="mt-2 whitespace-pre-wrap leading-relaxed text-muted">
+            {policy.eligibility}
+          </p>
         </div>
         <div className="rounded-xl bg-surface p-5 shadow-card">
           <h2 className="font-display text-lg font-semibold">如何办理</h2>
@@ -161,7 +202,9 @@ function PolicyPage() {
             </a>
           </p>
         ) : (
-          <p className="mt-2 text-sm text-muted">本条尚未链到具体文件页，请向当地残联或拨打 12385 核实。</p>
+          <p className="mt-2 text-sm text-muted">
+            本条尚未链到具体文件页，请向当地残联或拨打 12385 核实。
+          </p>
         )}
         <p className="mt-2 text-sm text-subtle">
           链接指向发布机关网站或该文件的公开文本。请以打开后的正文为准。残疾类别标签：

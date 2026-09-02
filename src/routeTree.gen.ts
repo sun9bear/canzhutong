@@ -17,10 +17,11 @@ import { Route as AppAdminRouteImport } from './routes/_app/admin'
 import { Route as AppAskRouteImport } from './routes/_app/ask'
 import { Route as AppCoverageRouteImport } from './routes/_app/coverage'
 import { Route as AppGuidesRouteImport } from './routes/_app/guides'
+import { Route as AppJobsRouteImport } from './routes/_app/jobs'
 import { Route as AppLibraryRouteImport } from './routes/_app/library'
 import { Route as AppMeRouteImport } from './routes/_app/me'
 import { Route as AppOrgsRouteImport } from './routes/_app/orgs'
-import { Route as AppJobsRouteImport } from './routes/_app/jobs'
+import { Route as AppVerifyEmailRouteImport } from './routes/_app/verify-email'
 import { Route as AppAdminIndexRouteImport } from './routes/_app/admin.index'
 import { Route as AppAdminAiRouteImport } from './routes/_app/admin.ai'
 import { Route as AppLibraryIndexRouteImport } from './routes/_app/library.index'
@@ -66,6 +67,11 @@ const AppGuidesRoute = AppGuidesRouteImport.update({
   path: '/guides',
   getParentRoute: () => AppRoute,
 } as any)
+const AppJobsRoute = AppJobsRouteImport.update({
+  id: '/jobs',
+  path: '/jobs',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppLibraryRoute = AppLibraryRouteImport.update({
   id: '/library',
   path: '/library',
@@ -81,9 +87,9 @@ const AppOrgsRoute = AppOrgsRouteImport.update({
   path: '/orgs',
   getParentRoute: () => AppRoute,
 } as any)
-const AppJobsRoute = AppJobsRouteImport.update({
-  id: '/jobs',
-  path: '/jobs',
+const AppVerifyEmailRoute = AppVerifyEmailRouteImport.update({
+  id: '/verify-email',
+  path: '/verify-email',
   getParentRoute: () => AppRoute,
 } as any)
 const AppAdminIndexRoute = AppAdminIndexRouteImport.update({
@@ -120,10 +126,11 @@ export interface FileRoutesByFullPath {
   '/ask': typeof AppAskRoute
   '/coverage': typeof AppCoverageRoute
   '/guides': typeof AppGuidesRoute
+  '/jobs': typeof AppJobsRoute
   '/library': typeof AppLibraryRouteWithChildren
   '/me': typeof AppMeRoute
   '/orgs': typeof AppOrgsRoute
-  '/jobs': typeof AppJobsRoute
+  '/verify-email': typeof AppVerifyEmailRoute
   '/admin/ai': typeof AppAdminAiRoute
   '/library/$policyId': typeof AppLibraryPolicyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -136,9 +143,10 @@ export interface FileRoutesByTo {
   '/ask': typeof AppAskRoute
   '/coverage': typeof AppCoverageRoute
   '/guides': typeof AppGuidesRoute
+  '/jobs': typeof AppJobsRoute
   '/me': typeof AppMeRoute
   '/orgs': typeof AppOrgsRoute
-  '/jobs': typeof AppJobsRoute
+  '/verify-email': typeof AppVerifyEmailRoute
   '/': typeof AppIndexRoute
   '/admin/ai': typeof AppAdminAiRoute
   '/library/$policyId': typeof AppLibraryPolicyIdRoute
@@ -155,10 +163,11 @@ export interface FileRoutesById {
   '/_app/ask': typeof AppAskRoute
   '/_app/coverage': typeof AppCoverageRoute
   '/_app/guides': typeof AppGuidesRoute
+  '/_app/jobs': typeof AppJobsRoute
   '/_app/library': typeof AppLibraryRouteWithChildren
   '/_app/me': typeof AppMeRoute
   '/_app/orgs': typeof AppOrgsRoute
-  '/_app/jobs': typeof AppJobsRoute
+  '/_app/verify-email': typeof AppVerifyEmailRoute
   '/_app/': typeof AppIndexRoute
   '/_app/admin/ai': typeof AppAdminAiRoute
   '/_app/library/$policyId': typeof AppLibraryPolicyIdRoute
@@ -176,10 +185,11 @@ export interface FileRouteTypes {
     | '/ask'
     | '/coverage'
     | '/guides'
+    | '/jobs'
     | '/library'
     | '/me'
     | '/orgs'
-    | '/jobs'
+    | '/verify-email'
     | '/admin/ai'
     | '/library/$policyId'
     | '/api/auth/$'
@@ -192,9 +202,10 @@ export interface FileRouteTypes {
     | '/ask'
     | '/coverage'
     | '/guides'
+    | '/jobs'
     | '/me'
     | '/orgs'
-    | '/jobs'
+    | '/verify-email'
     | '/'
     | '/admin/ai'
     | '/library/$policyId'
@@ -210,10 +221,11 @@ export interface FileRouteTypes {
     | '/_app/ask'
     | '/_app/coverage'
     | '/_app/guides'
+    | '/_app/jobs'
     | '/_app/library'
     | '/_app/me'
     | '/_app/orgs'
-    | '/_app/jobs'
+    | '/_app/verify-email'
     | '/_app/'
     | '/_app/admin/ai'
     | '/_app/library/$policyId'
@@ -286,6 +298,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppGuidesRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/jobs': {
+      id: '/_app/jobs'
+      path: '/jobs'
+      fullPath: '/jobs'
+      preLoaderRoute: typeof AppJobsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/library': {
       id: '/_app/library'
       path: '/library'
@@ -307,11 +326,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppOrgsRouteImport
       parentRoute: typeof AppRoute
     }
-    '/_app/jobs': {
-      id: '/_app/jobs'
-      path: '/jobs'
-      fullPath: '/jobs'
-      preLoaderRoute: typeof AppJobsRouteImport
+    '/_app/verify-email': {
+      id: '/_app/verify-email'
+      path: '/verify-email'
+      fullPath: '/verify-email'
+      preLoaderRoute: typeof AppVerifyEmailRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/admin/': {
@@ -386,10 +405,11 @@ interface AppRouteChildren {
   AppAskRoute: typeof AppAskRoute
   AppCoverageRoute: typeof AppCoverageRoute
   AppGuidesRoute: typeof AppGuidesRoute
+  AppJobsRoute: typeof AppJobsRoute
   AppLibraryRoute: typeof AppLibraryRouteWithChildren
   AppMeRoute: typeof AppMeRoute
   AppOrgsRoute: typeof AppOrgsRoute
-  AppJobsRoute: typeof AppJobsRoute
+  AppVerifyEmailRoute: typeof AppVerifyEmailRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
@@ -399,10 +419,11 @@ const AppRouteChildren: AppRouteChildren = {
   AppAskRoute: AppAskRoute,
   AppCoverageRoute: AppCoverageRoute,
   AppGuidesRoute: AppGuidesRoute,
+  AppJobsRoute: AppJobsRoute,
   AppLibraryRoute: AppLibraryRouteWithChildren,
   AppMeRoute: AppMeRoute,
   AppOrgsRoute: AppOrgsRoute,
-  AppJobsRoute: AppJobsRoute,
+  AppVerifyEmailRoute: AppVerifyEmailRoute,
   AppIndexRoute: AppIndexRoute,
 }
 

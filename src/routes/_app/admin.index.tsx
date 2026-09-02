@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { RedirectToSignIn } from "@/lib/auth/gates";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
-import { getAdminStatus } from "@/lib/server/ai-settings";
+import { getAdminStatus } from "@/lib/server/admin-status";
 
 export const Route = createFileRoute("/_app/admin/")({
   component: AdminIndexPage,

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
-import { getAdminStatus } from "@/lib/server/ai-settings";
+import { getAdminStatus } from "@/lib/server/admin-status";
 
 /** Client gate for admin-only UI (nav). Never shows admin chrome while session is loading. */
 export function useAdminStatus() {

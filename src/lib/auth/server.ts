@@ -29,7 +29,7 @@
  * a verified id via `@/lib/auth/middleware`.
  */
 import { APIError, betterAuth } from "better-auth";
-import { bearer, genericOAuth } from "better-auth/plugins";
+import { bearer, emailOTP, genericOAuth } from "better-auth/plugins";
 import { tanstackStartCookies } from "better-auth/tanstack-start";
 import { getCookie } from "@tanstack/react-start/server";
 import { randomBytes } from "node:crypto";
@@ -41,6 +41,7 @@ import {
   isAdminSignUpEmailBlocked,
   isEmailSignUpEnabled,
 } from "./email-password";
+import { sendVerificationOtpEmail } from "./email-otp-lib";
 import { GROK_PROVIDERS } from "./providers";
 import { pgliteDialect } from "./pglite-dialect";
 import {
@@ -89,8 +90,7 @@ const grokClientId = env("GROK_AUTH_CLIENT_ID") ?? PREVIEW_CLIENT_ID;
 const grokClientSecret = env("GROK_AUTH_CLIENT_SECRET") ?? PREVIEW_CLIENT_SECRET;
 
 /** True when federated sign-in is active (real auth is enforced). */
-export const authConfigured =
-  !authDisabled && Boolean(grokClientId && grokClientSecret);
+export const authConfigured = !authDisabled && Boolean(grokClientId && grokClientSecret);
 
 // This app's own Better Auth origin. When deployed the deployer injects the
 // public URL. In the sandbox live preview there's no fixed URL (each preview gets
@@ -104,15 +104,9 @@ const explicitBaseURL = env("BETTER_AUTH_URL");
 const previewAllowedHosts: string[] = [...PREVIEW_ALLOWED_HOSTS];
 // Production Vercel deploy + preview deployments (host patterns for dynamic
 // baseURL / Origin host matching).
-const DEPLOY_ALLOWED_HOSTS: string[] = [
-  "canzhutong.vercel.app",
-  "*.vercel.app",
-];
+const DEPLOY_ALLOWED_HOSTS: string[] = ["canzhutong.vercel.app", "*.vercel.app"];
 // Full https origins for production Vercel (always trusted - see trustedOrigins).
-const DEPLOY_ORIGINS: string[] = [
-  "https://canzhutong.vercel.app",
-  "https://*.vercel.app",
-];
+const DEPLOY_ORIGINS: string[] = ["https://canzhutong.vercel.app", "https://*.vercel.app"];
 const LOCAL_DEV_ORIGINS: string[] = [
   "http://localhost:8080",
   "http://127.0.0.1:8080",
@@ -228,6 +222,8 @@ export const auth = betterAuth({
         emailAndPassword: {
           enabled: true,
           disableSignUp: !isEmailSignUpEnabled(),
+          // Unverified password users may still sign in; favorites / 个人建议 are gated.
+          requireEmailVerification: false,
         },
       }
     : {}),
@@ -273,6 +269,22 @@ export const auth = betterAuth({
     // One genericOAuth provider per upstream (when auth is on), all federating
     // to the broker with the SAME client and differing only by the `idp` hint.
     ...(grokOAuthPlugin ? [grokOAuthPlugin] : []),
+
+    // 6-digit Resend OTP for email verification (not magic links). Login is not
+    // blocked when unverified — see requireEmailVerification: false above.
+    emailOTP({
+      otpLength: 6,
+      expiresIn: 300,
+      sendVerificationOnSignUp: false,
+      overrideDefaultEmailVerification: true,
+      async sendVerificationOTP({ email, otp, type }) {
+        if (type !== "email-verification") {
+          console.error("[email-otp] ignored OTP type");
+          return;
+        }
+        await sendVerificationOtpEmail({ email, otp });
+      },
+    }),
 
     // Accept `Authorization: Bearer <session-token>` as an alternative to the
     // cookie. Needed for the LIVE PREVIEW: the app runs in an embedded iframe

@@ -70,9 +70,8 @@ async function lookupAdminUser(userId: string): Promise<{
  * addresses in ADMIN_EMAILS cannot *register* (see `isAdminSignUpEmailBlocked`
  * + `databaseHooks.user.create.before` in auth/server). Existing admins sign in.
  *
- * If SMTP verification is later enabled, set REQUIRE_ADMIN_EMAIL_VERIFIED=true
- * to also demand `emailVerified` (OAuth users with a verified mailbox still
- * pass via ADMIN_EMAILS as today).
+ * Do **not** set REQUIRE_ADMIN_EMAIL_VERIFIED — ADMIN_EMAILS and existing
+ * admin accounts are not required to verify (email OTP is for regular users).
  */
 export async function requireAdmin(context: { userId: string }): Promise<{
   userId: string;
@@ -296,13 +295,6 @@ export async function getLlmConfig(): Promise<LlmConfig | null> {
   }
   return null;
 }
-
-export const getAdminStatus = createServerFn({ method: "GET" })
-  .middleware([authMiddleware])
-  .handler(async ({ context }) => {
-    const user = await lookupAdminUser(context.userId);
-    return { isAdmin: isAdminEmail(user?.email) };
-  });
 
 export const getAiSettings = createServerFn({ method: "GET" })
   .middleware([authMiddleware])

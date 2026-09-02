@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getSql } from "@/lib/db";
 import { authMiddleware } from "@/lib/auth/middleware";
+import { ADVICE_NEEDS_VERIFICATION } from "@/lib/auth/email-otp-lib";
 import { retrieveForQuestion } from "./policies";
 import { DISCLAIMER } from "@/data/copy";
 import { regionName, disabilityLabel } from "@/data/catalog";
@@ -105,6 +106,11 @@ export type AdviceResult =
 export const generateAdvice = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
   .handler(async ({ context }): Promise<AdviceResult> => {
+    const { getVerifiedFeatureFlags } = await import("@/lib/auth/verified-features.server");
+    const flags = await getVerifiedFeatureFlags(context.userId);
+    if (!flags.canUseVerifiedFeatures) {
+      return { ok: false, error: ADVICE_NEEDS_VERIFICATION };
+    }
     const sql = await getSql();
     const rows = await sql<{
       display_name: string;
