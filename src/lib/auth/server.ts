@@ -28,14 +28,19 @@
  * components read the user via `@/lib/auth/use-current-user`; server functions get
  * a verified id via `@/lib/auth/middleware`.
  */
-import { betterAuth } from "better-auth";
+import { APIError, betterAuth } from "better-auth";
 import { bearer, genericOAuth } from "better-auth/plugins";
 import { tanstackStartCookies } from "better-auth/tanstack-start";
 import { getCookie } from "@tanstack/react-start/server";
 import { randomBytes } from "node:crypto";
 import { Pool } from "pg";
 import { ensureDbReady, getPglite } from "../db";
-import { emailAndPasswordEnabled, isEmailSignUpEnabled } from "./email-password";
+import {
+  ADMIN_SIGNUP_BLOCKED_MESSAGE,
+  emailAndPasswordEnabled,
+  isAdminSignUpEmailBlocked,
+  isEmailSignUpEnabled,
+} from "./email-password";
 import { GROK_PROVIDERS } from "./providers";
 import { pgliteDialect } from "./pglite-dialect";
 import {
@@ -216,8 +221,8 @@ export const auth = betterAuth({
   session: { cookieCache: { enabled: true, maxAge: 300 } },
 
   // Local email/password — toggled only via `./email-password` (not a plugin).
-  // disableSignUp: production (DATABASE_URL) rejects public registration so
-  // nobody can squat ADMIN_EMAILS. Sign-in stays enabled.
+  // disableSignUp: default OFF (public sign-up on). ALLOW_EMAIL_SIGNUP=false
+  // still disables POSTs. ADMIN_EMAILS squat is blocked in databaseHooks below.
   ...(emailAndPasswordEnabled
     ? {
         emailAndPassword: {
@@ -226,6 +231,25 @@ export const auth = betterAuth({
         },
       }
     : {}),
+
+  // Minimal addition (AGENTS.md: do not rewrite this file). emailAndPassword
+  // has no signup hook; this runs before any user row is inserted — email
+  // sign-up and OAuth first-create alike. Existing admin sign-in does not
+  // create a user, so it stays allowed. Throw APIError so Better Auth
+  // rethrows the Chinese message instead of FAILED_TO_CREATE_USER.
+  databaseHooks: {
+    user: {
+      create: {
+        before: async (user) => {
+          if (isAdminSignUpEmailBlocked(user.email)) {
+            throw new APIError("BAD_REQUEST", {
+              message: ADMIN_SIGNUP_BLOCKED_MESSAGE,
+            });
+          }
+        },
+      },
+    },
+  },
 
   // `__Host-` prefixed cookies: the browser REFUSES any same-named cookie that
   // carries a `Domain` attribute, so a sibling `*.grok.me` app cannot "toss" a
