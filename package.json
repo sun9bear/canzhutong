@@ -13,7 +13,7 @@
     "build:dev": "vite build --mode development",
     "preview": "vite preview --host 0.0.0.0 --port 8080",
     "typecheck": "tsc --noEmit",
-    "test": "node --test 'scripts/**/*.test.mjs' && node --test --experimental-strip-types scripts/email-otp.test.ts",
+    "test": "node --test 'scripts/**/*.test.mjs' && node --test --experimental-strip-types scripts/email-otp.test.ts scripts/auth-admin-hooks.test.ts",
     "check:data": "node scripts/check-policy-ids.mjs",
     "lint": "eslint .",
     "format": "prettier --write .",
