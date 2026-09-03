@@ -90,3 +90,21 @@ test("server.ts wires create/update hooks and does not require email verificatio
   assert.doesNotMatch(src, /REQUIRE_ADMIN_EMAIL_VERIFIED/);
   assert.doesNotMatch(src, /requireLocalEmailVerified:\s*false/);
 });
+
+test("product: ADMIN_EMAILS still cannot self-register (create.before stays)", () => {
+  const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+  const src = readFileSync(join(root, "src/lib/auth/server.ts"), "utf8");
+  assert.match(src, /create:\s*\{/);
+  assert.match(src, /isAdminSignUpEmailBlocked\(user\.email\)/);
+  assert.match(src, /ADMIN_SIGNUP_BLOCKED_MESSAGE/);
+});
+
+test("product: 问一问 / askPolicy stays unauthenticated", () => {
+  const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+  const chat = readFileSync(join(root, "src/lib/server/chat.ts"), "utf8");
+  const askPage = readFileSync(join(root, "src/routes/_app/ask.tsx"), "utf8");
+  assert.match(chat, /export const askPolicy = createServerFn/);
+  assert.doesNotMatch(chat, /authMiddleware/);
+  assert.doesNotMatch(chat, /requireAdmin|useCurrentUser|SignedIn/);
+  assert.doesNotMatch(askPage, /authMiddleware|SignedIn|useCurrentUser/);
+});
