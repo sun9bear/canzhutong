@@ -1669,11 +1669,11 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     ],
   },
   HB: {
-    planTitle: "湖北省残疾人事业发展“十四五”规划（鄂州规划转引）",
+    planTitle: "湖北省残疾人事业发展“十四五”规划",
     planShortTitle: "湖北规划（残疾人）",
-    planUrl:
-      "https://www.ezhou.gov.cn/gk/xxgkzt/ezsswgh/sjzxgh/202205/t20220511_467933.html",
-    planIssued: "2021-12-12（鄂政发〔2021〕33号；鄂州市政府网专项规划栏目公开《鄂州市残疾人事业发展“十四五”规划》全文并依据省规划，同网部门解读列明省文号）",
+    planUrl: "http://www.hbdpf.org.cn/gk/jggh/fzgg/178444.htm",
+    planIssued:
+      "2021-12-12（鄂政发〔2021〕33号，省人民政府印发；湖北省残联网站发展规划栏目公开全文）",
     rehabUrl:
       "http://www.suizhou.gov.cn/zwgk/xxgk/shgysyjs/sblyxx/shjz/202005/t20200519_801383.shtml",
     rehabAgeNote:
@@ -1686,8 +1686,7 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "鄂政办发〔2015〕96号：生活补贴对象为低保家庭残疾人；护理补贴对象为一、二级需长期照护重度残疾人。",
       "省民政厅、财政厅、残联调整方案：自2026年1月1日起，生活补贴110元/人/月，护理补贴125元/人/月。",
     ],
-    employmentUrl:
-      "https://www.hbdaye.gov.cn/zfxxgk/fdgknr/gysyjs/shbz/202303/t20230329_1001750.html",
+    employmentUrl: "http://www.hbdpf.org.cn/gk/gfwj/gfxwj/170579.htm",
     employmentNote:
       "鄂财法规〔2017〕11号、省政府令第334号：安排比例不低于1.5%。年缴纳额=（上年职工人数\xD71.5%－上年实际安排人数）\xD7上年职工年平均工资。安排1名持证一、二级残疾人或残疾军人证1—3级的，按2人计算。工资不低于当地最低工资并足额缴社保、签一年以上合同的才计入。",
     extraPolicies: [
