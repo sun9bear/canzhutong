@@ -67,8 +67,10 @@ async function lookupAdminUser(userId: string): Promise<{
  * flag when email verification / SMTP is configured; password users (including
  * the real ADMIN_EMAILS owner) stay `emailVerified=false`. Requiring the flag
  * would lock them out of the admin hub. Public email sign-up is allowed, but
- * addresses in ADMIN_EMAILS cannot *register* (see `isAdminSignUpEmailBlocked`
- * + `databaseHooks.user.create.before` in auth/server). Existing admins sign in.
+ * addresses in ADMIN_EMAILS cannot *register* or *change email onto* (see
+ * `isAdminSignUpEmailBlocked` / `shouldBlockAdminEmailUpdate` +
+ * `databaseHooks.user.create.before` / `user.update.before` in auth/server).
+ * Existing admins sign in.
  *
  * Do **not** set REQUIRE_ADMIN_EMAIL_VERIFIED — ADMIN_EMAILS and existing
  * admin accounts are not required to verify (email OTP is for regular users).

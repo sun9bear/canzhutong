@@ -36,10 +36,15 @@ import { randomBytes } from "node:crypto";
 import { Pool } from "pg";
 import { ensureDbReady, getPglite } from "../db";
 import {
+  ADMIN_EMAIL_UPDATE_BLOCKED_MESSAGE,
   ADMIN_SIGNUP_BLOCKED_MESSAGE,
+  REQUIRE_EMAIL_VERIFICATION_TO_SIGN_IN,
+  REQUIRE_LOCAL_EMAIL_VERIFIED,
+  currentEmailFromAuthHookContext,
   emailAndPasswordEnabled,
   isAdminSignUpEmailBlocked,
   isEmailSignUpEnabled,
+  shouldBlockAdminEmailUpdate,
 } from "./email-password";
 import { sendVerificationOtpEmail } from "./email-otp-lib";
 import { GROK_PROVIDERS } from "./providers";
@@ -193,18 +198,23 @@ export const auth = betterAuth({
 
   // Encrypt broker-issued OAuth tokens at rest, and treat the broker's upstreams
   // as trusted first-party identities. The broker owns identity and X emails are
-  // synthetic/unverified, so WITHOUT this a login can fail with
+  // synthetic/unverified, so WITHOUT trustedProviders a login can fail with
   // `account_not_linked` (Better Auth refuses to attach an untrusted, unverified
   // identity to an existing user). Google and X carry DISTINCT emails, so this
   // never merges them into one user — they stay separate identities.
+  //
+  // requireLocalEmailVerified (better-auth 1.6.30, default true) checks the
+  // EXISTING local user.emailVerified, not the incoming OAuth claim. X first
+  // login creates a user; later X logins match the already-linked account and
+  // skip this gate. trustedProviders still skip the incoming emailVerified
+  // check. Setting this false let an unverified password squat absorb a later
+  // Google/X identity for the same email.
   account: {
     encryptOAuthTokens: true,
     accountLinking: {
       enabled: true,
       trustedProviders: GROK_PROVIDERS.map((p) => p.providerId),
-      // X's synthetic email is never "verified", so don't gate linking on the
-      // local user's email-verified state.
-      requireLocalEmailVerified: false,
+      requireLocalEmailVerified: REQUIRE_LOCAL_EMAIL_VERIFIED,
     },
   },
 
@@ -223,16 +233,17 @@ export const auth = betterAuth({
           enabled: true,
           disableSignUp: !isEmailSignUpEnabled(),
           // Unverified password users may still sign in; favorites / 个人建议 are gated.
-          requireEmailVerification: false,
+          requireEmailVerification: REQUIRE_EMAIL_VERIFICATION_TO_SIGN_IN,
         },
       }
     : {}),
 
   // Minimal addition (AGENTS.md: do not rewrite this file). emailAndPassword
-  // has no signup hook; this runs before any user row is inserted — email
-  // sign-up and OAuth first-create alike. Existing admin sign-in does not
-  // create a user, so it stays allowed. Throw APIError so Better Auth
-  // rethrows the Chinese message instead of FAILED_TO_CREATE_USER.
+  // has no signup hook; create.before runs before any user row is inserted —
+  // email sign-up and OAuth first-create alike. Existing admin sign-in does
+  // not create a user, so it stays allowed. update.before blocks changing
+  // *onto* an ADMIN_EMAILS address (Hy4 email takeover). Throw APIError so
+  // Better Auth rethrows the Chinese message instead of FAILED_TO_CREATE_USER.
   databaseHooks: {
     user: {
       create: {
@@ -240,6 +251,16 @@ export const auth = betterAuth({
           if (isAdminSignUpEmailBlocked(user.email)) {
             throw new APIError("BAD_REQUEST", {
               message: ADMIN_SIGNUP_BLOCKED_MESSAGE,
+            });
+          }
+        },
+      },
+      update: {
+        before: async (user, ctx) => {
+          const current = currentEmailFromAuthHookContext(ctx);
+          if (shouldBlockAdminEmailUpdate(user, current)) {
+            throw new APIError("BAD_REQUEST", {
+              message: ADMIN_EMAIL_UPDATE_BLOCKED_MESSAGE,
             });
           }
         },
