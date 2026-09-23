@@ -28,3 +28,7 @@ npm run dev
 See apps/mp/README.md for uni-app shell, shared policy JSON, and DevTools preview.
 Root scripts: mp:data, mp:install, mp:dev, mp:build.
 Policy catalog is exported from src/data to public/data/policies.json for the MP to fetch.
+
+## 许可证
+
+本仓库中由项目作者拥有权利的源代码采用 [MIT License](LICENSE)。第三方依赖、品牌素材和政策原文仍遵循各自的许可或使用条款；使用政策信息时请核对来源链接和最新官方文本。
