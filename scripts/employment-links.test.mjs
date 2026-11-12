@@ -32,6 +32,11 @@ const ALLOWLIST = [
   "https://www.hidpf.org.cn/zcwj/wjfb/202602/t20260205_4024349.shtml",
   "https://www.hidpf.org.cn/ywfw/jyjy/202607/t20260702_4103358.shtml",
   "https://www.hidpf.org.cn/bsfw/bszn/202507/t20250711_3895282.shtml",
+  "https://www.jiangxi.gov.cn/jxsrmzf/gzk/pc/content/content_1818127001001603072.html",
+  "https://www.jiangxi.gov.cn/jxsrmzf/szfbg100/pc/content/content_2007653864991363072.html",
+  "https://jxf.jiangxi.gov.cn/jxsczt/zcsd/content/content_2001136592168685568.html",
+  "https://jxf.jiangxi.gov.cn/jxsczt/gfxwj/content/content_1985597047802630144.html",
+  "https://www.sc.gov.cn/10462/c108923/1998/1/4/26baa24413a74cf0a7cedffdca8a94a6.shtml",
 ];
 
 const FORBIDDEN = [
