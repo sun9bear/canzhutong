@@ -516,9 +516,45 @@ export const NATIONAL_POLICIES: PolicyRecord[] = [
     docNo: "国发〔2021〕10号",
     issuedAt: "2021-07-08",
     effectiveAt: "2021-07-08",
-    status: "规划期至2025年",
+    status: "规划期已结束（至2025年），请同时查阅“十五五”规划",
     keywords: "十四五,规划,阳光家园,托养,就业,康复,两项补贴,无障碍",
-    relatedIds: ["two-subsidies-2015", "sunshine-home", "sc-employment-ordinance"],
+    relatedIds: ["two-subsidies-2015", "sunshine-home", "sc-employment-ordinance", "sc-15th-five-year-plan"],
+  },
+  {
+    id: "sc-15th-five-year-plan",
+    title: "残疾人保障和发展“十五五”规划",
+    shortTitle: "十五五残疾人规划",
+    level: "national",
+    regionCode: "CN",
+    regionName: "全国",
+    category: "rights",
+    disabilityTypes: ["all"],
+    summary:
+      "国务院残疾人工作委员会印发的2026—2030年残疾人保障和发展总体规划。国务院以国函〔2026〕60号批复同意。覆盖社会保障、就业创业、关爱服务、精神文化、科技助残、权益保障和支撑保障，是各地制定本省“十五五”规划的上级依据。",
+    keyPoints: [
+      "到2030年，残疾人社会保障制度更加完善，就业更加充分更有质量，基本公共服务更加精准高效。",
+      "主要指标包括：城乡新增残疾人就业100万人（预期性）；两项补贴覆盖率应保尽保（约束性）；重度残疾人托养照护服务350万人次（预期性）；基本康复服务覆盖率大于90%、辅助器具适配率大于87%（预期性）。",
+      "滚动实施促进残疾人就业专项行动，出台用人单位履行按比例安排残疾人就业义务办法。",
+      "完善两项补贴标准动态调整机制，深入实施残疾儿童康复救助制度。",
+      "推动修订残疾人保障法，加强无障碍和法律援助。",
+      "规划由国务院残工委组织实施，开展年度监测、中期评估和总结评估。",
+    ],
+    eligibility: "规划面向全体残疾人。具体项目各有对象范围，见对应专项政策和户籍地实施细则。",
+    howToApply:
+      "规划本身不是申请表。按规划分解的项目（补贴、康复、就业、改造、托养等）分别向残联、民政、人社、住建等部门申请。可向县级残联询问本县“十五五”项目安排。",
+    body: `残工委发〔2026〕4号，国务院残疾人工作委员会2026年7月1日印发。国务院2026年6月29日以国函〔2026〕60号批复同意本规划（中国政府网公开批复全文：https://www.gov.cn/zhengce/zhengceku/202607/content_7074096.htm）。
+
+规划围绕提高社会保障水平、促进就业创业、健全关爱服务体系、丰富精神文化生活、深化助残科技创新、保障平等权益、优化支撑保障条件等提出重点任务，并设置收入和就业、社会保障、基本公共服务等方面主要指标。
+
+“十四五”规划（国发〔2021〕10号）实施期至2025年。查阅现行总体规划请以本规划为准；专项制度仍按其效力文件执行。`,
+    sourceName: "国务院残疾人工作委员会（中国残联官网发布）",
+    sourceUrl: "https://www.cdpf.org.cn/xwzx/clyw2/30f6194c0b314603a48c2fbb5ac6c995.htm",
+    docNo: "残工委发〔2026〕4号",
+    issuedAt: "2026-07-01",
+    effectiveAt: "2026-07-01",
+    status: "2026—2030年实施",
+    keywords: "十五五,规划,残工委,两项补贴,就业,康复,托养,无障碍",
+    relatedIds: ["sc-14th-five-year-plan", "two-subsidies-2015", "sc-employment-ordinance", "employment-three-year-2025", "npc-disability-protection-law"],
   },
   {
     id: "personal-income-tax",
