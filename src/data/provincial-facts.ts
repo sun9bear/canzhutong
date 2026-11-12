@@ -1428,6 +1428,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
     implementingUrl:
       "https://www.baoshan.gov.cn/info/11596/4861464.htm",
     implementingIssued: "2016（云政发〔2016〕5号，保政发〔2016〕66号转引）",
+    employmentUrl:
+      "https://www.yn.gov.cn/zwgk/zcwj/yzfb/202511/t20251110_2921566.html",
+    employmentNote:
+      "云政办发〔2025〕51号《云南省促进残疾人就业三年行动实施方案（2025—2027年）》（省政府办公厅2025年10月31日印发，省政府门户网站公开，标注有效）：机关、事业单位和企业安排残疾人就业低于本单位在职（在编）职工总数1.5%的，应及时足额缴纳残疾人就业保障金（企业符合政策免征范围的除外）；目标为2025—2027年全省城乡新增残疾人就业30000人。残保金计征细则见云财非税〔2017〕32号专条（省级原文未核到，现为市县转载）。",
     subsidyUrl:
       "https://ynmz.yn.gov.cn/index.php/cms/qitazhengcewenjian/11943.html",
     subsidyPoints: [
@@ -3004,6 +3008,10 @@ export const PROVINCIAL_PATCHES: Record<string, ExtraPatch> = {
       "http://www.gzsdpf.org.cn/zwgk/clxxgkml/ghjh/202201/t20220106_72254010.html",
     planIssued:
       "2021（省残联联合省发改委出台；贵州省残联网站2022-01-06公开文字阅读版全文）",
+    rehabUrl:
+      "https://www.guizhou.gov.cn/zwgk/zcfg/szfwj/qff/201809/t20180930_70477271.html",
+    rehabAgeNote:
+      "黔府发〔2018〕27号《贵州省残疾儿童康复救助办法》（省人民政府2018年9月28日印发，省政府门户网站省政府文件栏目公开全文，自2018年10月1日起施行）：救助对象为贵州省户籍（或在贵州省领取居住证）经济困难家庭0—6岁视力、听力、言语、肢体、智力残疾儿童和孤独症儿童；经济困难家庭含城乡低保家庭、建档立卡贫困户家庭、儿童福利机构收留抚养的残疾儿童，残疾孤儿、纳入特困供养的残疾儿童及县级以上政府规定的其他经济困难家庭残疾儿童。有条件的地区可扩大救助年龄范围、放宽家庭经济条件。由监护人向户籍地（居住证发放地）县级残联申请。原文载明救助内容和标准建立动态调整机制，现行额度以省残联和当地最新口径为准，本库不锁死金额。",
     implementingUrl:
       "https://czt.guizhou.gov.cn/ztzl/hmhnczbt/zcwj/202306/t20230625_80489973.html",
     implementingIssued: "2016（黔府发〔2016〕2号）",
