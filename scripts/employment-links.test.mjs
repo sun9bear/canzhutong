@@ -23,6 +23,15 @@ const ALLOWLIST = [
   "https://jyzx.gddpf.org.cn/xxgk/tzgg/content/post_1321688.html",
   "https://www.cqdpf.org.cn/web/article/1385733981142347776/web/content_1385733981142347776.html",
   "https://www.gov.cn/zhengce/2018-04/10/content_5717277.htm",
+  "https://www.jscl.gov.cn/jscl/message/zcwj/202606/t20260612_11546.html",
+  "https://www.gov.cn/zhengce/2012-12/28/content_5716158.htm",
+  "https://www.gov.cn/zhengce/2021-12/23/content_5719172.htm",
+  "https://www.cdpf.org.cn/ztzl/zxzt1/2024/cjrqybzflfggzxxgkxt/dfxfgjgz/ahs2/f7c57ca75ce34d95981f488366d42f46.htm",
+  "https://www.gov.cn/zhengce/2013-12/18/content_5714882.htm",
+  "https://www.cdpf.org.cn/ztzl/zxzt1/2024/cjrqybzflfggzxxgkxt/dfxfgjgz/gxzzzzq2/4a4cb8baf6b0434385941def985ba65a.htm",
+  "https://www.hidpf.org.cn/zcwj/wjfb/202602/t20260205_4024349.shtml",
+  "https://www.hidpf.org.cn/ywfw/jyjy/202607/t20260702_4103358.shtml",
+  "https://www.hidpf.org.cn/bsfw/bszn/202507/t20250711_3895282.shtml",
 ];
 
 const FORBIDDEN = [
